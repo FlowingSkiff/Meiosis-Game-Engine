@@ -8,8 +8,10 @@ include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warings)
 include(cmake/StandardProjectSettings.cmake)
 set_project_settings(project_settings)
+
 include(cmake/Conan.cmake)
 run_conan()
+
 include(cmake/StaticAnalyzers.cmake)
 enable_cppcheck("")
 
