@@ -5,11 +5,13 @@ add_library(project_settings INTERFACE)
 add_library(project_warings INTERFACE)
 
 include(cmake/CompilerWarnings.cmake)
-set_project_warnings(
-  project_warings
-)
+set_project_warnings(project_warings)
 include(cmake/StandardProjectSettings.cmake)
 set_project_settings(project_settings)
+include(cmake/Conan.cmake)
+run_conan()
+include(cmake/StaticAnalyzers.cmake)
+enable_cppcheck("")
 
 include(CTest)
 enable_testing()

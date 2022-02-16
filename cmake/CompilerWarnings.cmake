@@ -3,7 +3,7 @@ function(
     project_name
 )
 
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    if(CMAKE_CXX_COMPILER_ID STREQUAL ".*Clang")
     set(WARNINGS
         -Wall
         -Wextra # reasonable and standard
