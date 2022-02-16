@@ -46,6 +46,7 @@ function(
         )
     endif()
 
+    cmake_policy(SET CMP0054 NEW)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(MSVC_WARNINGS
         /W4 # Baseline reasonable warnings
