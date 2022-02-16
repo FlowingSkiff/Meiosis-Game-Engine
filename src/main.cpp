@@ -5,6 +5,9 @@
 #include <memory>
 #include <iostream>
 
+#include "OGLAbstraction/Renderer.hpp"
+
+#include "spdlog/spdlog.h"
 
 struct GLFWWindowTerminator
 {
@@ -108,6 +111,16 @@ Type* generateBufferObject(GLuint& gl_id)
     return buffer;
 }
 
+void runComputeShader(GLuint computeShaderProgram)
+{
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 4, posSSbo);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 5, velSSbo);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 6, colSSbo);
+
+    glUseProgram(computeShaderProgram);
+    glDispatchCompute(NUM_PARTICLES / WORK_GROUP_SIZE, 1, 1);
+    glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+}
 
 int main()
 {
@@ -124,14 +137,18 @@ int main()
     [[maybe_unused]] auto* pos_buffer = generateBufferObject<pos>(posSSbo);
     [[maybe_unused]] auto* col_buffer = generateBufferObject<color>(colSSbo);
 
+    Renderer renderer;
+
+
     while (!glfwWindowShouldClose(window.get()))
     {
         processInput(window.get());
+
+        renderer.Clear();
 
         glfwSwapBuffers(window.get());
         glfwPollEvents();
     }
 
-
-    glfwTerminate();
+    spdlog::info("Welcome to spdlog!");
 }
