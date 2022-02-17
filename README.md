@@ -1,1 +1,1 @@
-# basic-lattice-boltzmann
+# Compute Shader Example
