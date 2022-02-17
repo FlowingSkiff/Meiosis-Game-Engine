@@ -138,7 +138,7 @@ int main()
     [[maybe_unused]] auto* col_buffer = generateBufferObject<color>(colSSbo);
 
     Renderer renderer;
-
+    
 
     while (!glfwWindowShouldClose(window.get()))
     {
