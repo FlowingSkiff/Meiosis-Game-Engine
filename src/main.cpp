@@ -6,8 +6,12 @@
 #include <iostream>
 
 #include "OGLAbstraction/Renderer.hpp"
+#include "OGLAbstraction/Texture.hpp"
+
 
 #include "spdlog/spdlog.h"
+
+#include "UTIL/Vector.hpp"
 
 struct GLFWWindowTerminator
 {
@@ -67,26 +71,9 @@ SmartGLFWWindow WindowInit()
 const int32_t NUM_PARTICLES = 1024 * 1024;
 const int32_t WORK_GROUP_SIZE = 128;
 
-struct pos
-{
-    float x, y, z, w;
-    auto* begin() { return &x; }
-    auto* end() { return &w + 1; }
-};
-
-struct vel
-{
-    float vx, vy, vz, vw;
-    auto* begin() { return &vx; }
-    auto* end() { return &vw + 1; }
-};
-
-struct color
-{
-    float r, g, b, a;
-    auto* begin() { return &r; }
-    auto* end() { return &a + 1; }
-};
+using pos = Util::Vector<float, 4>;
+using vel = Util::Vector<float, 4>;
+using color = Util::Vector<float, 4>;
 
 GLuint posSSbo;
 GLuint velSSbo;
@@ -138,17 +125,41 @@ int main()
     [[maybe_unused]] auto* col_buffer = generateBufferObject<color>(colSSbo);
 
     Renderer renderer;
-    
+
+    float positions[] = {
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f
+    };
+    uint32_t indices[] = {
+        0, 1, 2, 2, 3, 0
+    };
+
+    VertexArray vao;
+    vao.Bind();
+    VertexBuffer vb(positions, 4 * 5 * sizeof(float));
+    VertexBufferLayout layout;
+    layout.Push<float>(3);
+    layout.Push<float>(2);
+    vao.AddBuffer(vb, layout);
+
+    IndexBuffer ib(indices, 6);
+    Shader shader("resources/shaders/ortho.shader");
+
+    Texture texture("resources/textures/boat.png");
+    texture.Bind();
+
+    shader.SetUniform1i("u_Texture", 0);
+
+    shader.Bind();
+    glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+    shader.SetUniformMat4f("u_MVP", proj);
 
     while (!glfwWindowShouldClose(window.get()))
     {
         processInput(window.get());
 
         renderer.Clear();
-
+        renderer.Draw(vao, ib, shader);
         glfwSwapBuffers(window.get());
         glfwPollEvents();
     }
-
-    spdlog::info("Welcome to spdlog!");
 }
