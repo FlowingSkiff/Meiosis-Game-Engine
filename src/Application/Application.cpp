@@ -7,36 +7,30 @@
 #include <GLFW/glfw3.h>
 
 
-
 #include "spdlog/spdlog.h"
 
 #include "UTIL/Vector.hpp"
 
-struct GLFWWindowTerminator
+void GLFWWindowTerminator::operator()(GLFWwindow* /*window*/) const
 {
-    void operator()(GLFWwindow* /*window*/) const
-    {
-        glfwTerminate();
-    }
-};
-
-using SmartGLFWWindow = std::unique_ptr<GLFWwindow, GLFWWindowTerminator>;
-
-static void InitGLFW()
-{
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwTerminate();
 }
 
-static void framebuffer_size_callback(GLFWwindow* /*window*/, int width, int height)
+void Application::initGLFW()
+{
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GLFWVersionMajor);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GLFWVersionMinor);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFWProfile);
+}
+
+void Application::framebufferSizeCallback(GLFWwindow* /*window*/, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
 // Processing input function
-static void processInput(GLFWwindow* window)
+void Application::processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
@@ -44,7 +38,7 @@ static void processInput(GLFWwindow* window)
     }
 }
 
-static SmartGLFWWindow WindowInit()
+Application::SmartGLFWWindow Application::windowInit()
 {
     SmartGLFWWindow window(glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL));
     if (!window)
@@ -61,7 +55,7 @@ static SmartGLFWWindow WindowInit()
         return nullptr;
     }
     glViewport(0, 0, 800, 600);
-    glfwSetFramebufferSizeCallback(window.get(), framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window.get(), framebufferSizeCallback);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     return window;
@@ -109,10 +103,10 @@ static void runComputeShader(GLuint computeShaderProgram)
 }
 
 
-int Application::Run()
+int Application::run()
 {
-    InitGLFW();
-    SmartGLFWWindow window = std::move(WindowInit());
+    initGLFW();
+    SmartGLFWWindow window = std::move(windowInit());
 
 
     if (!window.get())
@@ -123,8 +117,6 @@ int Application::Run()
     [[maybe_unused]] auto* vel_buffer = generateBufferObject<vel>(velSSbo);
     [[maybe_unused]] auto* pos_buffer = generateBufferObject<pos>(posSSbo);
     [[maybe_unused]] auto* col_buffer = generateBufferObject<color>(colSSbo);
-
-    Renderer renderer;
 
     float positions[] = {
         -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f
@@ -157,8 +149,8 @@ int Application::Run()
     {
         processInput(window.get());
 
-        renderer.Clear();
-        renderer.Draw(vao, ib, shader);
+        Renderer::Clear();
+        Renderer::Draw(vao, ib, shader);
         glfwSwapBuffers(window.get());
         glfwPollEvents();
     }
