@@ -4,18 +4,14 @@ find_package(glm REQUIRED)
 
 add_subdirectory(thirdparty)
 add_subdirectory(OGLAbstraction)
+add_subdirectory(Application)
 add_executable(moving-particles main.cpp)
 
 target_link_libraries(moving-particles
     PUBLIC
         project_settings
         project_warings
-        glfw
-        spdlog
-        fmt
-        glm
-        glad
-        OGLAbstraction
+        application
 )
 
 target_include_directories(moving-particles
