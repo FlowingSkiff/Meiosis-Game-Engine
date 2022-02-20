@@ -2,6 +2,7 @@
 
 #include "OGLAbstraction/Renderer.hpp"
 #include "OGLAbstraction/Texture.hpp"
+#include "OGLAbstraction/ComputeShader.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -9,7 +10,7 @@
 
 #include "spdlog/spdlog.h"
 
-#include "UTIL/Vector.hpp"
+#include "Util/Vector.hpp"
 
 void GLFWWindowTerminator::operator()(GLFWwindow* /*window*/) const
 {
@@ -125,6 +126,11 @@ int Application::run()
     uint32_t indices[] = {
         0, 1, 2, 2, 3, 0
     };
+
+    ComputeShader compute_shader("resources/shaders/compute_move.shader");
+    auto vel_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
+    auto pos_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
+    auto col_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
 
     VertexArray vao;
     vao.Bind();
