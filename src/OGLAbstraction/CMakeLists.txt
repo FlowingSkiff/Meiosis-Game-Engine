@@ -6,6 +6,7 @@ set(ogl_abstraction_sources
     Texture.cpp
     VertexArray.cpp
     VertexBuffer.cpp
+    ComputeShader.cpp
 )
 
 add_library(OGLAbstraction ${ogl_abstraction_sources})
@@ -24,4 +25,10 @@ target_include_directories(OGLAbstraction
         $ENV{MINGW_INCLUDE}
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/OGLAbstraction
+)
+
+
+target_compile_definitions(OGLAbstraction
+    PUBLIC
+        SPDLOG_FMT_EXTERNAL
 )
