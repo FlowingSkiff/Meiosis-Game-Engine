@@ -3,8 +3,8 @@
 #include <sstream>
 #include <iostream>
 #include <Renderer.hpp>
-Shader::Shader(const std::string& name):
-    m_RendererID(0)
+#include <spdlog/spdlog.h>
+Shader::Shader(const std::string& name) : m_RendererID(0)
 {
     auto shader = ParseShader(name);
     m_RendererID = CreateShader(shader);
@@ -36,9 +36,10 @@ unsigned int Shader::CreateShader(const ShaderProgramSource& shader)
 
 Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath) const
 {
-    enum class ShaderType
-    {
-        NONE = -1, VERTEX = 0, FRAGMENT = 1
+    enum class ShaderType {
+        NONE = -1,
+        VERTEX = 0,
+        FRAGMENT = 1
     };
     std::ifstream ifile(filepath);
     std::string line;
@@ -62,7 +63,7 @@ Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath) con
             ss[static_cast<int>(type)] << line << '\n';
         }
     }
-    return {ss[0].str(), ss[1].str()};
+    return { ss[0].str(), ss[1].str() };
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
@@ -79,7 +80,7 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
         char buffer[512];
         int length;
         glGetShaderInfoLog(id, 512, &length, buffer);
-        std::cout << "ERROR::SHADER::COMPILE\n" << buffer << "\n";
+        spdlog::error("Shader could not be compiled. Returned error code {}", buffer);
         glDeleteShader(id);
         return 0;
     }
@@ -113,5 +114,5 @@ void Shader::SetUniform1i(const std::string& name, int value)
 
 void Shader::SetUniformMat4f(const std::string& name, const glm::mat<4, 4, float>& m)
 {
-    glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &m[0][0]); 
+    glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &m[0][0]);
 }

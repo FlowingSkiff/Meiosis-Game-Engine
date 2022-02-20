@@ -43,7 +43,7 @@ Application::SmartGLFWWindow Application::windowInit()
     SmartGLFWWindow window(glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL));
     if (!window)
     {
-        std::cout << "Failed to create GLFW window.\n";
+        spdlog::error("Failed to create GLFW window.");
         glfwTerminate();
         return nullptr;
     }
@@ -51,7 +51,7 @@ Application::SmartGLFWWindow Application::windowInit()
     // initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cout << "Failed to initialize GLAD.\n";
+        spdlog::error("Failed to initialize GLAD.");
         return nullptr;
     }
     glViewport(0, 0, 800, 600);
@@ -111,6 +111,7 @@ int Application::run()
 
     if (!window.get())
     {
+        spdlog::error("Could not initialize window");
         return -1;
     }
 
