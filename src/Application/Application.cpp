@@ -127,10 +127,10 @@ int Application::run()
         0, 1, 2, 2, 3, 0
     };
 
-    ComputeShader compute_shader("resources/shaders/compute_move.shader");
-    auto vel_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
-    auto pos_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
-    auto col_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
+    // ComputeShader compute_shader("resources/shaders/compute_move.shader");
+    // auto vel_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
+    // auto pos_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
+    // auto col_buffer = compute_shader.generateBufferObject<glm::vec4>(NUM_PARTICLES);
 
     VertexArray vao;
     vao.Bind();
