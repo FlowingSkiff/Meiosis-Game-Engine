@@ -12,6 +12,10 @@
 
 #include "Util/Vector.hpp"
 
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
 void GLFWWindowTerminator::operator()(GLFWwindow* /*window*/) const
 {
     glfwTerminate();
@@ -152,14 +156,30 @@ int Application::run()
     glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
     shader.SetUniformMat4f("u_MVP", proj);
 
+    const char* glsl_version = "#version 140";
+    ImGui::CreateContext();
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window.get(), true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+
     while (!glfwWindowShouldClose(window.get()))
     {
         processInput(window.get());
-
         Renderer::Clear();
         Renderer::Draw(vao, ib, shader);
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::Begin("Hello world!");
+        ImGui::Button("Button1");
+        ImGui::End();
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window.get());
         glfwPollEvents();
     }
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     return 0;
 }

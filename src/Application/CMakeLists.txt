@@ -11,6 +11,7 @@ target_link_libraries(application
         glm
         glad
         OGLAbstraction
+        imgui
 )
 
 target_include_directories(application

@@ -13,6 +13,7 @@ target_link_libraries(moving-particles
         project_settings
         project_warings
         application
+        imgui
 )
 
 target_include_directories(moving-particles
