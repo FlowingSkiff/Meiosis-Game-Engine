@@ -6,6 +6,7 @@ add_subdirectory(thirdparty)
 add_subdirectory(OGLAbstraction)
 add_subdirectory(Application)
 add_subdirectory(Util)
+add_subdirectory(Core)
 add_executable(moving-particles main.cpp)
 
 target_link_libraries(moving-particles
