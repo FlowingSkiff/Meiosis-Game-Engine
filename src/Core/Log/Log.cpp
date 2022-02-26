@@ -2,11 +2,10 @@
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-std::shared_ptr<spdlog::logger> clientLog;
+std::shared_ptr<spdlog::logger> Logger::clientLog;
 
 void Logger::Init()
 {
-    spdlog::set_pattern("[%l] %D %X: %v");
+    // spdlog::set_pattern("[%l] %D %X: %v");
     clientLog = spdlog::stdout_color_mt("console");
 }
-
