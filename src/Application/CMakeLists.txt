@@ -12,6 +12,7 @@ target_link_libraries(application
         glad
         OGLAbstraction
         imgui
+        Log
 )
 
 target_include_directories(application
@@ -23,4 +24,5 @@ target_include_directories(application
 target_compile_definitions(application
     PUBLIC
         SPDLOG_FMT_EXTERNAL
+        ENABLE_LOG
 )

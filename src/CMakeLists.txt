@@ -26,6 +26,7 @@ target_include_directories(moving-particles
 target_compile_definitions(moving-particles
     PUBLIC
         SPDLOG_FMT_EXTERNAL
+        ENABLE_LOG
 )
 
 add_custom_command(

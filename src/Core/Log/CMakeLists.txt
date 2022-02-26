@@ -20,4 +20,5 @@ target_include_directories(Log
 target_compile_definitions(Log
     PUBLIC
         SPDLOG_FMT_EXTERNAL
+        ENABLE_LOG
 )

@@ -17,6 +17,7 @@ target_link_libraries(OGLAbstraction
         project_warings
         glfw3
         glad
+        Log
 )
 
 target_include_directories(OGLAbstraction
@@ -31,4 +32,5 @@ target_include_directories(OGLAbstraction
 target_compile_definitions(OGLAbstraction
     PUBLIC
         SPDLOG_FMT_EXTERNAL
+        ENABLE_LOG
 )
