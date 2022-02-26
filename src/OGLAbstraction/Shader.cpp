@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <Renderer.hpp>
-#include <spdlog/spdlog.h>
+#include "Core/Log/Log.hpp"
 Shader::Shader(const std::string& name) : m_RendererID(0)
 {
     auto shader = ParseShader(name);
@@ -80,7 +80,7 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
         char buffer[512];
         int length;
         glGetShaderInfoLog(id, 512, &length, buffer);
-        spdlog::error("Shader could not be compiled. Returned error code {}", buffer);
+        ENGINE_ERROR("Shader could not be compiled. Returned error code {}", buffer);
         glDeleteShader(id);
         return 0;
     }

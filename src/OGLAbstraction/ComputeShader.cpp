@@ -1,7 +1,7 @@
 #include "ComputeShader.hpp"
 #include <sstream>
 #include <fstream>
-#include "spdlog/spdlog.h"
+#include "Core/Log/Log.hpp"
 static constexpr int32_t work_group_size = 128;
 
 void ComputeShader::run()
@@ -36,6 +36,6 @@ void ComputeShader::compileShader(const std::string& file_path)
     }
     else
     {
-        spdlog::warn("Compiling shader failed, could not open file.");
+        ENGINE_WARN("Compiling shader failed, could not open file.");
     }
 }

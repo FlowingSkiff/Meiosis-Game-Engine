@@ -3,12 +3,10 @@
 #include "OGLAbstraction/Renderer.hpp"
 #include "OGLAbstraction/Texture.hpp"
 #include "OGLAbstraction/ComputeShader.hpp"
+#include "Core/Log/Log.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-
-#include "spdlog/spdlog.h"
 
 #include "Util/Vector.hpp"
 
@@ -48,7 +46,7 @@ Application::SmartGLFWWindow Application::windowInit()
     SmartGLFWWindow window(glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL));
     if (!window)
     {
-        spdlog::error("Failed to create GLFW window.");
+        ENGINE_ERROR("Failed to create GLFW window.");
         glfwTerminate();
         return nullptr;
     }
@@ -56,7 +54,7 @@ Application::SmartGLFWWindow Application::windowInit()
     // initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        spdlog::error("Failed to initialize GLAD.");
+        ENGINE_ERROR("Failed to initialize GLAD.");
         return nullptr;
     }
     glViewport(0, 0, 800, 600);
@@ -112,11 +110,11 @@ int Application::run()
 {
     initGLFW();
     SmartGLFWWindow window = std::move(windowInit());
-
-
+    Logger::Init();
+    ENGINE_INFO("Testing {}", 1.0);
     if (!window.get())
     {
-        spdlog::error("Could not initialize window");
+        ENGINE_ERROR("Could not  initialize window");
         return -1;
     }
 
