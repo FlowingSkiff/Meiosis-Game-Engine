@@ -5,20 +5,21 @@
 #include <string_view>
 class Logger
 {
-    public:
-        static void Init();
-        template<typename... ARGS>
-        static void warn(std::string_view str, const ARGS&... args);
-        template<typename... ARGS>
-        static void info(std::string_view str, const ARGS&... args);
-        template<typename... ARGS>
-        static void debug(std::string_view str, const ARGS&... args);
-        template<typename... ARGS>
-        static void trace(std::string_view str, const ARGS&... args);
-        template<typename... ARGS>
-        static void error(std::string_view str, const ARGS&... args);
-    private:
-        static std::shared_ptr<spdlog::logger> clientLog;
+  public:
+    static void Init();
+    template<typename... ARGS>
+    static void warn(std::string_view str, const ARGS&... args);
+    template<typename... ARGS>
+    static void info(std::string_view str, const ARGS&... args);
+    template<typename... ARGS>
+    static void debug(std::string_view str, const ARGS&... args);
+    template<typename... ARGS>
+    static void trace(std::string_view str, const ARGS&... args);
+    template<typename... ARGS>
+    static void error(std::string_view str, const ARGS&... args);
+
+  private:
+    static std::shared_ptr<spdlog::logger> clientLog;
 };
 
 template<typename... ARGS>
@@ -51,3 +52,17 @@ void Logger::error(std::string_view str, const ARGS&... args)
 {
     clientLog->error(str, args...);
 }
+
+#ifdef ENABLE_LOG
+#define ENGINE_WARN(...) Logger::warn(__VA_ARGS__)
+#define ENGINE_DEBUG(...) Logger::debug(__VA_ARGS__)
+#define ENGINE_TRACE(...) Logger::trace(__VA_ARGS__)
+#define ENGINE_INFO(...) Logger::info(__VA_ARGS__)
+#define ENGINE_ERROR(...) Logger::error(__VA_ARGS__)
+#else
+#define ENGINE_WARN(...)
+#define ENGINE_DEBUG(...)
+#define ENGINE_TRACE(...)
+#define ENGINE_INFO(...)
+#define ENGINE_ERROR(...)
+#endif
