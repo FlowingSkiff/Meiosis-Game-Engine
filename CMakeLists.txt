@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(moving-particles VERSION 0.1.0)
+project(genesis VERSION 0.1.0)
 
 add_library(project_settings INTERFACE)
 add_library(project_warings INTERFACE)

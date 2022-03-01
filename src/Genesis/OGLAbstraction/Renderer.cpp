@@ -1,4 +1,4 @@
-#include "Renderer.hpp"
+#include "OGLAbstraction/Renderer.hpp"
 
 void Renderer::Draw(const VertexArray& vao, const IndexBuffer& ib, const Shader& shader)
 {

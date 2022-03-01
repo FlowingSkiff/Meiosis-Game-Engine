@@ -1,14 +1,14 @@
-#include "Application/Application.hpp"
+#include "Genesis/Application/Application.hpp"
 
-#include "OGLAbstraction/Renderer.hpp"
-#include "OGLAbstraction/Texture.hpp"
-#include "OGLAbstraction/ComputeShader.hpp"
-#include "Core/Log/Log.hpp"
+#include "Genesis/OGLAbstraction/Renderer.hpp"
+#include "Genesis/OGLAbstraction/Texture.hpp"
+#include "Genesis/OGLAbstraction/ComputeShader.hpp"
+#include "Genesis/Core/Log/Log.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Util/Vector.hpp"
+#include "Genesis/Util/Vector.hpp"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"

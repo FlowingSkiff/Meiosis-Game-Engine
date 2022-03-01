@@ -1,4 +1,4 @@
-#include "VertexArray.hpp"
+#include "OGLAbstraction/VertexArray.hpp"
 #include "glad\glad.h"
 VertexArray::VertexArray(): m_RendererID(0)
 {

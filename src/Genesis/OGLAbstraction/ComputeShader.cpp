@@ -1,4 +1,4 @@
-#include "ComputeShader.hpp"
+#include "OGLAbstraction/ComputeShader.hpp"
 #include <sstream>
 #include <fstream>
 #include "Core/Log/Log.hpp"

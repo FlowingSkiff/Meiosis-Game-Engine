@@ -23,9 +23,8 @@ target_link_libraries(OGLAbstraction
 target_include_directories(OGLAbstraction
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/include/Genesis
         $ENV{MINGW_INCLUDE}
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/include/OGLAbstraction
 )
 
 

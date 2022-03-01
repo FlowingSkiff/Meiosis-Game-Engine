@@ -14,5 +14,6 @@ PUBLIC
 target_include_directories(util
 PUBLIC
     ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/include/Genesis
     $ENV{MINGW_INCLUDE}
 )

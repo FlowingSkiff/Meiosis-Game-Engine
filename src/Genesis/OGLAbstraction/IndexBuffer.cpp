@@ -1,4 +1,4 @@
-#include "IndexBuffer.hpp"
+#include "OGLAbstraction/IndexBuffer.hpp"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count):

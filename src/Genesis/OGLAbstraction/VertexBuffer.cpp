@@ -1,4 +1,4 @@
-#include "VertexBuffer.hpp"
+#include "OGLAbstraction/VertexBuffer.hpp"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 

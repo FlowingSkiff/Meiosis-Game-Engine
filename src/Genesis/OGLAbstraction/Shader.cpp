@@ -1,8 +1,8 @@
-#include "Shader.hpp"
+#include "OGLAbstraction/Shader.hpp"
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <Renderer.hpp>
+#include "OGLAbstraction/Renderer.hpp"
 #include "Core/Log/Log.hpp"
 Shader::Shader(const std::string& name) : m_RendererID(0)
 {
