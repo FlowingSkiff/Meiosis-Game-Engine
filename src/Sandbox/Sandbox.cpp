@@ -7,7 +7,6 @@ class MyNewApp : public Genesis::Application
 
 MyNewApp::MyNewApp()
 {
-    ENGINE_WARN("Created a new app!");
 }
 
 Genesis::Application* Genesis::CreateApplication()

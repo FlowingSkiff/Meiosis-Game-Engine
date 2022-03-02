@@ -11,5 +11,6 @@ void Logger::init()
 {
     // spdlog::set_pattern("[%l] %D %X: %v");
     clientLog = spdlog::stdout_color_mt("console");
+    clientLog->set_level(spdlog::level::trace);
 }
 }// namespace Genesis

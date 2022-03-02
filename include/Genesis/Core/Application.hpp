@@ -7,7 +7,6 @@ class GN_API Application
   public:
     Application();
     virtual ~Application();
-    void print();
     void run();
 };
 Genesis::Application* CreateApplication();
