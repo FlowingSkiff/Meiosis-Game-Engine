@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Core.hpp"
 #include "Core/Application.hpp"
-#include "Core/Log/Log.hpp"
+#include "Core/Log.hpp"
 
 extern Genesis::Application* Genesis::CreateApplication();
 

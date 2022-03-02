@@ -1,5 +1,5 @@
 #include "Core/Application.hpp"
-#include "Core/Log/Log.hpp"
+#include "Core/Log.hpp"
 namespace Genesis
 {
 Application::Application()
