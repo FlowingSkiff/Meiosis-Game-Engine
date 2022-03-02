@@ -6,27 +6,25 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 add_subdirectory(thirdparty)
-# add_subdirectory(OGLAbstraction)
-# add_subdirectory(Application)
-# add_subdirectory(Util)
 add_subdirectory(Core)
-# add_executable(genesis main.cpp)
 
 
 target_link_libraries(genesis
-    PUBLIC
+    PRIVATE
         project_settings
         project_warings
         imgui
         glfw3
         glm
         glad
+    PUBLIC
         fmt
 )
 
 target_include_directories(genesis
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/Genesis
+        ${CMAKE_SOURCE_DIR}/include
         $ENV{MINGW_INCLUDE}
 )
 
