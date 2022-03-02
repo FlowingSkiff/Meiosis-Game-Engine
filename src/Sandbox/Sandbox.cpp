@@ -1,5 +1,4 @@
 #include <Genesis.hpp>
-#include <iostream>
 class MyNewApp : public Genesis::Application
 {
   public:
@@ -8,7 +7,7 @@ class MyNewApp : public Genesis::Application
 
 MyNewApp::MyNewApp()
 {
-    std::cout << "Created a new app!\n";
+    ENGINE_WARN("Created a new app!");
 }
 
 Genesis::Application* Genesis::CreateApplication()
