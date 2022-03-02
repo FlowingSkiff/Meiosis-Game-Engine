@@ -1,32 +1,40 @@
 
+set(genesis_sources empty.cpp)
+add_library(genesis SHARED ${genesis_sources})
+
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 add_subdirectory(thirdparty)
-add_subdirectory(OGLAbstraction)
-add_subdirectory(Application)
-add_subdirectory(Util)
+# add_subdirectory(OGLAbstraction)
+# add_subdirectory(Application)
+# add_subdirectory(Util)
 add_subdirectory(Core)
-add_executable(genesis main.cpp)
+# add_executable(genesis main.cpp)
+
 
 target_link_libraries(genesis
     PUBLIC
         project_settings
         project_warings
-        application
         imgui
+        glfw3
+        glm
+        glad
+        fmt
 )
 
 target_include_directories(genesis
-    PUBLIC
-        ${CMAKE_SOURCE_DIR}/include
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include/Genesis
         $ENV{MINGW_INCLUDE}
 )
 
 target_compile_definitions(genesis
-    PUBLIC
+    PRIVATE
         SPDLOG_FMT_EXTERNAL
         ENABLE_LOG
+        GN_BUILD_DLL
 )
 
 add_custom_command(
