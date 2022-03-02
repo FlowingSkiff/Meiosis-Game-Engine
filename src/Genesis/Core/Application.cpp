@@ -1,10 +1,10 @@
 #include "Core/Application.hpp"
-#include <iostream>
+#include "Core/Log/Log.hpp"
 namespace Genesis
 {
 Application::Application() {}
 Application::~Application() {}
-void Application::print() { std::cout << "Hello world\n"; }
+void Application::print() { ENGINE_WARN("Printing!"); }
 void Application::run()
 {
     this->print();
