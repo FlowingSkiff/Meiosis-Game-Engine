@@ -1,9 +1,13 @@
 #pragma once
 
+#include "Genesis/Core/Core.hpp"
+
 #include <spdlog/spdlog.h>
 #include <memory>
 #include <string_view>
-class Logger
+namespace Genesis
+{
+class GN_API Logger
 {
   public:
     static void Init();
@@ -17,6 +21,7 @@ class Logger
     static void trace(std::string_view str, const ARGS&... args);
     template<typename... ARGS>
     static void error(std::string_view str, const ARGS&... args);
+    static void print();
 
   private:
     static std::shared_ptr<spdlog::logger> clientLog;
@@ -66,3 +71,6 @@ void Logger::error(std::string_view str, const ARGS&... args)
 #define ENGINE_INFO(...)
 #define ENGINE_ERROR(...)
 #endif
+
+
+}// namespace Genesis
