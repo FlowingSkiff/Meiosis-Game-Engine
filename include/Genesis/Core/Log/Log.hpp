@@ -10,7 +10,7 @@ namespace Genesis
 class GN_API Logger
 {
   public:
-    static void Init();
+    static void init();
     template<typename... ARGS>
     static void warn(std::string_view str, const ARGS&... args);
     template<typename... ARGS>
@@ -21,7 +21,6 @@ class GN_API Logger
     static void trace(std::string_view str, const ARGS&... args);
     template<typename... ARGS>
     static void error(std::string_view str, const ARGS&... args);
-    static void print();
 
   private:
     static std::shared_ptr<spdlog::logger> clientLog;
@@ -58,12 +57,16 @@ void Logger::error(std::string_view str, const ARGS&... args)
     clientLog->error(str, args...);
 }
 
+
+}// namespace Genesis
+
+
 #ifdef ENABLE_LOG
-#define ENGINE_WARN(...) Logger::warn(__VA_ARGS__)
-#define ENGINE_DEBUG(...) Logger::debug(__VA_ARGS__)
-#define ENGINE_TRACE(...) Logger::trace(__VA_ARGS__)
-#define ENGINE_INFO(...) Logger::info(__VA_ARGS__)
-#define ENGINE_ERROR(...) Logger::error(__VA_ARGS__)
+#define ENGINE_WARN(...) Genesis::Logger::warn(__VA_ARGS__)
+#define ENGINE_DEBUG(...) Genesis::Logger::debug(__VA_ARGS__)
+#define ENGINE_TRACE(...) Genesis::Logger::trace(__VA_ARGS__)
+#define ENGINE_INFO(...) Genesis::Logger::info(__VA_ARGS__)
+#define ENGINE_ERROR(...) Genesis::Logger::error(__VA_ARGS__)
 #else
 #define ENGINE_WARN(...)
 #define ENGINE_DEBUG(...)
@@ -71,6 +74,3 @@ void Logger::error(std::string_view str, const ARGS&... args)
 #define ENGINE_INFO(...)
 #define ENGINE_ERROR(...)
 #endif
-
-
-}// namespace Genesis
