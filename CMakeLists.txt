@@ -14,7 +14,7 @@ include(cmake/StandardProjectSettings.cmake)
 set_project_settings(project_settings)
 
 include(cmake/StaticAnalyzers.cmake)
-# enable_cppcheck("")
+enable_cppcheck("")
 
 include(CTest)
 enable_testing()

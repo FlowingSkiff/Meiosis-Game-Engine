@@ -18,6 +18,7 @@ target_compile_definitions(sandbox
     PRIVATE
         SPDLOG_FMT_EXTERNAL
         ENABLE_LOG
+        #GN_LINK_DLL
 )
 
 

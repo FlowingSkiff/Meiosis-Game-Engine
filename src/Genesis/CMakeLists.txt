@@ -1,6 +1,6 @@
 
 set(genesis_sources empty.cpp)
-add_library(genesis SHARED ${genesis_sources})
+add_library(genesis STATIC ${genesis_sources})
 
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
@@ -32,7 +32,7 @@ target_compile_definitions(genesis
     PRIVATE
         SPDLOG_FMT_EXTERNAL
         ENABLE_LOG
-        GN_BUILD_DLL
+        #GN_BUILD_DLL
 )
 
 add_custom_command(

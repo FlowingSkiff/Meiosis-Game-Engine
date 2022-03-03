@@ -2,6 +2,8 @@
 
 #ifdef GN_BUILD_DLL
 #define GN_API __declspec(dllexport)
-#else
+#elif GN_LINK_DLL
 #define GN_API __declspec(dllimport)
+#else
+#define GN_API
 #endif
