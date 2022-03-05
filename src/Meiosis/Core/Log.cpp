@@ -1,9 +1,9 @@
-#include "Genesis/Core/Log.hpp"
+#include "Meiosis/Core/Log.hpp"
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 
 
-namespace Genesis
+namespace Meiosis
 {
 std::shared_ptr<spdlog::logger> Logger::clientLog;
 std::shared_ptr<spdlog::logger> Logger::coreLog;
@@ -16,4 +16,4 @@ void Logger::init()
     coreLog = spdlog::stdout_color_mt("core");
     coreLog->set_level(spdlog::level::trace);
 }
-}// namespace Genesis
+}// namespace Meiosis

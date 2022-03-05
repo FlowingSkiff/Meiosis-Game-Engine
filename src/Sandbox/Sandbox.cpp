@@ -1,5 +1,5 @@
-#include <Genesis.hpp>
-class MyNewApp : public Genesis::Application
+#include <Meiosis.hpp>
+class MyNewApp : public Meiosis::Application
 {
   public:
     MyNewApp();
@@ -14,7 +14,7 @@ MyNewApp::MyNewApp()
     ENGINE_ERROR("Test ");
 }
 
-Genesis::Application* Genesis::CreateApplication()
+Meiosis::Application* Meiosis::CreateApplication()
 {
     return new MyNewApp();
 }

@@ -2,7 +2,7 @@
 #include "..\Core\Core.hpp"
 #include "Event.hpp"
 #include "..\Core\MouseCodes.hpp"
-namespace Genesis
+namespace Meiosis
 {
 class MouseMovedEvent : public Event
 {
@@ -58,4 +58,4 @@ class MouseButtonReleasedEvent : public MouseButtonEvent
     static EventType getStaticType() { return EventType::MouseButtonRelease; }
     virtual EventType type() const override { return getStaticType(); }
 };
-}// namespace Genesis
+}// namespace Meiosis

@@ -1,7 +1,7 @@
 #pragma once
 #include "Core.hpp"
 #include <cstdint>
-namespace Genesis
+namespace Meiosis
 {
 enum class MouseCode : uint16_t {
     // From glfw3.h

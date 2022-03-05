@@ -2,7 +2,7 @@
 #include "Event.hpp"
 #include <cstdint>
 
-namespace Genesis
+namespace Meiosis
 {
 class WindowResizeEvent : public Event
 {
@@ -51,4 +51,4 @@ class AppRenderEvent : public Event
     virtual EventType type() const override { return getStaticType(); }
     virtual int categoryFlags() const override { return static_cast<int>(EventCategory::Application); }
 };
-}// namespace Genesis
+}// namespace Meiosis

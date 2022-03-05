@@ -3,7 +3,7 @@ set(application_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/application.cpp
 )
 
-target_sources(genesis PRIVATE ${application_sources})
+target_sources(meiosis PRIVATE ${application_sources})
 
 # add_library(application application.cpp)
 # 

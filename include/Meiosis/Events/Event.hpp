@@ -1,7 +1,7 @@
 #pragma once
 #include "../Core/Core.hpp"
 
-namespace Genesis
+namespace Meiosis
 {
 
 enum class EventType {
@@ -83,4 +83,4 @@ bool EventHandler::dispatch(const FUNC& func)
     }
     return should_handle;
 }
-}// namespace Genesis
+}// namespace Meiosis

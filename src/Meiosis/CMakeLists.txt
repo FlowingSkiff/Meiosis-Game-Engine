@@ -1,6 +1,6 @@
 
-set(genesis_sources empty.cpp)
-add_library(genesis STATIC ${genesis_sources})
+set(meiosis_sources empty.cpp)
+add_library(meiosis STATIC ${meiosis_sources})
 
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
@@ -9,7 +9,7 @@ add_subdirectory(thirdparty)
 add_subdirectory(Core)
 
 
-target_link_libraries(genesis
+target_link_libraries(meiosis
     PRIVATE
         project_settings
         project_warings
@@ -21,22 +21,22 @@ target_link_libraries(genesis
         fmt
 )
 
-target_include_directories(genesis
+target_include_directories(meiosis
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/include/Genesis
+        ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
         $ENV{MINGW_INCLUDE}
 )
 
-target_compile_definitions(genesis
+target_compile_definitions(meiosis
     PRIVATE
         SPDLOG_FMT_EXTERNAL
         ENABLE_LOG
-        #GN_BUILD_DLL
+        #ME_BUILD_DLL
 )
 
 add_custom_command(
     TARGET ${PROJECT_NAME} PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/src/Genesis/resources/ $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
+        ${CMAKE_SOURCE_DIR}/src/Meiosis/resources/ $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
 )

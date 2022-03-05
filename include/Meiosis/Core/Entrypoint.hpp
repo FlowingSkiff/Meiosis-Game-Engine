@@ -3,12 +3,12 @@
 #include "Core/Application.hpp"
 #include "Core/Log.hpp"
 
-extern Genesis::Application* Genesis::CreateApplication();
+extern Meiosis::Application* Meiosis::CreateApplication();
 
 int main(int argc, char** argv)
 {
-    Genesis::Logger::init();
-    auto* application = Genesis::CreateApplication();
+    Meiosis::Logger::init();
+    auto* application = Meiosis::CreateApplication();
     application->run();
     delete application;
     return 0;

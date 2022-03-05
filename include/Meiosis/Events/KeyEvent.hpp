@@ -2,7 +2,7 @@
 #include "..\Core\Core.hpp"
 #include "Event.hpp"
 #include "..\Core\Keycodes.hpp"
-namespace Genesis
+namespace Meiosis
 {
 class KeyEvent : public Event
 {
@@ -45,4 +45,4 @@ class KeyTypedEvent : public KeyEvent
     static EventType getStaticType() { return EventType::KeyType; }
     virtual EventType type() const override { return getStaticType(); }
 };
-}// namespace Genesis
+}// namespace Meiosis

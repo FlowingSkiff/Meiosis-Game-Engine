@@ -9,7 +9,7 @@ set(ogl_abstraction_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/ComputeShader.cpp
 )
 
-target_sources(genesis PRIVATE ${ogl_abstraction_sources})
+target_sources(meiosis PRIVATE ${ogl_abstraction_sources})
 
 # add_library(OGLAbstraction ${ogl_abstraction_sources})
 # 
@@ -25,7 +25,7 @@ target_sources(genesis PRIVATE ${ogl_abstraction_sources})
 # target_include_directories(OGLAbstraction
 #     PUBLIC
 #         ${CMAKE_SOURCE_DIR}/include
-#         ${CMAKE_SOURCE_DIR}/include/Genesis
+#         ${CMAKE_SOURCE_DIR}/include/Meiosis
 #         $ENV{MINGW_INCLUDE}
 # )
 # 

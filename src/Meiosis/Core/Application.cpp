@@ -1,6 +1,6 @@
 #include "Core/Application.hpp"
 #include "Core/Log.hpp"
-namespace Genesis
+namespace Meiosis
 {
 Application::Application()
 {
@@ -11,4 +11,4 @@ Application::~Application()
 void Application::run()
 {
 }
-}// namespace Genesis
+}// namespace Meiosis

@@ -4,4 +4,4 @@ set(event_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/ApplicationEvent.cpp
 )
 
-target_sources(genesis PRIVATE ${event_sources})
+target_sources(meiosis PRIVATE ${event_sources})

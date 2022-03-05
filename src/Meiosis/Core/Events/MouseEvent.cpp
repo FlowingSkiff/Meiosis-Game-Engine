@@ -1,6 +1,6 @@
 #include "Events\MouseEvent.hpp"
 
-namespace Genesis
+namespace Meiosis
 {
 MouseMovedEvent::MouseMovedEvent(const float x, const float y) : m_x_offset(x), m_y_offset(y) {}
 int MouseMovedEvent::categoryFlags() const
@@ -20,4 +20,4 @@ int MouseButtonEvent::categoryFlags() const
 }
 MouseButtonPressedEvent::MouseButtonPressedEvent(const MouseCode code) : MouseButtonEvent(code) {}
 MouseButtonReleasedEvent::MouseButtonReleasedEvent(const MouseCode code) : MouseButtonEvent(code) {}
-}// namespace Genesis
+}// namespace Meiosis

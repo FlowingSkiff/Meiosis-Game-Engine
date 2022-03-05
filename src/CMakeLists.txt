@@ -1,2 +1,2 @@
-add_subdirectory(Genesis)
+add_subdirectory(Meiosis)
 add_subdirectory(Sandbox)

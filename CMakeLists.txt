@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(genesis VERSION 0.1.0)
+project(meiosis VERSION 0.1.0)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>-lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>-lib)
@@ -14,7 +14,7 @@ include(cmake/StandardProjectSettings.cmake)
 set_project_settings(project_settings)
 
 include(cmake/StaticAnalyzers.cmake)
-enable_cppcheck("")
+#enable_cppcheck("")
 
 include(CTest)
 enable_testing()
