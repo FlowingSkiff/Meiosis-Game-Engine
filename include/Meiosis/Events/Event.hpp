@@ -54,14 +54,6 @@ class Event
     bool m_handled;
 };
 
-#define EVENT_CLASS_TYPE(type)                                   \
-    static EventType getStaticType() { return EventType::type; } \
-    virtual EventType type() const override { return getStaticType(); }
-
-#define EVENT_CLASS_CATEGORY(category) \
-    virtual int getCategoryFlags() const override { return category; }
-
-
 class EventHandler
 {
   public:
