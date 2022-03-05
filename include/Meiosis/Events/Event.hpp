@@ -79,7 +79,7 @@ bool EventHandler::dispatch(const FUNC& func)
     bool should_handle = m_event->type() == TYPE::staticType();
     if (should_handle)
     {
-        m_event.handle(func(static_cast<TYPE&>(*m_event)));
+        m_event->handle(func(static_cast<TYPE&>(*m_event)));
     }
     return should_handle;
 }
