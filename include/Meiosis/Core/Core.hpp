@@ -9,3 +9,7 @@
 #endif
 
 inline constexpr auto bit(int n) { return 1 << n; }
+
+#define ME_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { \
+    return this->fn(std::forward<decltype(args)>(args)...);             \
+}

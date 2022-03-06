@@ -7,6 +7,7 @@ find_package(glm REQUIRED)
 
 add_subdirectory(thirdparty)
 add_subdirectory(Core)
+add_subdirectory(Platform)
 
 
 target_link_libraries(meiosis

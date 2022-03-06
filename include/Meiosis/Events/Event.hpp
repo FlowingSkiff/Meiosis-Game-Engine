@@ -68,7 +68,7 @@ class EventHandler
 template<typename TYPE, typename FUNC>
 bool EventHandler::dispatch(const FUNC& func)
 {
-    bool should_handle = m_event->type() == TYPE::staticType();
+    bool should_handle = m_event->type() == TYPE::getStaticType();
     if (should_handle)
     {
         m_event->handle(func(static_cast<TYPE&>(*m_event)));
