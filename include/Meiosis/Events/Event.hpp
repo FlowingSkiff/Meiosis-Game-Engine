@@ -33,7 +33,7 @@ enum class EventCategory {
 };
 
 
-class Event
+class ME_API Event
 {
   protected:
     Event() : m_handled{ false } {}
@@ -54,7 +54,7 @@ class Event
     bool m_handled;
 };
 
-class EventHandler
+class ME_API EventHandler
 {
   public:
     EventHandler(Event& event) : m_event(&event) {}

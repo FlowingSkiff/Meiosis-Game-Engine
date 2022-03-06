@@ -8,7 +8,7 @@
 #include <string>
 namespace Meiosis
 {
-class Window
+class ME_API Window
 {
   public:
     using WindowCallbackFunction = std::function<void(Event&)>;

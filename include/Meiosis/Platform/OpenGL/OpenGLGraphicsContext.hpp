@@ -6,7 +6,7 @@ struct GLFWwindow;
 
 namespace Meiosis
 {
-class OpenGLGraphicsContext : public GraphicsContext
+class ME_API OpenGLGraphicsContext : public GraphicsContext
 {
   public:
     OpenGLGraphicsContext(GLFWwindow* window);

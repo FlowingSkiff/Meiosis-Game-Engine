@@ -4,7 +4,7 @@
 #include "..\Core\Keycodes.hpp"
 namespace Meiosis
 {
-class KeyEvent : public Event
+class ME_API KeyEvent : public Event
 {
   public:
     inline KeyCode keyCode() const { return m_key_code; }
@@ -15,7 +15,7 @@ class KeyEvent : public Event
     KeyCode m_key_code;
 };
 
-class KeyPressedEvent : public KeyEvent
+class ME_API KeyPressedEvent : public KeyEvent
 {
   public:
     KeyPressedEvent(const KeyCode keycode, const uint16_t repeat_count);
@@ -30,7 +30,7 @@ class KeyPressedEvent : public KeyEvent
     uint16_t m_repeat_count;
 };
 
-class KeyReleasedEvent : public KeyEvent
+class ME_API KeyReleasedEvent : public KeyEvent
 {
   public:
     KeyReleasedEvent(const KeyCode keycode);
@@ -38,7 +38,7 @@ class KeyReleasedEvent : public KeyEvent
     virtual EventType type() const override { return getStaticType(); }
 };
 
-class KeyTypedEvent : public KeyEvent
+class ME_API KeyTypedEvent : public KeyEvent
 {
   public:
     KeyTypedEvent(const KeyCode keycode);

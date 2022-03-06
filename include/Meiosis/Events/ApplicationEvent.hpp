@@ -4,7 +4,7 @@
 
 namespace Meiosis
 {
-class WindowResizeEvent : public Event
+class ME_API WindowResizeEvent : public Event
 {
   public:
     WindowResizeEvent(uint32_t width, uint32_t height);
@@ -18,7 +18,7 @@ class WindowResizeEvent : public Event
     uint32_t m_width;
     uint32_t m_height;
 };
-class WindowCloseEvent : public Event
+class ME_API WindowCloseEvent : public Event
 {
   public:
     WindowCloseEvent() = default;
@@ -27,7 +27,7 @@ class WindowCloseEvent : public Event
     virtual int categoryFlags() const override { return static_cast<int>(EventCategory::Application); }
 };
 
-class AppTickEvent : public Event
+class ME_API AppTickEvent : public Event
 {
   public:
     AppTickEvent() = default;
@@ -35,7 +35,7 @@ class AppTickEvent : public Event
     virtual EventType type() const override { return getStaticType(); }
     virtual int categoryFlags() const override { return static_cast<int>(EventCategory::Application); }
 };
-class AppUpdateEvent : public Event
+class ME_API AppUpdateEvent : public Event
 {
   public:
     AppUpdateEvent() = default;
@@ -43,7 +43,7 @@ class AppUpdateEvent : public Event
     virtual EventType type() const override { return getStaticType(); }
     virtual int categoryFlags() const override { return static_cast<int>(EventCategory::Application); }
 };
-class AppRenderEvent : public Event
+class ME_API AppRenderEvent : public Event
 {
   public:
     AppRenderEvent() = default;

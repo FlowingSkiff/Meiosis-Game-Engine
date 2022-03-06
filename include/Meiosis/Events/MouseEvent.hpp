@@ -4,7 +4,7 @@
 #include "..\Core\MouseCodes.hpp"
 namespace Meiosis
 {
-class MouseMovedEvent : public Event
+class ME_API MouseMovedEvent : public Event
 {
   public:
     MouseMovedEvent(const float x, const float y);
@@ -18,7 +18,7 @@ class MouseMovedEvent : public Event
     float m_x_offset;
     float m_y_offset;
 };
-class MouseScrolledEvent : public Event
+class ME_API MouseScrolledEvent : public Event
 {
   public:
     MouseScrolledEvent(const float x, const float y);
@@ -32,7 +32,7 @@ class MouseScrolledEvent : public Event
     float m_x_offset;
     float m_y_offset;
 };
-class MouseButtonEvent : public Event
+class ME_API MouseButtonEvent : public Event
 {
   public:
     inline MouseCode mouseButton() const;
@@ -44,14 +44,14 @@ class MouseButtonEvent : public Event
   private:
     MouseCode m_code;
 };
-class MouseButtonPressedEvent : public MouseButtonEvent
+class ME_API MouseButtonPressedEvent : public MouseButtonEvent
 {
   public:
     MouseButtonPressedEvent(const MouseCode button);
     static EventType getStaticType() { return EventType::MouseButtonPress; }
     virtual EventType type() const override { return getStaticType(); }
 };
-class MouseButtonReleasedEvent : public MouseButtonEvent
+class ME_API MouseButtonReleasedEvent : public MouseButtonEvent
 {
   public:
     MouseButtonReleasedEvent(const MouseCode button);

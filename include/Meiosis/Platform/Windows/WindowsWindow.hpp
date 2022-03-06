@@ -5,7 +5,7 @@
 #include <glfw/glfw3.h>
 namespace Meiosis
 {
-class WindowsWindow : public Window
+class ME_API WindowsWindow : public Window
 {
   public:
     struct WindowData

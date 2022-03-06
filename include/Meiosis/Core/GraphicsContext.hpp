@@ -2,7 +2,7 @@
 #include <memory>
 namespace Meiosis
 {
-class GraphicsContext
+class ME_API GraphicsContext
 {
   public:
     virtual ~GraphicsContext() = default;
