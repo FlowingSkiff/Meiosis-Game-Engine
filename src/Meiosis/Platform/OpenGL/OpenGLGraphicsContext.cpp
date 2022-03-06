@@ -12,7 +12,7 @@ void OpenGLGraphicsContext::init()
 {
     glfwMakeContextCurrent(m_window);
     auto status = gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
-    if (status)
+    if (!status)
         ME_ENGINE_ERROR("Could not initialize GLAD");
 
     ME_ENGINE_INFO("OpenGL Info:");

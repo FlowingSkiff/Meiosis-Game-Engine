@@ -106,7 +106,7 @@ WindowsWindow::WindowsWindow(const std::string& name, uint32_t width, uint32_t h
 {
     ME_ENGINE_INFO("Creating window {} ({}, {})", m_data.title, m_data.width, m_data.height);
     auto init_success = glfwInit();
-    if (init_success != 0)
+    if (init_success != GLFW_TRUE)
     {
         ME_ENGINE_ERROR("Failed to initialize GLFW");
     }
