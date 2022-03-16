@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Core.hpp"
 namespace Meiosis
 {
 class ME_API GraphicsContext
