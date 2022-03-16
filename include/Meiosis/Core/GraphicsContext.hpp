@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.hpp"
 #include <memory>
 #include "Core.hpp"
 namespace Meiosis
