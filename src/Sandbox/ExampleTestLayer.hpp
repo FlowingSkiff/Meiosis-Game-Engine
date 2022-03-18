@@ -3,8 +3,8 @@
 
 class ExampleLayer : public Meiosis::Layer
 {
-    public:
-        ExampleLayer() { }
-        virtual ~ExampleLayer() { }
-        virtual void onEvent(Meiosis::Event& e);
+  public:
+    ExampleLayer() {}
+    virtual ~ExampleLayer() {}
+    virtual void onEvent(Meiosis::Event& e);
 };
