@@ -1,4 +1,5 @@
 #include <Meiosis.hpp>
+#include "ExampleTestLayer.hpp"
 class MyNewApp : public Meiosis::Application
 {
   public:
@@ -7,11 +8,7 @@ class MyNewApp : public Meiosis::Application
 
 MyNewApp::MyNewApp()
 {
-    ENGINE_TRACE("Test ");
-    ENGINE_DEBUG("Test ");
-    ENGINE_INFO("Test ");
-    ENGINE_WARN("Test ");
-    ENGINE_ERROR("Test ");
+    pushLayer(new ExampleLayer());
 }
 
 Meiosis::Application* Meiosis::CreateApplication()

@@ -1,6 +1,10 @@
 
+set(sandbox_sources 
+    sandbox.cpp
+    ExampleTestLayer.cpp
+)
 
-add_executable(sandbox sandbox.cpp)
+add_executable(sandbox ${sandbox_sources})
 
 target_include_directories(sandbox
     PRIVATE
