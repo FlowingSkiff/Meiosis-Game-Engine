@@ -29,7 +29,8 @@ void Application::onEvent(Event& e)
 
     for (auto rit = m_layers.rbegin(); rit != m_layers.rend(); ++rit)
     {
-        // TODO: check for handle
+        if (e.handle())
+            break;
         (*rit)->onEvent(e);
     }
 }

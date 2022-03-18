@@ -42,15 +42,34 @@ class ME_API Event
 
   public:
     virtual ~Event() {}
+    /**
+     * @brief Gets the type of event 
+     * 
+     * @return EventType 
+     */
     virtual EventType type() const = 0;
     virtual int categoryFlags() const = 0;
 
   public:
+    /**
+     * @brief Determines if the event is in the current category
+     * 
+     * @param cat category to check if the event is in
+     * @return true The event is in the specified category
+     * @return false The event is not in the specified category
+     */
     bool isInCategory(EventCategory cat)
     {
         return categoryFlags() & static_cast<int>(cat);
     }
-    inline bool handle(bool should_handle) { return m_handled |= should_handle; }
+    /**
+     * @brief Funtion to get the status of the event
+     * 
+     * @param should_handle optional arg for whether to handle the event
+     * @return true the event has been handled
+     * @return false the event has not been handled
+     */
+    inline bool handle(bool should_handle = false) { return m_handled |= should_handle; }
 
   private:
     bool m_handled;
