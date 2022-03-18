@@ -10,6 +10,8 @@ find_package(fmt REQUIRED)
 add_subdirectory(thirdparty)
 add_subdirectory(Core)
 add_subdirectory(Platform)
+add_subdirectory(Layer)
+add_subdirectory(Events)
 
 
 target_link_libraries(meiosis
