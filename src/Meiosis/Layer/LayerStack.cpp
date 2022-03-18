@@ -44,9 +44,9 @@ namespace Meiosis
     }
     void LayerStack::pushLayer(Layer* layer)
     {
-        // Add debug check for index > size
+        // TODO: Add debug check for index > size
         const auto ins_index = m_layers.size() - m_overlay_count;
-        #ifdef _DEBUG
+        #ifdef ME_DEBUG
         if (ins_index < 0)
         {
             ME_ENGINE_ERROR("Overlay count ({}) is greater than the total amount of layers ({}).", m_overlay_count, m_layers.size());

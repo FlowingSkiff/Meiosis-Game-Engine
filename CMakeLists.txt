@@ -11,6 +11,10 @@ set_project_settings(project_settings)
 include(cmake/Conan.cmake)
 conan_install()
 
+if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    target_compile_definitions(project_settings INTERFACE ME_DEBUG)
+endif()
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>-lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>-lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>-bin)
