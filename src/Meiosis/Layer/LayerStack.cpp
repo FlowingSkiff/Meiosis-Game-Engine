@@ -57,4 +57,21 @@ void LayerStack::pushLayer(Layer* layer)
     m_layers.insert(ins_iter, layer);
 }
 
+void LayerStack::detachLayer(Layer* layer)
+{
+    for (auto it = m_layers.begin(); it != m_layers.end(); ++it)
+    {
+        if (*it == layer)
+        {
+            m_layers.erase(it);
+            break;
+        }
+    }
+}
+void LayerStack::deleteLayer(Layer* layer)
+{
+    detachLayer(layer);
+    delete layer;
+}
+
 }// namespace Meiosis
