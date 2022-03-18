@@ -1,5 +1,7 @@
 #pragma once
 #include "../Core/Core.hpp"
+#include <magic_enum/magic_enum.hpp>
+#include <spdlog/spdlog.h>
 
 namespace Meiosis
 {
@@ -76,3 +78,15 @@ bool EventHandler::dispatch(const FUNC& func)
     return should_handle;
 }
 }// namespace Meiosis
+
+template<>
+struct fmt::formatter<Meiosis::Event>
+{
+  template<typename ParseContext>
+  constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
+  template<typename FormatContext>
+  auto format(const Meiosis::Event& e, FormatContext& ctx)
+  {
+    return format_to(ctx.out(), "{}", magic_enum::enum_name(e.type()));
+  }
+};
