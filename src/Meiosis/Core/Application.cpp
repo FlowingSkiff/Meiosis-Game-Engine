@@ -3,13 +3,24 @@
 #include "Core/Window.hpp"
 namespace Meiosis
 {
+
+Application* Application::s_instance = nullptr;
 Application::Application()
 {
+    s_instance = this;
     m_window = Window::create();
     m_window->setEventCallback(ME_BIND_EVENT_FN(Application::onEvent));
+
+    m_imgui_layer = new ImguiLayer();
+    pushOverlay(m_imgui_layer);
 }
 Application::~Application()
 {
+}
+
+Application& Application::get()
+{
+    return *s_instance;
 }
 void Application::run()
 {
@@ -17,6 +28,12 @@ void Application::run()
     {
         for (auto layer : m_layers)
             layer->onUpdate(0.0f);
+        m_imgui_layer->beginFrame();
+        {
+            for (auto layer : m_layers)
+                layer->onImguiRender();
+        }
+        m_imgui_layer->endFrame();
         m_window->onUpdate();
     }
 }
@@ -51,5 +68,17 @@ bool Application::onWindowResize(WindowResizeEvent& e)
 void Application::pushLayer(Layer* layer)
 {
     m_layers.pushLayer(layer);
+    layer->onAttach();
+}
+
+void Application::pushOverlay(Layer* layer)
+{
+    m_layers.pushOverlay(layer);
+    layer->onAttach();
+}
+
+auto Application::getWindow() -> Window&
+{
+    return *m_window;
 }
 }// namespace Meiosis
