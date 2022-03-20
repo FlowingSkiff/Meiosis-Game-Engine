@@ -8,16 +8,17 @@ find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 
 add_subdirectory(Core)
-add_subdirectory(Platform)
-add_subdirectory(Layer)
 add_subdirectory(Events)
+add_subdirectory(imgui)
+add_subdirectory(Layer)
+add_subdirectory(Platform)
 
 
 target_link_libraries(meiosis
-    PRIVATE
+    PUBLIC
         project_settings
         project_warings
-        # imgui
+        imgui
         glfw3
         glm
         glad
@@ -30,6 +31,7 @@ target_include_directories(meiosis
         ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
         ${third_party_include}
+        ${CMAKE_SOURCE_DIR}/thirdparty/imgui
 )
 
 target_compile_definitions(meiosis
@@ -43,4 +45,10 @@ add_custom_command(
     TARGET ${PROJECT_NAME} PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/src/Meiosis/resources/ $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
+)
+
+add_custom_command(
+    TARGET ${PROJECT_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/Meiosis/resources/  ${CMAKE_BINARY_DIR}/$<CONFIG>-bin/resources
 )
