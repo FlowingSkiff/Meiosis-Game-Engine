@@ -13,8 +13,9 @@ target_include_directories(sandbox
         ${third_party_include}
 )
 target_link_libraries(sandbox
-    PRIVATE
+    PUBLIC
         meiosis
+        imgui
         project_settings
         project_warings
 )

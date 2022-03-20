@@ -7,4 +7,5 @@ class ExampleLayer : public Meiosis::Layer
     ExampleLayer() {}
     virtual ~ExampleLayer() {}
     virtual void onEvent(Meiosis::Event& e) override;
+    virtual void onImguiRender() override;
 };

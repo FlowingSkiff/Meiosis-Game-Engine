@@ -8,4 +8,5 @@ void Layer::onUpdate(float dt) {}
 void Layer::onEvent(Event& e) {}
 void Layer::onAttach() {}
 void Layer::onDetach() {}
+void Layer::onImguiRender() {}
 }// namespace Meiosis

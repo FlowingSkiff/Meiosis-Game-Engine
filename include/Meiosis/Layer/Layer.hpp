@@ -12,5 +12,6 @@ class ME_API Layer
     virtual void onEvent(Event& e);
     virtual void onAttach();
     virtual void onDetach();
+    virtual void onImguiRender();
 };
 }// namespace Meiosis
