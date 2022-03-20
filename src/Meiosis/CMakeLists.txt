@@ -7,7 +7,6 @@ find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 
-add_subdirectory(thirdparty)
 add_subdirectory(Core)
 add_subdirectory(Platform)
 add_subdirectory(Layer)
@@ -18,7 +17,7 @@ target_link_libraries(meiosis
     PRIVATE
         project_settings
         project_warings
-        imgui
+        # imgui
         glfw3
         glm
         glad
@@ -30,6 +29,7 @@ target_include_directories(meiosis
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
+        ${third_party_include}
 )
 
 target_compile_definitions(meiosis

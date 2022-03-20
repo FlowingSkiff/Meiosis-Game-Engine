@@ -9,7 +9,7 @@ set_project_warnings(project_warings)
 include(cmake/StandardProjectSettings.cmake)
 set_project_settings(project_settings)
 include(cmake/Conan.cmake)
-conan_install()
+# conan_install()
 
 if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     target_compile_definitions(project_settings INTERFACE ME_DEBUG)
@@ -26,7 +26,8 @@ include(CTest)
 enable_testing()
 
 add_subdirectory(lib)
-
+add_subdirectory(thirdparty)
+set(third_party_include ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
 add_subdirectory(src)
 
 
