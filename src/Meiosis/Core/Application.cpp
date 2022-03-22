@@ -9,7 +9,7 @@ Application::Application()
 {
     s_instance = this;
     m_window = Window::create();
-    m_window->setEventCallback(ME_BIND_EVENT_FN(Application::onEvent));
+    m_window->setEventCallback(bindMemberFunction(this, &Application::onEvent));
 
     m_imgui_layer = new ImguiLayer();
     pushOverlay(m_imgui_layer);
@@ -41,8 +41,8 @@ void Application::run()
 void Application::onEvent(Event& e)
 {
     EventHandler handler(e);
-    handler.dispatch<WindowCloseEvent>(ME_BIND_EVENT_FN(Application::onWindowClose));
-    handler.dispatch<WindowResizeEvent>(ME_BIND_EVENT_FN(Application::onWindowResize));
+    handler.dispatch<WindowCloseEvent>(bindMemberFunction(this, &Application::onWindowClose));
+    handler.dispatch<WindowResizeEvent>(bindMemberFunction(this, &Application::onWindowResize));
 
     for (auto rit = m_layers.rbegin(); rit != m_layers.rend(); ++rit)
     {

@@ -1,5 +1,6 @@
 #pragma once
 #include <type_traits>
+#include <utility>
 #ifdef ME_BUILD_DLL
 #define ME_API __declspec(dllexport)
 #elif ME_LINK_DLL
@@ -10,6 +11,11 @@
 
 inline constexpr auto bit(int n) { return 1 << n; }
 
-#define ME_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { \
-    return this->fn(std::forward<decltype(args)>(args)...);             \
+template<typename TYPE, typename FUNC>
+constexpr inline auto bindMemberFunction(TYPE* obj, FUNC func) -> decltype(auto)
+{
+    return [obj, func](auto&&... args) -> decltype(auto)
+    {
+        return (obj->*func)(std::forward<decltype(args)>(args)...);
+    };
 }
