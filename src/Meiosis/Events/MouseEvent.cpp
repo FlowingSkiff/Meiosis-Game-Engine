@@ -13,7 +13,6 @@ int MouseScrolledEvent::categoryFlags() const
     return static_cast<int>(EventCategory::Mouse) | static_cast<int>(EventCategory::Input);
 }
 MouseButtonEvent::MouseButtonEvent(const MouseCode code) : m_code(code) {}
-MouseCode MouseButtonEvent::mouseButton() const { return m_code; }
 int MouseButtonEvent::categoryFlags() const
 {
     return static_cast<int>(EventCategory::Mouse) | static_cast<int>(EventCategory::Input) | static_cast<int>(EventCategory::MouseButton);

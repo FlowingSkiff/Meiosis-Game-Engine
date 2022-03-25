@@ -35,7 +35,7 @@ class ME_API MouseScrolledEvent : public Event
 class ME_API MouseButtonEvent : public Event
 {
   public:
-    inline MouseCode mouseButton() const;
+    inline MouseCode mouseButton() const { return m_code; }
     virtual int categoryFlags() const override;
 
   protected:
