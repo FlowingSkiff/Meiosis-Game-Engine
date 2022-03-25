@@ -9,4 +9,5 @@ void ExampleLayer::onEvent(Meiosis::Event& e)
 void ExampleLayer::onImguiRender()
 {
     ImGui::Text("dear imgui says hello. (%s)", IMGUI_VERSION);
+    ImGui::InputFloat("Float value: ", &m_float_val);
 }
