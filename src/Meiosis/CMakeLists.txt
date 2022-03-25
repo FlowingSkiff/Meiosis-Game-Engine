@@ -12,6 +12,7 @@ add_subdirectory(Events)
 add_subdirectory(imgui)
 add_subdirectory(Layer)
 add_subdirectory(Platform)
+add_subdirectory(Renderer)
 
 
 target_link_libraries(meiosis

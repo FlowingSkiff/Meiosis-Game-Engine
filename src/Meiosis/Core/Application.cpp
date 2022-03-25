@@ -1,6 +1,8 @@
 #include "Core/Application.hpp"
 #include "Core/Log.hpp"
 #include "Core/Window.hpp"
+#include "Meiosis/Renderer/Renderer.hpp"
+#include "Meiosis/Renderer/RendererAPI.hpp"
 namespace Meiosis
 {
 
@@ -13,6 +15,7 @@ Application::Application()
 
     m_imgui_layer = new ImguiLayer();
     pushOverlay(m_imgui_layer);
+    Renderer::init();
 }
 Application::~Application()
 {
@@ -26,6 +29,7 @@ void Application::run()
 {
     while (m_running)
     {
+        RendererAPI::clear();
         for (auto layer : m_layers)
             layer->onUpdate(0.0f);
         m_imgui_layer->beginFrame();
