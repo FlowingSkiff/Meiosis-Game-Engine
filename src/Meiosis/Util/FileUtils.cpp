@@ -4,12 +4,22 @@ namespace Meiosis::Util
 {
     std::string filenameFromPath(const std::string& file_path, bool remove_extension)
     {
-        const auto last_slash = file_path.find_last_of('/');
-        const auto last_period = [&]() -> size_t{ 
-            if (!remove_extension) 
-                return 0;
-            return file_path.find_last_of('.');
+        std::string cpy = file_path;
+        for (auto& c : cpy)
+            if (c == '\\')
+                c = '/';
+        const auto last_slash = [&]() -> size_t{
+            const auto lst = cpy.find_last_of('/');
+            return (lst != std::string::npos) ? lst + 1 : 0;
         }();
-        return (last_period) ? file_path.substr(last_slash, last_period) : file_path.substr(last_slash);
+        const auto last_period = [&]() -> size_t{ 
+            const auto lst = cpy.find_last_of('.');
+            if (!remove_extension || lst == std::string::npos) 
+                return cpy.size();
+            return lst;
+        }();
+        // const auto length = cpy.size() - last_slash - (cpy.size() - last_period);
+        const auto length = last_period - last_slash;
+        return cpy.substr(last_slash, length);
     }
 }
