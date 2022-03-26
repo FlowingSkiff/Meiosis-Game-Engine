@@ -1,6 +1,5 @@
 macro(conan_install)
     find_program(conan conan)
-    
     if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Darwin)
         set(os Macos)
     else()
@@ -15,6 +14,9 @@ macro(conan_install)
         message(FATAL_ERROR "Unknown compiler: ${CMAKE_CXX_COMPILER_ID}")
     endif()
 
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
+    list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
+
     set(conanfile ${CMAKE_SOURCE_DIR}/conanfile.txt)
     set(conanfile_cmake ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 
@@ -28,12 +30,26 @@ macro(conan_install)
         -s compiler.libcxx=libstdc++11
         -s compiler.version=${major_minor_compiler}
         --build=missing
+        --no-imports
         COMMAND_ECHO STDOUT
         RESULT_VARIABLE return_code
     )
 
     if (NOT ${return_code} EQUAL 0)
         message(FATAL_ERROR "conan install command failed.")
+    endif()
+
+    set(tmp_import_dir ${CMAKE_SOURCE_DIR}/build/Debug-lib/)
+    link_directories(${tmp_import_dir})
+    execute_process(COMMAND ${conan} imports ${CMAKE_SOURCE_DIR}/
+        -if ${CMAKE_SOURCE_DIR}/build
+        -imf ${tmp_import_dir}
+        COMMAND_ECHO STDOUT
+        RESULT_VARIABLE return_code
+    )
+    # include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+    if (NOT ${return_code} EQUAL 0)
+        message(FATAL_ERROR "conan import command failed.")
     endif()
     # include(${conanfile_cmake})
     # conan_basic_setup()

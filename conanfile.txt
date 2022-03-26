@@ -2,6 +2,7 @@
 fmt/8.1.1
 spdlog/1.9.2
 glm/0.9.9.8
+gtest/cci.20210126
 
 [generators]
 cmake_find_package_multi
@@ -10,3 +11,8 @@ cmake_find_package
 [options]
 fmt:header_only=True
 spdlog:header_only=True
+
+
+[imports]
+bin, * -> ./.
+lib, * -> ./.
