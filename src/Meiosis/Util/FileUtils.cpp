@@ -1,6 +1,6 @@
 #include "Meiosis/Util/FileUtils.hpp"
 #include <algorithm>
-namespace Meiosis
+namespace Meiosis::Util
 {
     std::string filenameFromPath(const std::string& file_path, bool remove_extension)
     {
