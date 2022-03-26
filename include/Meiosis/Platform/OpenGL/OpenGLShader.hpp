@@ -11,8 +11,9 @@ namespace Meiosis
         public:
             using source_map = std::unordered_map<GLenum, std::string>;
         public:
-            OpenGLShader::OpenGLShader(const std::string& file_path);
-            OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex_source, const std::string& fragment_source);
+            OpenGLShader(const std::string& file_path);
+            OpenGLShader(const std::string& name, const std::string& vertex_source, const std::string& fragment_source);
+            virtual const std::string& getName() const override;
             virtual ~OpenGLShader();
             virtual void bind() const override;
             virtual void unbind() const override;
