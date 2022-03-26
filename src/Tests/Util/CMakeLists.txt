@@ -10,7 +10,7 @@ set(file_util_test_sources
 add_executable(FileUtilTest ${file_util_test_sources})
 target_link_libraries(FileUtilTest 
     PRIVATE
-        gtest_main
+        GTest::gtest_main
         project_settings
         project_warings
         
@@ -18,7 +18,6 @@ target_link_libraries(FileUtilTest
 target_include_directories(FileUtilTest 
     PUBLIC 
         ${CMAKE_SOURCE_DIR}/include
-        ${GTest_INCLUDE_DIRS}
 )
 
 include(GoogleTest)
