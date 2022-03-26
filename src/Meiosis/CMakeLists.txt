@@ -13,6 +13,7 @@ add_subdirectory(imgui)
 add_subdirectory(Layer)
 add_subdirectory(Platform)
 add_subdirectory(Renderer)
+add_subdirectory(Util)
 
 
 target_link_libraries(meiosis
@@ -21,9 +22,7 @@ target_link_libraries(meiosis
         project_warings
         imgui
         glfw3
-        glm
         glad
-    PUBLIC
         fmt
 )
 
@@ -33,6 +32,8 @@ target_include_directories(meiosis
         ${CMAKE_SOURCE_DIR}/include
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
+    public:
+        ${glm_INCLUDE_DIR}
 )
 
 target_compile_definitions(meiosis

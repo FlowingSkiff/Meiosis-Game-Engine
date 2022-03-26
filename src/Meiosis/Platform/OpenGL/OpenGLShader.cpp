@@ -1,7 +1,7 @@
 #include "Meiosis/Platform/OpenGL/OpenGLShader.hpp"
 #include "GLFW/glfw3.h"
 #include <glm/gtc/type_ptr.hpp>
-#include <Meiosis/Util/FileUtils.hpp>
+#include "Meiosis/Util/FileUtils.hpp"
 #include <fstream>
 #include "Meiosis/Core/Log.hpp"
 namespace Meiosis
@@ -136,5 +136,9 @@ namespace Meiosis
     {
         const GLint location = glGetUniformLocation(m_renderer_id, name.c_str());
         glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(mat));
+    }
+    auto OpenGLShader::getName() const -> const std::string&
+    {
+        return m_name;
     }
 }
