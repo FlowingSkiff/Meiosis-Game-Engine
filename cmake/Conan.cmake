@@ -27,6 +27,7 @@ macro(conan_install)
         -s compiler=${compiler}
         -s compiler.libcxx=libstdc++11
         -s compiler.version=${major_minor_compiler}
+        --build=missing
         COMMAND_ECHO STDOUT
         RESULT_VARIABLE return_code
     )
