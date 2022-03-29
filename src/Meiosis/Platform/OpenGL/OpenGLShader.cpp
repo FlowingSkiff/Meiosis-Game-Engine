@@ -28,10 +28,33 @@ namespace Meiosis
             file.read(source.data(), size);
             return source;
         }
-        // TODO: HERE
         auto splitSource(const std::string& source) -> OpenGLShader::source_map
         {
+            // Shaders are in the form of #shader-type VERTEX ... #shader-type FRAGMENT
             OpenGLShader::source_map sources;
+            const std::string vertex_str {"#shader-type VERTEX"};
+            const std::string fragment_str {"#shader-type FRAGMENT"};
+            const auto vertex_begin = source.find(vertex_str);
+            const auto fragment_begin = source.find(fragment_str);
+            if (vertex_begin != std::string::npos && fragment_begin != std::string::npos)
+            {
+                if (vertex_begin < fragment_begin )
+                {
+                    const auto vertex_offset = vertex_begin + vertex_str.size();
+                    sources[GL_VERTEX_SHADER] = source.substr(vertex_offset, fragment_begin - vertex_offset);
+                    sources[GL_FRAGMENT_SHADER] = source.substr(fragment_begin + fragment_str.size());
+                }
+                else
+                {
+                    const auto fragment_offset = fragment_begin + fragment_str.size();
+                    sources[GL_FRAGMENT_SHADER] = source.substr(fragment_offset, vertex_begin - fragment_offset);
+                    sources[GL_VERTEX_SHADER] = source.substr(vertex_begin + vertex_str.size());
+                }
+            }
+            else
+            {
+                ME_ENGINE_ERROR("Error loading shader, vertex({}) and fragment({}) shaders not found.", vertex_begin, fragment_begin);
+            }
             return sources;
         }
     }
