@@ -3,7 +3,6 @@
 #include "Meiosis/Core/Core.hpp"
 #include "Meiosis/Renderer/Shader.hpp"
 #include <glad/glad.h>
-
 namespace Meiosis
 {
     class ME_API OpenGLShader : public Shader
@@ -42,4 +41,9 @@ namespace Meiosis
             std::string m_file_path;
             std::string m_name;
     };
+    namespace details
+    {
+        auto readFile(const std::string& file_path) -> std::string;
+        auto splitSource(const std::string& source) -> OpenGLShader::source_map;
+    }
 }
