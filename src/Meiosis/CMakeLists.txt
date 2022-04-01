@@ -2,7 +2,7 @@
 set(meiosis_sources empty.cpp)
 add_library(meiosis STATIC ${meiosis_sources})
 
-# find_package(glfw3 REQUIRED)
+find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
@@ -21,7 +21,7 @@ target_link_libraries(meiosis
         project_settings
         project_warings
         imgui
-        glfw3
+        glfw::glfw
         glad
         fmt
 )

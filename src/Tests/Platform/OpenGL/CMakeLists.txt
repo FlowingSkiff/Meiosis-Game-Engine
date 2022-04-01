@@ -22,7 +22,7 @@ target_link_libraries(OpenGLTest
         project_warings
         glm::glm
         spdlog
-        glfw3
+        glfw::glfw
         glad
         fmt
 )

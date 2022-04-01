@@ -26,7 +26,6 @@ include(cmake/StaticAnalyzers.cmake)
 include(CTest)
 enable_testing()
 
-add_subdirectory(lib)
 add_subdirectory(thirdparty)
 set(third_party_include ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
 add_subdirectory(src)
