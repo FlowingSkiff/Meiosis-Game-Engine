@@ -6,12 +6,12 @@
 
 namespace Meiosis
 {
-    namespace Input
-    {
-        bool isKeyPressed(KeyCode key_code);
-        bool isMouseButtonPressed(MouseCode mouse_button);
-        auto getMousePosition() -> glm::vec2;
-        auto getMouseX() -> float;
-        auto getMouseY() -> float;
-    }
-}
+namespace Input
+{
+    bool isKeyPressed(KeyCode key_code);
+    bool isMouseButtonPressed(MouseCode mouse_button);
+    auto getMousePosition() -> glm::vec2;
+    auto getMouseX() -> float;
+    auto getMouseY() -> float;
+}// namespace Input
+}// namespace Meiosis

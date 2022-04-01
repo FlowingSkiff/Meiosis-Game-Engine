@@ -43,9 +43,9 @@ class ME_API Event
   public:
     virtual ~Event() {}
     /**
-     * @brief Gets the type of event 
-     * 
-     * @return EventType 
+     * @brief Gets the type of event
+     *
+     * @return EventType
      */
     virtual EventType type() const = 0;
     virtual int categoryFlags() const = 0;
@@ -53,7 +53,7 @@ class ME_API Event
   public:
     /**
      * @brief Determines if the event is in the current category
-     * 
+     *
      * @param cat category to check if the event is in
      * @return true The event is in the specified category
      * @return false The event is not in the specified category
@@ -64,7 +64,7 @@ class ME_API Event
     }
     /**
      * @brief Funtion to get the status of the event
-     * 
+     *
      * @param should_handle optional arg for whether to handle the event
      * @return true the event has been handled
      * @return false the event has not been handled
@@ -101,11 +101,14 @@ bool EventHandler::dispatch(const FUNC& func)
 template<>
 struct fmt::formatter<Meiosis::Event>
 {
-  template<typename ParseContext>
-  constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
-  template<typename FormatContext>
-  auto format(const Meiosis::Event& e, FormatContext& ctx)
-  {
-    return format_to(ctx.out(), "{}", magic_enum::enum_name(e.type()));
-  }
+    template<typename ParseContext>
+    constexpr auto parse(ParseContext& ctx)
+    {
+        return ctx.begin();
+    }
+    template<typename FormatContext>
+    auto format(const Meiosis::Event& e, FormatContext& ctx)
+    {
+        return format_to(ctx.out(), "{}", magic_enum::enum_name(e.type()));
+    }
 };

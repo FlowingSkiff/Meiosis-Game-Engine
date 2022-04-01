@@ -3,5 +3,5 @@
 #include <string>
 namespace Meiosis::Util
 {
-    std::string ME_API filenameFromPath(const std::string& file_path, bool remove_extension = false);
+std::string ME_API filenameFromPath(const std::string& file_path, bool remove_extension = false);
 }

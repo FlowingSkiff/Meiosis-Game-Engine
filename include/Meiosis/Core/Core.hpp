@@ -15,8 +15,7 @@ inline constexpr auto bit(int n) { return 1 << n; }
 template<typename TYPE, typename FUNC>
 constexpr inline auto bindMemberFunction(TYPE* obj, FUNC func) -> decltype(auto)
 {
-    return [obj, func](auto&&... args) -> decltype(auto)
-    {
+    return [obj, func](auto&&... args) -> decltype(auto) {
         return (obj->*func)(std::forward<decltype(args)>(args)...);
     };
 }
