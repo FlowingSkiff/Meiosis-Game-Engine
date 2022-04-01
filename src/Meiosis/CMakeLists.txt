@@ -6,6 +6,7 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
+find_package(magic_enum REQUIRED)
 
 add_subdirectory(Core)
 add_subdirectory(Events)
@@ -22,6 +23,7 @@ target_link_libraries(meiosis
         project_warings
         imgui
         glfw::glfw
+        magic_enum::magic_enum
         glad
         fmt
 )
