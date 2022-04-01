@@ -1,6 +1,6 @@
 add_executable(Test main.cpp)
 
-find_package(gtest REQUIRED)
+find_package(GTest REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(glfw3 REQUIRED)
