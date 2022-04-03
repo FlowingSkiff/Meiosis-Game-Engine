@@ -5,17 +5,6 @@
 #include <assert.h>
 namespace Meiosis
 {
-std::shared_ptr<Shader> Shader::create(const std::string& file_name)
-{
-    switch (RendererAPI::getAPI())
-    {
-        case RendererAPI::API::OpenGL:
-            return std::make_unique<OpenGLShader>(file_name);
-    }
-    ME_ENGINE_ERROR("Shader could not be created. ");
-    assert(false);
-    return nullptr;
-}
 
 void ShaderLibrary::add(const std::string& name, const std::shared_ptr<Shader>& shader)
 {
@@ -27,13 +16,13 @@ void ShaderLibrary::add(const std::shared_ptr<Shader>& shader)
 }
 auto ShaderLibrary::load(const std::string& file_name) -> std::shared_ptr<Shader>
 {
-    auto shader = Shader::create(file_name);
+    auto shader = RendererAPI::createShader(file_name);
     add(shader);
     return shader;
 }
 auto ShaderLibrary::load(const std::string& name, const std::string& file_name) -> std::shared_ptr<Shader>
 {
-    auto shader = Shader::create(file_name);
+    auto shader = RendererAPI::createShader(file_name);
     add(name, shader);
     return shader;
 }

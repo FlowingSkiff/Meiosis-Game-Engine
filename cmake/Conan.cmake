@@ -14,11 +14,11 @@ macro(conan_install)
         message(FATAL_ERROR "Unknown compiler: ${CMAKE_CXX_COMPILER_ID}")
     endif()
 
-    list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
-    list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/conan)
+    list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/conan)
 
-    set(conanfile ${CMAKE_SOURCE_DIR}/conanfile.txt)
-    set(conanfile_cmake ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    set(conanfile ${CMAKE_BINARY_DIR}/conan/conanfile.txt)
+    set(conanfile_cmake ${CMAKE_BINARY_DIR}/conan/conanbuildinfo.cmake)
 
     string(FIND ${CMAKE_CXX_COMPILER_VERSION} "." compiler_first_per)
     string(SUBSTRING ${CMAKE_CXX_COMPILER_VERSION} 0 ${compiler_first_per} major_compiler)
@@ -31,6 +31,7 @@ macro(conan_install)
         -s compiler.version=${major_minor_compiler}
         --build=missing
         --no-imports
+        -if ${CMAKE_BINARY_DIR}/conan/
         COMMAND_ECHO STDOUT
         RESULT_VARIABLE return_code
     )
@@ -42,7 +43,7 @@ macro(conan_install)
     set(tmp_import_dir ${CMAKE_SOURCE_DIR}/build/Debug-lib/)
     link_directories(${tmp_import_dir})
     execute_process(COMMAND ${conan} imports ${CMAKE_SOURCE_DIR}/
-        -if ${CMAKE_SOURCE_DIR}/build
+        -if ${CMAKE_BINARY_DIR}/conan
         -imf ${tmp_import_dir}
         COMMAND_ECHO STDOUT
         RESULT_VARIABLE return_code

@@ -25,7 +25,7 @@ target_link_libraries(meiosis
         glfw::glfw
         magic_enum::magic_enum
         glad
-        fmt
+        fmt::fmt
 )
 
 target_include_directories(meiosis
