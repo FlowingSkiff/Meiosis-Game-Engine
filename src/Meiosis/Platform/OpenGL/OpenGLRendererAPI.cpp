@@ -53,7 +53,7 @@ auto createVertexArray() -> std::shared_ptr<VertexArray>
 void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 {
     shader->bind();
-    shader->setMat4("u_Transform", transform);
+    shader->setMat4("u_transform", transform);
 
     vertexArray->bind();
     drawIndexed(vertexArray);
@@ -63,7 +63,7 @@ void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count)
 {
     count = (count) ? count : array->getIndexBuffer()->getCount();
     glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
-    // glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 

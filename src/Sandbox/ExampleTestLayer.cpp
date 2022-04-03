@@ -52,7 +52,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0)
             v_position =  vec3(a_position, 1.0);
             v_color = vec4(a_color, 1.0);
             gl_Position = u_transform * vec4(a_position, 0.0, 1.0);
-            gl_Position = vec4(a_position, 0.0, 1.0);
+            // gl_Position = vec4(a_position, 0.0, 1.0);
         }
     )....";
 

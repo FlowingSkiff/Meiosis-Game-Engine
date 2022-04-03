@@ -189,7 +189,7 @@ void OpenGLShader::uploadUniform(const std::string& name, const glm::mat3& mat)
 void OpenGLShader::uploadUniform(const std::string& name, const glm::mat4& mat)
 {
     const GLint location = glGetUniformLocation(m_renderer_id, name.c_str());
-    glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(mat));
+    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat));
 }
 auto OpenGLShader::getName() const -> const std::string&
 {
