@@ -21,9 +21,14 @@ void ExampleLayer::onUpdate(float dt)
 ExampleLayer::ExampleLayer() : m_float_val(1.0)
 {
     m_obj = Meiosis::RendererAPI::createVertexArray();
+    // clang-format off
     std::vector<float> verticies{
-        -0.5, -0.5, 0.8, 0.1, 0.1, 0.5, -0.5, 0.1, 0.8, 0.1, 0.5, 0.5, 0.1, 0.1, 0.8
+        -0.5, -0.5, 0.8, 0.1, 0.1, 
+         0.5, -0.5, 0.1, 0.8, 0.1, 
+         0.5,  0.5, 0.1, 0.1, 0.8, 
+        -0.5,  0.5, 0.8, 0.8, 0.8
     };
+    // clang-format on
     auto vertex = Meiosis::RendererAPI::createVertexBuffer(verticies);
     Meiosis::BufferLayout layout = {
         { "a_position", Meiosis::ShaderUniformType::Float2 },
@@ -31,7 +36,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0)
     };
     vertex->setLayout(layout);
     m_obj->addVertexBuffer(vertex);
-    auto inde = Meiosis::RendererAPI::createIndexBuffer({ 0, 1, 2 });
+    auto inde = Meiosis::RendererAPI::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
     m_obj->setIndexBuffer(inde);
 
     std::string vertexSrc = R"....(
