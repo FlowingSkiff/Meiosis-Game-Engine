@@ -32,6 +32,8 @@ macro(conan_install)
         --build=missing
         --no-imports
         -if ${CMAKE_BINARY_DIR}/conan/
+        -e CXX=${CMAKE_CXX_COMPILER}
+        -e CC=${CMAKE_C_COMPILER}
         COMMAND_ECHO STDOUT
         RESULT_VARIABLE return_code
     )
