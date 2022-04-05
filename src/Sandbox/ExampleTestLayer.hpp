@@ -9,6 +9,7 @@ class ExampleLayer : public Meiosis::Layer
     virtual void onEvent(Meiosis::Event& e) override;
     virtual void onImguiRender() override;
     virtual void onUpdate(float dt) override;
+    bool onKeyPressEvent(Meiosis::KeyPressedEvent& e);
 
   private:
     float m_float_val;

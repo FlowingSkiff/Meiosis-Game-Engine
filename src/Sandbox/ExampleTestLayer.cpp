@@ -2,9 +2,21 @@
 #include <imgui/imgui.h>
 #include <vector>
 
+bool ExampleLayer::onKeyPressEvent(Meiosis::KeyPressedEvent& e)
+{
+    switch (e.keyCode())
+    {
+        case Meiosis::KeyCode::Escape:
+            Meiosis::Application::get().shouldExit();
+    }
+    return false;
+}
+
 void ExampleLayer::onEvent(Meiosis::Event& e)
 {
     ENGINE_INFO("{}", e);
+    Meiosis::EventHandler handler(e);
+    handler.dispatch<Meiosis::KeyPressedEvent>(bindMemberFunction(this, &ExampleLayer::onKeyPressEvent));
 }
 
 void ExampleLayer::onImguiRender()
