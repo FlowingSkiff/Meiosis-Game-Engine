@@ -85,4 +85,8 @@ auto Application::getWindow() -> Window&
 {
     return *m_window;
 }
+void Application::shouldExit()
+{
+    m_running = false;
+}
 }// namespace Meiosis

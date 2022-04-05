@@ -23,6 +23,7 @@ class ME_API Application
     void run();
     static Application& get();
     auto getWindow() -> Window&;
+    void shouldExit();
 
   public:
     void pushLayer(Layer* layer);
