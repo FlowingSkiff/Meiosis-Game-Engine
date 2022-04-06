@@ -16,4 +16,5 @@ class ExampleLayer : public Meiosis::Layer
     std::shared_ptr<Meiosis::VertexArray> m_obj;
     std::shared_ptr<Meiosis::Shader> m_shader;
     Meiosis::ShaderLibrary m_shader_library;
+    Meiosis::Camera2D m_camera;
 };
