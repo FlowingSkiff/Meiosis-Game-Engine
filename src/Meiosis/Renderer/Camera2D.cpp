@@ -52,11 +52,13 @@ void Camera2D::setProjectionMatrix(float left, float right, float bottom, float 
 void Camera2D::setPosition(const glm::vec3& pos)
 {
     m_position = pos;
+    recalculateViewMatrix();
 }
 
 void Camera2D::setRotation(float rot)
 {
     m_rotation = rot;
+    recalculateViewMatrix();
 }
 
 void Camera2D::recalculateViewMatrix()
