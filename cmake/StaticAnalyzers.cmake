@@ -42,9 +42,11 @@ endmacro()
 
 macro(enable_clang_tidy)
   find_program(CLANGTIDY clang-tidy)
+  set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
   if(CLANGTIDY)
     # construct the clang-tidy command line
     set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
+    list(APPEND CMAKE_CXX_CLANG_TIDY -p ${CMAKE_BINARY_DIR})
     # set standard
     if(NOT
        "${CMAKE_CXX_STANDARD}"
@@ -55,10 +57,6 @@ macro(enable_clang_tidy)
       else()
         set(CMAKE_CXX_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY} -extra-arg=-std=c++${CMAKE_CXX_STANDARD})
       endif()
-    endif()
-    # set warnings as errors
-    if(WARNINGS_AS_ERRORS)
-      list(APPEND CMAKE_CXX_CLANG_TIDY -warnings-as-errors=*)
     endif()
   else()
     message(${WARNING_MESSAGE} "clang-tidy requested but executable not found")
