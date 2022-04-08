@@ -37,12 +37,12 @@ void ExampleLayer::onUpdate(float dt)
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::D))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(-dx, 0.0, 0.0));
     m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
-    Meiosis::RendererAPI::submit(m_shader, m_obj);
+    Meiosis::Renderer::submit(m_shader, m_obj);
 }
 
 ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
 {
-    m_obj = Meiosis::RendererAPI::createVertexArray();
+    m_obj = Meiosis::Renderer::createVertexArray();
     // clang-format off
     std::vector<float> verticies{
         -0.5, -0.5, 0.8, 0.1, 0.1, 
@@ -51,14 +51,14 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(), m_shader(), m_shader_l
         -0.5,  0.5, 0.8, 0.8, 0.8
     };
     // clang-format on
-    auto vertex = Meiosis::RendererAPI::createVertexBuffer(verticies);
+    auto vertex = Meiosis::Renderer::createVertexBuffer(verticies);
     Meiosis::BufferLayout layout = {
         { "a_position", Meiosis::ShaderUniformType::Float2 },
         { "a_color", Meiosis::ShaderUniformType::Float3 }
     };
     vertex->setLayout(layout);
     m_obj->addVertexBuffer(vertex);
-    auto inde = Meiosis::RendererAPI::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
+    auto inde = Meiosis::Renderer::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
     m_obj->setIndexBuffer(inde);
 
     std::string vertexSrc = R"....(
@@ -91,5 +91,5 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(), m_shader(), m_shader_l
         }
     )....";
 
-    m_shader = Meiosis::RendererAPI::createShader("Basic", vertexSrc, fragmentSrc);
+    m_shader = Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc);
 }

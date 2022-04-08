@@ -1,5 +1,5 @@
 #include "Meiosis/Renderer/Shader.hpp"
-#include "Meiosis/Renderer/RendererAPI.hpp"
+#include "Meiosis/Renderer/Renderer.hpp"
 #include "Meiosis/Platform/OpenGL/OpenGLShader.hpp"
 #include "Meiosis/Core/Log.hpp"
 #include <assert.h>
@@ -16,13 +16,13 @@ void ShaderLibrary::add(const std::shared_ptr<Shader>& shader)
 }
 auto ShaderLibrary::load(const std::string& file_name) -> std::shared_ptr<Shader>
 {
-    auto shader = RendererAPI::createShader(file_name);
+    auto shader = Renderer::createShader(file_name);
     add(shader);
     return shader;
 }
 auto ShaderLibrary::load(const std::string& name, const std::string& file_name) -> std::shared_ptr<Shader>
 {
-    auto shader = RendererAPI::createShader(file_name);
+    auto shader = Renderer::createShader(file_name);
     add(name, shader);
     return shader;
 }

@@ -1,4 +1,4 @@
-#include "Meiosis/Renderer/RendererAPI.hpp"
+#include "Meiosis/Platform/OpenGL/OpenGLRendererAPI.hpp"
 #include "glad/glad.h"
 #include "Meiosis/Platform/OpenGL/OpenGLBuffer.hpp"
 #include "Meiosis/Platform/OpenGL/OpenGLShader.hpp"
@@ -10,7 +10,7 @@ void debugMessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity
     ME_ENGINE_DEBUG("OpenGL Debug Callback: ({}) {}", source, std::string(message, length));
 }
 
-void RendererAPI::init()
+void OpenGLRendererAPI::init()
 {
     glEnable(GL_BLEND);
     glEnable(GL_DEBUG_OUTPUT);
@@ -18,39 +18,39 @@ void RendererAPI::init()
     glEnable(GL_DEPTH_TEST);
     glDebugMessageCallback(debugMessageCallback, nullptr);
 }
-void RendererAPI::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+void OpenGLRendererAPI::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 {
     glViewport(x, y, width, height);
 }
-void RendererAPI::setClearColor(const glm::vec4& color)
+void OpenGLRendererAPI::setClearColor(const glm::vec4& color)
 {
     glClearColor(color.r, color.g, color.b, color.a);
 }
-void RendererAPI::clear()
+void OpenGLRendererAPI::clear()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
-RendererAPI::API RendererAPI::getAPI() { return API::OpenGL; }
+RendererAPI::API OpenGLRendererAPI::getAPI() { return API::OpenGL; }
 
-auto RendererAPI::createIndexBuffer(const std::vector<uint32_t>& indicies) -> std::shared_ptr<IndexBuffer>
+auto OpenGLRendererAPI::createIndexBuffer(const std::vector<uint32_t>& indicies) -> std::shared_ptr<IndexBuffer>
 {
     return std::make_shared<OpenGLIndexBuffer>(indicies);
 }
-auto RendererAPI::createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer>
+auto OpenGLRendererAPI::createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer>
 {
     return std::make_shared<OpenGLVertexBuffer>(vertices);
 }
-auto RendererAPI::createVertexBuffer(size_t size) -> std::shared_ptr<VertexBuffer>
+auto OpenGLRendererAPI::createVertexBuffer(size_t size) -> std::shared_ptr<VertexBuffer>
 {
     return std::make_shared<OpenGLVertexBuffer>(size);
 }
 
-auto RendererAPI::createVertexArray() -> std::shared_ptr<VertexArray>
+auto OpenGLRendererAPI::createVertexArray() -> std::shared_ptr<VertexArray>
 {
     return std::make_shared<OpenGLVertexArray>();
 }
 
-void RendererAPI::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
+void OpenGLRendererAPI::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 {
     shader->bind();
     shader->setMat4("u_transform", transform);
@@ -59,7 +59,7 @@ void RendererAPI::submit(const std::shared_ptr<Shader>& shader, const std::share
     drawIndexed(vertexArray);
 }
 
-void RendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count)
+void OpenGLRendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count)
 {
     count = (count) ? count : array->getIndexBuffer()->getCount();
     glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
@@ -67,11 +67,11 @@ void RendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_
 }
 
 
-auto RendererAPI::createShader(const std::string& filename) -> std::shared_ptr<Shader>
+auto OpenGLRendererAPI::createShader(const std::string& filename) -> std::shared_ptr<Shader>
 {
     return std::make_shared<OpenGLShader>(filename);
 }
-auto RendererAPI::createShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> std::shared_ptr<Shader>
+auto OpenGLRendererAPI::createShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> std::shared_ptr<Shader>
 {
     return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
 }

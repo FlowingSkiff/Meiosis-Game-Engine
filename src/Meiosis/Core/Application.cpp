@@ -29,7 +29,7 @@ void Application::run()
 {
     while (m_running)
     {
-        RendererAPI::clear();
+        Renderer::clear();
         for (auto layer : m_layers)
             layer->onUpdate(0.0f);
         m_imgui_layer->beginFrame();
