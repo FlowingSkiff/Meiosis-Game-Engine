@@ -14,3 +14,9 @@ target_include_directories(imgui PUBLIC BEFORE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/backends
 )
+
+set_target_properties(imgui
+    PROPERTIES
+        CXX_CPPCHECK ""
+        CXX_CLANG_TIDY ""
+)
