@@ -10,6 +10,8 @@ macro(conan_install)
         set(compiler gcc)
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
         set(compiler apple-clang)
+    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
+        set(compiler clang)
     else()
         message(FATAL_ERROR "Unknown compiler: ${CMAKE_CXX_COMPILER_ID}")
     endif()
@@ -20,15 +22,23 @@ macro(conan_install)
     set(conanfile ${CMAKE_BINARY_DIR}/conan/conanfile.txt)
     set(conanfile_cmake ${CMAKE_BINARY_DIR}/conan/conanbuildinfo.cmake)
 
-    string(FIND ${CMAKE_CXX_COMPILER_VERSION} "." compiler_first_per)
-    string(SUBSTRING ${CMAKE_CXX_COMPILER_VERSION} 0 ${compiler_first_per} major_compiler)
+    if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
+        string(REGEX MATCH "^[0-9]+[.][0-9]+" conan_compiler_version ${CMAKE_CXX_COMPILER_VERSION})
+    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
+        if (${CMAKE_CXX_COMPILER_VERSION} GREATER 7.1)
+            string(REGEX MATCH "^[0-9]+" conan_compiler_version ${CMAKE_CXX_COMPILER_VERSION})
+        else()
+            string(REGEX MATCH "^[0-9]+[.][0-9]+" conan_compiler_version ${CMAKE_CXX_COMPILER_VERSION})
+        endif()
+    else()
+        message(FATAL_ERROR "Unknown compiler: ${CMAKE_CXX_COMPILER_ID}")
+    endif()
 
-    string(REGEX MATCH "^[0-9]+[.][0-9]+" major_minor_compiler ${CMAKE_CXX_COMPILER_VERSION})
     execute_process(COMMAND ${conan} install ${CMAKE_SOURCE_DIR}/
         -s os=${os}
         -s compiler=${compiler}
         -s compiler.libcxx=libstdc++11
-        -s compiler.version=${major_minor_compiler}
+        -s compiler.version=${conan_compiler_version}
         --build=missing
         --no-imports
         -if ${CMAKE_BINARY_DIR}/conan/
