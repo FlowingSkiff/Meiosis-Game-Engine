@@ -1,7 +1,7 @@
 #pragma once
 #include "Meiosis\Core\Core.hpp"
 #include "Event.hpp"
-#include "Meiosis\Core\Keycodes.hpp"
+#include "Meiosis\Core\KeyCodes.hpp"
 namespace Meiosis
 {
 class ME_API KeyEvent : public Event
