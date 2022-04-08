@@ -42,9 +42,8 @@ void ExampleLayer::onUpdate(float dt)
     Meiosis::Renderer::endScene();
 }
 
-ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
+ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
 {
-    m_obj = Meiosis::Renderer::createVertexArray();
     // clang-format off
     std::vector<float> verticies{
         -0.5, -0.5, 0.8, 0.1, 0.1, 
