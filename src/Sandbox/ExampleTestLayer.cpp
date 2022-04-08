@@ -8,6 +8,9 @@ bool ExampleLayer::onKeyPressEvent(Meiosis::KeyPressedEvent& e)
     {
         case Meiosis::KeyCode::Escape:
             Meiosis::Application::get().shouldExit();
+            break;
+        default:
+            break;
     }
     return false;
 }
