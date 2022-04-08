@@ -40,6 +40,8 @@ macro(enable_cppcheck CPPCHECK_OPTIONS)
   endif()
 endmacro()
 
+# TODO: #1 Clang tidy does not work
+
 macro(enable_clang_tidy)
   find_program(CLANGTIDY clang-tidy)
   set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
