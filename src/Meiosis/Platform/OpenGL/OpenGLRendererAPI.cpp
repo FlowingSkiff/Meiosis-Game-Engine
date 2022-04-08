@@ -54,6 +54,7 @@ void OpenGLRendererAPI::submit(const std::shared_ptr<Shader>& shader, const std:
 {
     shader->bind();
     shader->setMat4("u_transform", transform);
+    shader->setMat4("u_view_projection", m_view_projection_matrix);
 
     vertexArray->bind();
     drawIndexed(vertexArray);
@@ -74,6 +75,14 @@ auto OpenGLRendererAPI::createShader(const std::string& filename) -> std::shared
 auto OpenGLRendererAPI::createShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> std::shared_ptr<Shader>
 {
     return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+}
+
+void OpenGLRendererAPI::beginScene(Camera& camera)
+{
+    m_view_projection_matrix = camera.getViewProjectionMatrix();
+}
+void OpenGLRendererAPI::endScene()
+{
 }
 
 }// namespace Meiosis

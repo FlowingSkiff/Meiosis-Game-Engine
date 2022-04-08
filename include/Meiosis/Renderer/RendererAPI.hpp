@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <memory>
+#include "Meiosis/Renderer/Camera.hpp"
 namespace Meiosis
 {
 class IndexBuffer;
@@ -33,5 +34,7 @@ class ME_API RendererAPI
 
     virtual void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f)) = 0;
     virtual void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count = 0) = 0;
+    virtual void beginScene(Camera& cam) = 0;
+    virtual void endScene() = 0;
 };// namespace RendererAPI
 }// namespace Meiosis

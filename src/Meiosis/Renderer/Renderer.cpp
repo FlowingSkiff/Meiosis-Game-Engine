@@ -30,14 +30,14 @@ void Renderer::onWindowResize(uint32_t width, uint32_t height)
     s_api_instance->setViewport(0, 0, width, height);
 }
 
-void Renderer::beginScene()
+void Renderer::beginScene(Camera& camera)
 {
-    // s_api_instance.beginScene();
+    s_api_instance->beginScene(camera);
 }
 
 void Renderer::endScene()
 {
-    // s_api_instance.endScene();
+    s_api_instance->endScene();
 }
 
 void Renderer::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)

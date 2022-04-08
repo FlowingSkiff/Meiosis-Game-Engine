@@ -21,5 +21,11 @@ class ME_API OpenGLRendererAPI : public RendererAPI
 
     virtual void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f)) override;
     virtual void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count = 0) override;
+
+    virtual void beginScene(Camera& camera) override;
+    virtual void endScene() override;
+
+  private:
+    glm::mat4 m_view_projection_matrix;
 };
 }// namespace Meiosis

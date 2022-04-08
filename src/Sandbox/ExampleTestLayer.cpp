@@ -36,8 +36,10 @@ void ExampleLayer::onUpdate(float dt)
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(dx, 0.0, 0.0));
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::D))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(-dx, 0.0, 0.0));
-    m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
+    Meiosis::Renderer::beginScene(m_camera);
+    // m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
     Meiosis::Renderer::submit(m_shader, m_obj);
+    Meiosis::Renderer::endScene();
 }
 
 ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)

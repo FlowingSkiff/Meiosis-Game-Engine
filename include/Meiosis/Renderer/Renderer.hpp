@@ -3,6 +3,7 @@
 #include "Meiosis/Core/Core.hpp"
 #include "Meiosis/Renderer/RendererAPI.hpp"
 #include <memory>
+#include "Meiosis/Renderer/Camera.hpp"
 
 namespace Meiosis
 {
@@ -14,7 +15,7 @@ class ME_API Renderer
 
     static void onWindowResize(uint32_t width, uint32_t height);
 
-    static void beginScene();
+    static void beginScene(Camera& cam);
     static void endScene();
 
     static void setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height);

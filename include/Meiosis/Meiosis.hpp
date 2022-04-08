@@ -5,16 +5,19 @@
 
 // ---- Core
 #include "Core/Application.hpp"
+// #include "Core/Core.hpp" ---- above
 #include "Core/Entrypoint.hpp"
 #include "Core/GraphicsContext.hpp"
 #include "Core/Input.hpp"
 #include "Core/KeyCodes.hpp"
 #include "Core/Log.hpp"
+#include "Core/LogHelper.hpp"
 #include "Core/MouseCodes.hpp"
 #include "Core/Window.hpp"
 
 // ---- Events
 #include "Events/ApplicationEvent.hpp"
+#include "Events/Event.hpp"
 #include "Events/KeyEvent.hpp"
 #include "Events/MouseEvent.hpp"
 
@@ -26,6 +29,7 @@
 #include "Layer/LayerStack.hpp"
 
 // ---- Renderer ----
+#include "Renderer/Camera.hpp"
 #include "Renderer/Camera2D.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Renderer/RendererAPI.hpp"
