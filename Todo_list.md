@@ -3,6 +3,7 @@
 ## Supported Compiler
 
 * Tested on Windows using MinGW GCC
+* Additional compiler support needs to be added to cmake/Conan.cmake
 
 ## Required Tools
 
@@ -10,6 +11,7 @@
 2. Conan package manager
 3. cpp_check (optional)
 4. clang-tidy (optional)
+   1. Not working yet
 
 ## How to use
 
