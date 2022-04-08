@@ -19,7 +19,7 @@ namespace details
         }
         file.seekg(0, std::ios::end);
         size_t size = file.tellg();
-        if (size == -1)
+        if (file.fail())
         {
             ME_ENGINE_ERROR("Could not read from file: {}", file_path);
         }
