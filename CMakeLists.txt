@@ -21,7 +21,8 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 endif()
 
 include(cmake/StaticAnalyzers.cmake)
-#enable_cppcheck("")
+# enable_cppcheck("")
+# enable_clang_tidy()
 
 include(CTest)
 enable_testing()
