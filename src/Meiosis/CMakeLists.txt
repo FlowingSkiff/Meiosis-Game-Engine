@@ -26,6 +26,7 @@ target_link_libraries(meiosis
         magic_enum::magic_enum
         glad
         fmt::fmt
+        spdlog::spdlog
 )
 
 target_include_directories(meiosis

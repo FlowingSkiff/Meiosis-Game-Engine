@@ -16,11 +16,11 @@ target_link_libraries(Test
         project_settings
         project_warings
         glm::glm
-        spdlog
+        spdlog::spdlog
         glfw::glfw
         magic_enum::magic_enum
         glad
-        fmt
+        fmt::fmt
         
 )
 
