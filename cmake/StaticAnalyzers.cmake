@@ -44,11 +44,13 @@ endmacro()
 
 macro(enable_clang_tidy)
   find_program(CLANGTIDY clang-tidy)
-  set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
   if(CLANGTIDY)
     # construct the clang-tidy command line
+    
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES Off)
     set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
-    list(APPEND CMAKE_CXX_CLANG_TIDY -p ${CMAKE_BINARY_DIR})
+    set(CMAKE_CXX_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY} -p ${CMAKE_BINARY_DIR})
     # set standard
     if(NOT
        "${CMAKE_CXX_STANDARD}"
