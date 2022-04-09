@@ -10,8 +10,9 @@
 1. cmake
 2. Conan package manager
 3. cpp_check (optional)
+   1. TODO stop checking third party includes
 4. clang-tidy (optional)
-   1. Not working yet
+   1. Not working yet with third party includes
 
 ## How to use
 
