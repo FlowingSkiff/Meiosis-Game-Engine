@@ -21,7 +21,7 @@ target_link_libraries(sandbox
         project_settings
         project_warings
         glm::glm
-        glfw::glfw
+        glfw
 )
 
 target_compile_definitions(sandbox

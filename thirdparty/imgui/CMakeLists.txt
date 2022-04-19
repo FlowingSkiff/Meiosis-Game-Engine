@@ -19,7 +19,7 @@ target_include_directories(imgui PUBLIC BEFORE
 
 target_link_libraries(imgui
     PRIVATE
-        glfw::glfw
+        glfw
 )
 
 set_target_properties(imgui
