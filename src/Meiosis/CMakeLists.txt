@@ -22,7 +22,7 @@ target_link_libraries(meiosis
         project_settings
         project_warings
         imgui
-        glfw::glfw
+        glfw
         magic_enum::magic_enum
         glad
         fmt::fmt

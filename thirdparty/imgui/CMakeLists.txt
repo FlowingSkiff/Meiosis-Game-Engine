@@ -10,6 +10,8 @@ set(imgui_sources
 find_package(glfw3 REQUIRED)
 add_library(imgui STATIC ${imgui_sources})
 
+target_compile_options(imgui PRIVATE -w)
+
 target_include_directories(imgui PUBLIC BEFORE 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/backends
