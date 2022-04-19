@@ -17,7 +17,7 @@ target_link_libraries(Test
         project_warings
         glm::glm
         spdlog
-        glfw::glfw
+        glfw
         magic_enum::magic_enum
         glad
         fmt
@@ -38,14 +38,4 @@ target_compile_definitions(Test
 )
 
 include(GoogleTest)
-gtest_add_tests(TARGET      Test
-                TEST_SUFFIX .noArgs
-                TEST_LIST   noArgsTests
-)
-# gtest_add_tests(TARGET      FileUtilTest
-#                 EXTRA_ARGS  --someArg someValue
-#                 TEST_SUFFIX .withArgs
-#                 TEST_LIST   withArgsTests
-# )
-set_tests_properties(${noArgsTests}   PROPERTIES TIMEOUT 10)
-set_tests_properties(${withArgsTests} PROPERTIES TIMEOUT 20)
+gtest_discover_tests(Test)

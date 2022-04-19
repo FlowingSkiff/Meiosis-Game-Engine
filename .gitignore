@@ -38,3 +38,9 @@
 # output files
 build
 out
+
+# conan
+conan/*
+
+# user presets for cmake
+CMakeUserPresets.json

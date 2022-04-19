@@ -4,7 +4,7 @@
 #include <cstdint>
 #ifdef ME_BUILD_DLL
 #define ME_API __declspec(dllexport)
-#elif ME_LINK_DLL
+#elifdef ME_LINK_DLL
 #define ME_API __declspec(dllimport)
 #else
 #define ME_API

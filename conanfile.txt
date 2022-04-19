@@ -7,8 +7,9 @@ glfw/3.3.6
 magic_enum/0.7.3
 
 [generators]
-cmake_find_package_multi
-cmake_find_package
+CMakeDeps
+CMakeToolchain
+virtualrunenv
 
 [options]
 fmt:header_only=True
