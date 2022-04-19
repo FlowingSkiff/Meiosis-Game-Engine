@@ -6,6 +6,8 @@ set(sandbox_sources
 
 add_executable(sandbox ${sandbox_sources})
 
+find_package(glm REQUIRED)
+find_package(glfw3 REQUIRED)
 target_include_directories(sandbox
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/Meiosis
@@ -18,6 +20,8 @@ target_link_libraries(sandbox
         imgui
         project_settings
         project_warings
+        glm::glm
+        glfw::glfw
 )
 
 target_compile_definitions(sandbox

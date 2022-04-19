@@ -5,9 +5,7 @@ namespace Meiosis::Util
 std::string filenameFromPath(const std::string& file_path, bool remove_extension)
 {
     std::string cpy = file_path;
-    for (auto& c : cpy)
-        if (c == '\\')
-            c = '/';
+    std::replace(cpy.begin(), cpy.end(), '\\', '/');
     const auto last_slash = [&]() -> size_t {
         const auto lst = cpy.find_last_of('/');
         return (lst != std::string::npos) ? lst + 1 : 0;

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <memory>
+#include <string>
 #include "Meiosis/Renderer/Camera.hpp"
 namespace Meiosis
 {

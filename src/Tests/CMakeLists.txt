@@ -20,7 +20,7 @@ target_link_libraries(Test
         glfw
         magic_enum::magic_enum
         glad
-        fmt
+        fmt::fmt
         
 )
 

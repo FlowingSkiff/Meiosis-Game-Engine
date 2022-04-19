@@ -39,3 +39,30 @@ macro(enable_cppcheck CPPCHECK_OPTIONS)
     message(${WARNING_MESSAGE} "cppcheck requested but executable not found")
   endif()
 endmacro()
+
+# TODO: #1 Clang tidy does not work
+
+macro(enable_clang_tidy)
+  find_program(CLANGTIDY clang-tidy)
+  if(CLANGTIDY)
+    # construct the clang-tidy command line
+    
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES Off)
+    set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
+    set(CMAKE_CXX_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY} -p ${CMAKE_BINARY_DIR})
+    # set standard
+    if(NOT
+       "${CMAKE_CXX_STANDARD}"
+       STREQUAL
+       "")
+      if("${CMAKE_CXX_CLANG_TIDY_DRIVER_MODE}" STREQUAL "cl")
+        set(CMAKE_CXX_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY} -extra-arg=/std:c++${CMAKE_CXX_STANDARD})
+      else()
+        set(CMAKE_CXX_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY} -extra-arg=-std=c++${CMAKE_CXX_STANDARD})
+      endif()
+    endif()
+  else()
+    message(${WARNING_MESSAGE} "clang-tidy requested but executable not found")
+  endif()
+endmacro()
