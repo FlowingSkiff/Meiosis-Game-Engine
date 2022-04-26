@@ -1,5 +1,6 @@
 #include "Meiosis/Layer/LayerStack.hpp"
 #include "Meiosis/Core/Log.hpp"
+#include <iterator>
 namespace Meiosis
 {
 LayerStack::LayerStack() {}
@@ -52,7 +53,8 @@ void LayerStack::pushLayer(Layer* layer)
         return;
     }
 #endif
-    const auto ins_iter = m_layers.begin() + ins_index;
+    auto ins_iter = m_layers.begin();
+    std::advance(ins_iter, ins_index);
     m_layers.insert(ins_iter, layer);
 }
 
