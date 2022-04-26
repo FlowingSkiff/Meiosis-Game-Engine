@@ -5,9 +5,9 @@
 namespace Meiosis//::RendererAPI::
 {
 
-void debugMessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+void debugMessageCallback(GLenum source, [[maybe_unused]] GLenum type, [[maybe_unused]] GLuint id, [[maybe_unused]] GLenum severity, GLsizei length, const GLchar* message, [[maybe_unused]] const void* userParam)
 {
-    ME_ENGINE_DEBUG("OpenGL Debug Callback: ({}) {}", source, std::string(message, length));
+    ME_ENGINE_DEBUG("OpenGL Debug Callback: ({}) {}", source, std::string(message, static_cast<size_t>(length)));
 }
 
 void OpenGLRendererAPI::init()
@@ -20,7 +20,7 @@ void OpenGLRendererAPI::init()
 }
 void OpenGLRendererAPI::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 {
-    glViewport(x, y, width, height);
+    glViewport(static_cast<GLsizei>(x), static_cast<GLsizei>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height));
 }
 void OpenGLRendererAPI::setClearColor(const glm::vec4& color)
 {
@@ -63,7 +63,7 @@ void OpenGLRendererAPI::submit(const std::shared_ptr<Shader>& shader, const std:
 void OpenGLRendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count)
 {
     count = (count) ? count : array->getIndexBuffer()->getCount();
-    glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), GL_UNSIGNED_INT, nullptr);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

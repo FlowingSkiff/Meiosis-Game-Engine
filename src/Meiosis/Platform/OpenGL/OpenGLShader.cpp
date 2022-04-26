@@ -18,12 +18,12 @@ namespace details
             return "";
         }
         file.seekg(0, std::ios::end);
-        size_t size = file.tellg();
+        auto size = file.tellg();
         if (file.fail())
         {
             ME_ENGINE_ERROR("Could not read from file: {}", file_path);
         }
-        source.resize(size);
+        source.resize(static_cast<size_t>(size));
         file.seekg(0, std::ios::beg);
         file.read(source.data(), size);
         return source;
@@ -108,7 +108,7 @@ uint16_t OpenGLShader::CompileShaderFromSource(uint16_t type, const std::string&
         ME_ENGINE_ERROR("Shader compile error: {}", error_buffer);
         glDeleteShader(id);
     }
-    return id;
+    return static_cast<uint16_t>(id);
 }
 OpenGLShader::~OpenGLShader()
 {
@@ -159,7 +159,7 @@ void OpenGLShader::uploadUniform(const std::string& name, int value)
 void OpenGLShader::uploadUniform(const std::string& name, int* values, uint32_t count)
 {
     const GLint location = glGetUniformLocation(m_renderer_id, name.c_str());
-    glUniform1iv(location, count, values);
+    glUniform1iv(location, static_cast<GLsizei>(count), values);
 }
 void OpenGLShader::uploadUniform(const std::string& name, float value)
 {

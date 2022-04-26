@@ -3,7 +3,7 @@
 namespace Meiosis
 {
 
-static auto toOpenGLBaseType(ShaderUniformType type)
+static auto toOpenGLBaseType(ShaderUniformType type) -> GLenum
 {
     switch (type)
     {
@@ -51,13 +51,13 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(const std::vector<float>& vertices)
 {
     glCreateBuffers(1, &m_renderer_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(float) * vertices.size()), vertices.data(), GL_STATIC_DRAW);
 }
 OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size)
 {
     glCreateBuffers(1, &m_renderer_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
-    glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), nullptr, GL_DYNAMIC_DRAW);
 }
 OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
@@ -74,14 +74,14 @@ void OpenGLVertexBuffer::unbind() const
 void OpenGLVertexBuffer::setData(const void* data, size_t size)
 {
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(size), data);
 }
 void OpenGLVertexBuffer::setLayout(const BufferLayout& layout)
 {
     m_layout = layout;
 }
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(const std::vector<uint32_t>& indicies) : m_renderer_id(0), m_count(indicies.size())
+OpenGLIndexBuffer::OpenGLIndexBuffer(const std::vector<uint32_t>& indicies) : m_renderer_id(0), m_count(static_cast<decltype(m_count)>(indicies.size()))
 {
     glCreateBuffers(1, &m_renderer_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
@@ -136,11 +136,12 @@ void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& buf
             {
                 glEnableVertexAttribArray(m_vertex_buffer_index);
                 glVertexAttribPointer(m_vertex_buffer_index,
-                    element.getComponentCount(),
+                    static_cast<GLint>(element.getComponentCount()),
                     toOpenGLBaseType(element.type),
                     element.is_normalized ? GL_TRUE : GL_FALSE,
-                    layout.getStride(),
-                    (const void*)element.offset);
+                    static_cast<GLsizei>(layout.getStride()),
+                    reinterpret_cast<const void*>(element.offset));
+                    //(const void*)element.offset);
                 // reinterpret_cast<const void*>(element.offset));
                 m_vertex_buffer_index++;
                 break;
@@ -153,9 +154,9 @@ void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& buf
             {
                 glEnableVertexAttribArray(m_vertex_buffer_index);
                 glVertexAttribIPointer(m_vertex_buffer_index,
-                    element.getComponentCount(),
+                    static_cast<GLint>(element.getComponentCount()),
                     toOpenGLBaseType(element.type),
-                    layout.getStride(),
+                    static_cast<GLsizei>(layout.getStride()),
                     reinterpret_cast<const void*>(element.offset));
                 m_vertex_buffer_index++;
                 break;
@@ -163,15 +164,15 @@ void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& buf
             case ShaderUniformType::Mat3:
             case ShaderUniformType::Mat4:
             {
-                uint8_t count = element.getComponentCount();
-                for (uint8_t i = 0; i < count; ++i)
+                auto count = element.getComponentCount();
+                for (size_t i = 0; i < count; ++i)
                 {
                     glEnableVertexAttribArray(m_vertex_buffer_index);
                     glVertexAttribPointer(m_vertex_buffer_index,
-                        count,
+                        static_cast<GLint>(count),
                         toOpenGLBaseType(element.type),
                         element.is_normalized ? GL_TRUE : GL_FALSE,
-                        layout.getStride(),
+                        static_cast<GLsizei>(layout.getStride()),
                         reinterpret_cast<const void*>(element.offset + sizeof(float) * count * i));
                     glVertexAttribDivisor(m_vertex_buffer_index, 1);
                     m_vertex_buffer_index++;

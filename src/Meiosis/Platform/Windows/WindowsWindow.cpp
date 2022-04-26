@@ -15,9 +15,9 @@ static void GLFWErrorCallback(int error, const char* description)
 static void GLFWWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
     auto& data = *static_cast<WindowsWindow::WindowData*>(glfwGetWindowUserPointer(window));
-    data.width = width;
-    data.height = height;
-    WindowResizeEvent event(width, height);
+    data.width = static_cast<uint32_t>(width);
+    data.height = static_cast<uint32_t>(height);
+    WindowResizeEvent event(static_cast<uint32_t>(width), static_cast<uint32_t>(height));
     data.callback(event);
 }
 
@@ -28,7 +28,7 @@ static void GLFWWindowShouldCloseCallback(GLFWwindow* window)
     data.callback(event);
 }
 
-static void GLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+static void GLFWKeyCallback(GLFWwindow* window, int key, [[maybe_unused]] int scancode, int action, [[maybe_unused]] int mods)
 {
     auto& data = *static_cast<WindowsWindow::WindowData*>(glfwGetWindowUserPointer(window));
     switch (action)
@@ -63,7 +63,7 @@ static void GLFWCharCallback(GLFWwindow* window, unsigned int keycode)
     data.callback(event);
 }
 
-static void GLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+static void GLFWMouseButtonCallback(GLFWwindow* window, int button, int action, [[maybe_unused]] int mods)
 {
     auto& data = *static_cast<WindowsWindow::WindowData*>(glfwGetWindowUserPointer(window));
     switch (action)
@@ -111,7 +111,7 @@ WindowsWindow::WindowsWindow(const std::string& name, uint32_t width, uint32_t h
         ME_ENGINE_ERROR("Failed to initialize GLFW");
     }
     glfwSetErrorCallback(GLFWErrorCallback);
-    m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
+    m_window = glfwCreateWindow(static_cast<int>(m_data.width), static_cast<int>(m_data.height), m_data.title.c_str(), nullptr, nullptr);
     m_context = GraphicsContext::create(m_window);
     m_context->init();
     glfwSetWindowUserPointer(m_window, &m_data);
