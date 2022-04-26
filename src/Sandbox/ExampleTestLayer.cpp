@@ -28,7 +28,7 @@ void ExampleLayer::onImguiRender()
     ImGui::InputFloat("Float value: ", &m_float_val);
 }
 
-void ExampleLayer::onUpdate(float dt)
+void ExampleLayer::onUpdate([[maybe_unused]] float dt)
 {
     const float dx = 0.1f;
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::W))

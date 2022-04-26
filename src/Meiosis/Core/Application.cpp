@@ -56,7 +56,7 @@ void Application::onEvent(Event& e)
     }
 }
 
-bool Application::onWindowClose(WindowCloseEvent& event)
+bool Application::onWindowClose([[maybe_unused]] WindowCloseEvent& event)
 {
     m_running = false;
     return true;
