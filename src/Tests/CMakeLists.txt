@@ -28,6 +28,10 @@ target_include_directories(Test
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
+)
+
+target_include_directories(Test
+    SYSTEM PRIVATE
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
 )

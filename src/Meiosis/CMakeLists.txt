@@ -33,9 +33,12 @@ target_include_directories(meiosis
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
+)
+
+target_include_directories(meiosis
+    SYSTEM PRIVATE
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
-    public:
         ${glm_INCLUDE_DIR}
 )
 

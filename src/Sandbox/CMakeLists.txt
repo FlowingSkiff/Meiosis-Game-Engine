@@ -12,8 +12,13 @@ target_include_directories(sandbox
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
+)
+
+target_include_directories(sandbox
+    SYSTEM PRIVATE
         ${third_party_include}
 )
+
 target_link_libraries(sandbox
     PUBLIC
         meiosis
