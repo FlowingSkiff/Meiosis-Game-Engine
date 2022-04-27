@@ -5,7 +5,7 @@
 namespace Meiosis//::RendererAPI::
 {
 
-void debugMessageCallback(GLenum source, [[maybe_unused]] GLenum type, [[maybe_unused]] GLuint id, [[maybe_unused]] GLenum severity, GLsizei length, const GLchar* message, [[maybe_unused]] const void* userParam)
+void debugMessageCallback([[maybe_unused]] GLenum source, [[maybe_unused]] GLenum type, [[maybe_unused]] GLuint id, [[maybe_unused]] GLenum severity, [[maybe_unused]] GLsizei length, [[maybe_unused]] const GLchar* message, [[maybe_unused]] const void* userParam)
 {
     ME_ENGINE_DEBUG("OpenGL Debug Callback: ({}) {}", source, std::string(message, static_cast<size_t>(length)));
 }
