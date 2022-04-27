@@ -16,6 +16,14 @@ add_subdirectory(Platform)
 add_subdirectory(Renderer)
 add_subdirectory(Util)
 
+add_library(Meiosis::Meiosis ALIAS meiosis)
+set_target_properties(meiosis PROPERTIES
+    VERSION "${PROJECT_VERSION}"
+    SOVERSION "${PROJECT_VERSION_MAJOR}"
+    EXPORT_NAME Meiosis
+    OUTPUT_NAME Meiosis
+)
+
 
 target_link_libraries(meiosis
     PUBLIC
@@ -29,13 +37,13 @@ target_link_libraries(meiosis
 )
 
 target_include_directories(meiosis
-    PRIVATE
+    PUBLIC
         ${CMAKE_SOURCE_DIR}/include/Meiosis
         ${CMAKE_SOURCE_DIR}/include
 )
 
 target_include_directories(meiosis
-    SYSTEM PRIVATE
+    SYSTEM PUBLIC
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
         ${glm_INCLUDE_DIR}
@@ -46,7 +54,7 @@ target_include_directories(meiosis
 )
 
 target_compile_definitions(meiosis
-    PRIVATE
+    PUBLIC
         SPDLOG_FMT_EXTERNAL
         ENABLE_LOG
         #ME_BUILD_DLL

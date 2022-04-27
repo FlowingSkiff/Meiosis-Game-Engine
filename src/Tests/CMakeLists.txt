@@ -38,6 +38,7 @@ target_include_directories(Test
         ${magic_enum_INCLUDE_DIRS_RELEASE}
         ${fmt_INCLUDE_DIRS_RELEASE}
         ${spdlog_INCLUDE_DIRS_RELEASE}
+        ${gtest_INCLUDE_DIRS_RELEASE}
 )
 
 target_compile_definitions(Test
