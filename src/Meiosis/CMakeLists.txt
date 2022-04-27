@@ -26,7 +26,6 @@ target_link_libraries(meiosis
         magic_enum::magic_enum
         glad
         fmt::fmt
-        spdlog
 )
 
 target_include_directories(meiosis
@@ -40,6 +39,10 @@ target_include_directories(meiosis
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
         ${glm_INCLUDE_DIR}
+        ${glfw_INCLUDE_DIRS_RELEASE}
+        ${magic_enum_INCLUDE_DIRS_RELEASE}
+        ${fmt_INCLUDE_DIRS_RELEASE}
+        ${spdlog_INCLUDE_DIRS_RELEASE}
 )
 
 target_compile_definitions(meiosis

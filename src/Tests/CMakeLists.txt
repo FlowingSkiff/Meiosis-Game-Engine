@@ -16,7 +16,6 @@ target_link_libraries(Test
         project_settings
         project_warings
         glm::glm
-        spdlog
         glfw
         magic_enum::magic_enum
         glad
@@ -34,6 +33,11 @@ target_include_directories(Test
     SYSTEM PRIVATE
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
+        ${glm_INCLUDE_DIR}
+        ${glfw_INCLUDE_DIRS_RELEASE}
+        ${magic_enum_INCLUDE_DIRS_RELEASE}
+        ${fmt_INCLUDE_DIRS_RELEASE}
+        ${spdlog_INCLUDE_DIRS_RELEASE}
 )
 
 target_compile_definitions(Test
