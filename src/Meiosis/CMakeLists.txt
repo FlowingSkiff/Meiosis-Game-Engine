@@ -57,17 +57,6 @@ target_compile_definitions(meiosis
     PUBLIC
         SPDLOG_FMT_EXTERNAL
         ENABLE_LOG
-        #ME_BUILD_DLL
 )
 
-add_custom_command(
-    TARGET ${PROJECT_NAME} PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/src/Meiosis/resources/ $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
-)
-
-add_custom_command(
-    TARGET ${PROJECT_NAME} PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/src/Meiosis/resources/  ${CMAKE_BINARY_DIR}/$<CONFIG>-bin/resources
-)
+COPY_RESOURCES(meiosis ${CMAKE_CURRENT_SOURCE_DIR}/resources)

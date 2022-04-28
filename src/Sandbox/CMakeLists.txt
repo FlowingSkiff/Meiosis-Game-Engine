@@ -11,7 +11,4 @@ target_link_libraries(sandbox
         Meiosis::Meiosis
 )
 
-add_custom_command(TARGET sandbox POST_BUILD        # Adds a post-build event to MyTest
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
-        $<TARGET_FILE:meiosis>      
-        $<TARGET_FILE_DIR:sandbox>)    
+COPY_RESOURCES(sandbox ${CMAKE_CURRENT_SOURCE_DIR}/resources)
