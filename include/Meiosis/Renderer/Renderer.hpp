@@ -4,7 +4,7 @@
 #include "Meiosis/Renderer/RendererAPI.hpp"
 #include <memory>
 #include "Meiosis/Renderer/Camera.hpp"
-
+#include "Meiosis/Renderer/Texture.hpp"
 namespace Meiosis
 {
 class ME_API Renderer
@@ -29,6 +29,8 @@ class ME_API Renderer
     static auto createVertexArray() -> std::shared_ptr<VertexArray>;
     static auto createShader(const std::string& filename) -> std::shared_ptr<Shader>;
     static auto createShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> std::shared_ptr<Shader>;
+    static auto createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture>;
+    static auto createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture>;
 
     static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
     static void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count = 0);

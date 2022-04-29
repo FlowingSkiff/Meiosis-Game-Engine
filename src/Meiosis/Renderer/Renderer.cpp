@@ -91,5 +91,13 @@ void Renderer::drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t c
     s_api_instance->drawIndexed(array, count);
 }
 
+auto Renderer::createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture>
+{
+    return s_api_instance->createTexture2D(file_name);
+}
+auto Renderer::createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture>
+{
+    return s_api_instance->createTexture2D(width, height);
+}
 
 }// namespace Meiosis

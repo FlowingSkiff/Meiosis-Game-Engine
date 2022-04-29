@@ -2,6 +2,7 @@
 #include "glad/glad.h"
 #include "Meiosis/Platform/OpenGL/OpenGLBuffer.hpp"
 #include "Meiosis/Platform/OpenGL/OpenGLShader.hpp"
+#include "Meiosis/Platform/OpenGL/OpenGLTexture.hpp"
 namespace Meiosis//::RendererAPI::
 {
 
@@ -83,6 +84,16 @@ void OpenGLRendererAPI::beginScene(Camera& camera)
 }
 void OpenGLRendererAPI::endScene()
 {
+}
+
+
+auto OpenGLRendererAPI::createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture>
+{
+    return std::make_shared<OpenGLTexture2D>(file_name);
+}
+auto OpenGLRendererAPI::createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture>
+{
+    return std::make_shared<OpenGLTexture2D>(width, height);
 }
 
 }// namespace Meiosis

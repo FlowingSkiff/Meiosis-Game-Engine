@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include "Meiosis/Renderer/Camera.hpp"
+#include "Meiosis/Renderer/Texture.hpp"
 namespace Meiosis
 {
 class IndexBuffer;
@@ -32,6 +33,8 @@ class ME_API RendererAPI
     virtual auto createVertexArray() -> std::shared_ptr<VertexArray> = 0;
     virtual auto createShader(const std::string& filename) -> std::shared_ptr<Shader> = 0;
     virtual auto createShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> std::shared_ptr<Shader> = 0;
+    virtual auto createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture> = 0;
+    virtual auto createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture> = 0;
 
     virtual void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f)) = 0;
     virtual void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count = 0) = 0;

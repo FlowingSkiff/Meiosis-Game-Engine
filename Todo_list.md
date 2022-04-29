@@ -67,6 +67,8 @@ The conan package manager is used to integrate third party libraries. Depending 
 
 1. Assert
 2. Texture
+   1. Design test
+   2. Include example for use
 3. Material
 4. Timestep
 5. Renderer
