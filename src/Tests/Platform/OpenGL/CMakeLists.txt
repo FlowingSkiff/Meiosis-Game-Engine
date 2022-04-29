@@ -7,6 +7,7 @@ set(open_gl_test_sources
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Renderer/Renderer.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Platform/OpenGL/OpenGLRendererAPI.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Platform/OpenGL/OpenGLBuffer.cpp
+    ${CMAKE_SOURCE_DIR}/src/Meiosis/Platform/OpenGL/OpenGLTexture.cpp
 )
 
 target_sources(Test PUBLIC ${open_gl_test_sources})

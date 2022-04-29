@@ -1,4 +1,5 @@
 #include "Meiosis/Platform/OpenGL/OpenGLTexture.hpp"
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include "Meiosis/Core/Log.hpp"
 namespace Meiosis

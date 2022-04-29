@@ -53,6 +53,7 @@ target_include_directories(meiosis
         ${magic_enum_INCLUDE_DIRS_RELEASE}
         ${fmt_INCLUDE_DIRS_RELEASE}
         ${spdlog_INCLUDE_DIRS_RELEASE}
+        ${stb_INCLUDE_DIRS}
 )
 
 target_compile_definitions(meiosis

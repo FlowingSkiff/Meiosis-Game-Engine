@@ -6,6 +6,7 @@ find_package(fmt REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(magic_enum REQUIRED)
+find_package(stb REQUIRED)
 
 add_subdirectory(Platform)
 add_subdirectory(Util)
@@ -20,6 +21,7 @@ target_link_libraries(Test
         magic_enum::magic_enum
         glad
         fmt::fmt
+        stb::stb
         
 )
 
@@ -39,6 +41,7 @@ target_include_directories(Test
         ${fmt_INCLUDE_DIRS_RELEASE}
         ${spdlog_INCLUDE_DIRS_RELEASE}
         ${gtest_INCLUDE_DIRS_RELEASE}
+        ${stb_INCLUDE_DIR}
 )
 
 target_compile_definitions(Test
