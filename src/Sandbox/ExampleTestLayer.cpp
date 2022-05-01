@@ -15,9 +15,9 @@ bool ExampleLayer::onKeyPressEvent(Meiosis::KeyPressedEvent& e)
     return false;
 }
 
-void ExampleLayer::onEvent(Meiosis::Event& e)
+void ExampleLayer::onEvent([[maybe_unused]] Meiosis::Event& e)
 {
-    ENGINE_INFO("{}", e);
+    // ENGINE_INFO("{}", e);
     Meiosis::EventHandler handler(e);
     handler.dispatch<Meiosis::KeyPressedEvent>(bindMemberFunction(this, &ExampleLayer::onKeyPressEvent));
 }
@@ -42,17 +42,21 @@ void ExampleLayer::onUpdate([[maybe_unused]] float dt)
     Meiosis::Renderer::beginScene(m_camera);
     // m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
     Meiosis::Renderer::submit(m_shader, m_obj);
+
+    m_texture->bind();
+    Meiosis::Renderer::submit(m_texture_shader, m_texture_obj);
+
     Meiosis::Renderer::endScene();
 }
 
-ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
+ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_texture_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
 {
     // clang-format off
     std::vector<float> verticies{
         -0.5, -0.5, 0.8, 0.1, 0.1, 
-         0.5, -0.5, 0.1, 0.8, 0.1, 
-         0.5,  0.5, 0.1, 0.1, 0.8, 
-        -0.5,  0.5, 0.8, 0.8, 0.8
+         0.0, -0.5, 0.1, 0.8, 0.1, 
+         0.0,  0.0, 0.1, 0.1, 0.8, 
+        -0.5,  0.0, 0.8, 0.8, 0.8
     };
     // clang-format on
     auto vertex = Meiosis::Renderer::createVertexBuffer(verticies);
@@ -64,6 +68,22 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_obj->addVertexBuffer(vertex);
     auto inde = Meiosis::Renderer::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
     m_obj->setIndexBuffer(inde);
+    // clang-format off
+    std::vector<float> text_verticies{
+         0.0,  0.0, 0.0, 0.0, 
+         1.0,  0.0, 0.0, 1.0, 
+         1.0,  1.0, 1.0, 1.0, 
+         0.0,  1.0, 1.0, 0.0
+    };
+    // clang-format on
+    auto tex_vertex = Meiosis::Renderer::createVertexBuffer(text_verticies);
+    Meiosis::BufferLayout texture_layout = {
+        { "a_position", Meiosis::ShaderUniformType::Float2 },
+        { "a_texture_coord", Meiosis::ShaderUniformType::Float2 }
+    };
+    tex_vertex->setLayout(texture_layout);
+    m_texture_obj->addVertexBuffer(tex_vertex);
+    m_texture_obj->setIndexBuffer(inde);
 
     std::string vertexSrc = R"....(
         #version 330 core
@@ -96,4 +116,8 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     )....";
 
     m_shader = Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc);
+    m_texture_shader = Meiosis::Renderer::createShader("resources/shaders/texture.glsl");
+    m_texture = Meiosis::Renderer::createTexture2D("resources/textures/ChernoLogo.png");
+    m_texture_shader->bind();
+    m_texture_shader->setInt("u_texture", 0);
 }

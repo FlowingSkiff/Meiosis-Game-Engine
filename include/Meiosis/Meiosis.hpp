@@ -35,6 +35,7 @@
 #include "Renderer/RendererAPI.hpp"
 #include "Renderer/RendererBuffer.hpp"
 #include "Renderer/Shader.hpp"
+#include "Renderer/Texture.hpp"
 
 // ---- Util
 #include "Util/FileUtils.hpp"
