@@ -3,6 +3,7 @@
 #include "Meiosis/Platform/OpenGL/OpenGLBuffer.hpp"
 #include "Meiosis/Platform/OpenGL/OpenGLShader.hpp"
 #include "Meiosis/Platform/OpenGL/OpenGLTexture.hpp"
+#include <glfw/glfw3.h>
 namespace Meiosis//::RendererAPI::
 {
 
@@ -94,6 +95,11 @@ auto OpenGLRendererAPI::createTexture2D(const std::string& file_name) -> std::sh
 auto OpenGLRendererAPI::createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture>
 {
     return std::make_shared<OpenGLTexture2D>(width, height);
+}
+
+auto OpenGLRendererAPI::getTime() const -> float
+{
+    return static_cast<float>(glfwGetTime());
 }
 
 }// namespace Meiosis

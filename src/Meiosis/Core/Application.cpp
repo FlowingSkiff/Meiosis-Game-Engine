@@ -3,6 +3,7 @@
 #include "Core/Window.hpp"
 #include "Meiosis/Renderer/Renderer.hpp"
 #include "Meiosis/Renderer/RendererAPI.hpp"
+#include "Meiosis/Core/Timestep.hpp"
 namespace Meiosis
 {
 
@@ -27,11 +28,15 @@ Application& Application::get()
 }
 void Application::run()
 {
+    Timestep last_time = Renderer::getTime();
     while (m_running)
     {
+        float current_time = Renderer::getTime();
+        float dt = current_time - last_time;
+        last_time = current_time;
         Renderer::clear();
         for (auto layer : m_layers)
-            layer->onUpdate(0.0f);
+            layer->onUpdate(dt);
         m_imgui_layer->beginFrame();
         {
             for (auto layer : m_layers)

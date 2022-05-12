@@ -13,6 +13,7 @@
 #include "Core/Log.hpp"
 #include "Core/LogHelper.hpp"
 #include "Core/MouseCodes.hpp"
+#include "Core/Timestep.hpp"
 #include "Core/Window.hpp"
 
 // ---- Events

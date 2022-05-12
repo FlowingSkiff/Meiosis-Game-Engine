@@ -40,5 +40,7 @@ class ME_API RendererAPI
     virtual void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count = 0) = 0;
     virtual void beginScene(Camera& cam) = 0;
     virtual void endScene() = 0;
+
+    virtual auto getTime() const -> float = 0;
 };// namespace RendererAPI
 }// namespace Meiosis

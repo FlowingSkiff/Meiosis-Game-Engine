@@ -27,6 +27,8 @@ class ME_API OpenGLRendererAPI : public RendererAPI
     virtual auto createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture> override;
     virtual auto createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture> override;
 
+    virtual auto getTime() const -> float override;
+
   private:
     glm::mat4 m_view_projection_matrix;
 };

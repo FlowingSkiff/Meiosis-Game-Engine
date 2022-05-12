@@ -100,4 +100,9 @@ auto Renderer::createTexture2D(uint32_t width, uint32_t height) -> std::shared_p
     return s_api_instance->createTexture2D(width, height);
 }
 
+auto Renderer::getTime() -> float
+{
+    return s_api_instance->getTime();
+}
+
 }// namespace Meiosis

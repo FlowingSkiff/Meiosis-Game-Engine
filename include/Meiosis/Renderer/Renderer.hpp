@@ -22,6 +22,7 @@ class ME_API Renderer
     static void setClearColor(const glm::vec4& color);
     static void clear();
     static auto getAPI() -> RendererAPI::API;
+    static auto getTime() -> float;
 
     static auto createIndexBuffer(const std::vector<uint32_t>& indicies) -> std::shared_ptr<IndexBuffer>;
     static auto createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer>;

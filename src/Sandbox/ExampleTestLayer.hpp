@@ -8,7 +8,7 @@ class ExampleLayer : public Meiosis::Layer
     virtual ~ExampleLayer() {}
     virtual void onEvent(Meiosis::Event& e) override;
     virtual void onImguiRender() override;
-    virtual void onUpdate(float dt) override;
+    virtual void onUpdate(Meiosis::Timestep dt) override;
     bool onKeyPressEvent(Meiosis::KeyPressedEvent& e);
 
   private:

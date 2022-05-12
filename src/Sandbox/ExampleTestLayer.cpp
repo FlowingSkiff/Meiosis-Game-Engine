@@ -28,9 +28,9 @@ void ExampleLayer::onImguiRender()
     ImGui::InputFloat("Float value: ", &m_float_val);
 }
 
-void ExampleLayer::onUpdate([[maybe_unused]] float dt)
+void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
 {
-    const float dx = 0.1f;
+    const float dx = dt.getSeconds();
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::W))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(0.0, -dx, 0.0));
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::S))
