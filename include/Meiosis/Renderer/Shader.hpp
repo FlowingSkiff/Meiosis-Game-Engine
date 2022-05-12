@@ -11,6 +11,11 @@ class ME_API Shader
 {
   public:
     virtual ~Shader() = default;
+    explicit Shader() = default;
+    Shader(const Shader&) = default;
+    Shader(Shader&&) = default;
+    Shader& operator=(const Shader&) = default;
+    Shader& operator=(Shader&&) = default;
     virtual void bind() const = 0;
     virtual void unbind() const = 0;
     virtual void setInt(const std::string& name, int value) = 0;
@@ -21,7 +26,7 @@ class ME_API Shader
     virtual void setFloat4(const std::string& name, const glm::vec4& value) = 0;
     virtual void setMat4(const std::string& name, const glm::mat4& value) = 0;
 
-    virtual const std::string& getName() const = 0;
+    [[nodiscard]] virtual const std::string& getName() const = 0;
 };
 
 class ME_API ShaderLibrary
@@ -32,7 +37,7 @@ class ME_API ShaderLibrary
     auto load(const std::string& file_name) -> std::shared_ptr<Shader>;
     auto load(const std::string& name, const std::string& file_name) -> std::shared_ptr<Shader>;
     auto get(const std::string& name) -> std::shared_ptr<Shader>;
-    bool exists(const std::string& name) const;
+    [[nodiscard]] bool exists(const std::string& name) const;
 
   private:
     std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
