@@ -53,10 +53,10 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
 {
     // clang-format off
     std::vector<float> verticies{
-        -0.5, -0.5, 0.8, 0.1, 0.1, 
-         0.0, -0.5, 0.1, 0.8, 0.1, 
-         0.0,  0.0, 0.1, 0.1, 0.8, 
-        -0.5,  0.0, 0.8, 0.8, 0.8
+        -0.5f, -0.5f, 0.8f, 0.1f, 0.1f, 
+         0.0f, -0.5f, 0.1f, 0.8f, 0.1f, 
+         0.0f,  0.0f, 0.1f, 0.1f, 0.8f, 
+        -0.5f,  0.0f, 0.8f, 0.8f, 0.8f
     };
     // clang-format on
     auto vertex = Meiosis::Renderer::createVertexBuffer(verticies);
@@ -70,10 +70,10 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_obj->setIndexBuffer(inde);
     // clang-format off
     std::vector<float> text_verticies{
-         0.0,  0.0, 0.0, 0.0, 
-         1.0,  0.0, 0.0, 1.0, 
-         1.0,  1.0, 1.0, 1.0, 
-         0.0,  1.0, 1.0, 0.0
+         0.0f,  0.0f, 0.0f, 0.0f, 
+         1.0f,  0.0f, 0.0f, 1.0f, 
+         1.0f,  1.0f, 1.0f, 1.0f, 
+         0.0f,  1.0f, 1.0f, 0.0f
     };
     // clang-format on
     auto tex_vertex = Meiosis::Renderer::createVertexBuffer(text_verticies);
