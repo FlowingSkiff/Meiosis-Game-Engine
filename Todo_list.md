@@ -62,16 +62,14 @@ The conan package manager is used to integrate third party libraries. Depending 
       2. Event handler
    5. imgui
    6. Application
+   7. Textures
+   8. Timestep
 
 ### TODO
 
 1. Assert
-2. Texture
-   1. Design test
-   2. Include example for use
-3. Material
-4. Timestep
-5. Renderer
+2. Material
+4. Renderer
    1. Batch Rendering
    2. Primitive Objects
       1. Triangle
@@ -79,6 +77,6 @@ The conan package manager is used to integrate third party libraries. Depending 
       3. Cube
    3. Frame Buffer
    4. Shader optimization
-6. ECS
-7. Scene
-8. Physics
+5. ECS
+6. Scene
+7. Physics
