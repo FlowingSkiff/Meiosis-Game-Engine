@@ -77,9 +77,9 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     // clang-format off
     std::vector<float> text_verticies{
          0.0f,  0.0f, 0.0f, 0.0f, 
-         1.0f,  0.0f, 0.0f, 1.0f, 
+         1.0f,  0.0f, 1.0f, 0.0f, 
          1.0f,  1.0f, 1.0f, 1.0f, 
-         0.0f,  1.0f, 1.0f, 0.0f
+         0.0f,  1.0f, 0.0f, 1.0f
     };
     // clang-format on
     auto tex_vertex = Meiosis::Renderer::createVertexBuffer(text_verticies);
