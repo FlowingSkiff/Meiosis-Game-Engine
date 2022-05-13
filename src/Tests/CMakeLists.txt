@@ -14,8 +14,6 @@ add_subdirectory(Util)
 target_link_libraries(Test 
     PRIVATE
         GTest::gtest_main
-        project_settings
-        project_warings
         glm::glm
         glfw
         magic_enum::magic_enum

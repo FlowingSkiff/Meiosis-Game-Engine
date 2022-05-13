@@ -28,8 +28,6 @@ set_target_properties(meiosis PROPERTIES
 
 target_link_libraries(meiosis
     PUBLIC
-        project_settings
-        project_warings
         imgui
         glfw
         magic_enum::magic_enum

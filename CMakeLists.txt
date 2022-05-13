@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(meiosis VERSION 0.1.0)
 
-add_library(project_settings INTERFACE)
-add_library(project_warings INTERFACE)
-
 include(CTest)
 enable_testing()
 include(cmake/Commands.cmake)
