@@ -66,7 +66,7 @@ void OpenGLRendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& array, u
 {
     count = (count) ? count : array->getIndexBuffer()->getCount();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), GL_UNSIGNED_INT, nullptr);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    // glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 

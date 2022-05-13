@@ -32,6 +32,7 @@ void ExampleLayer::onImguiRender()
 
 void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
 {
+    
     const float dx = dt.getSeconds();
     m_last_frame_time = dt.getSeconds();
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::W))
