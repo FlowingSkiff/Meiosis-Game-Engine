@@ -55,9 +55,8 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     Meiosis::Renderer::endScene();
 }
 
-ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_texture_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
+ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_texture_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f), m_simple_obj(Meiosis::Renderer::createVertexArray()), m_simple_color{ 0.0, 0.0, 0.0 }
 {
-    m_simple_color = { 0.0, 0.0, 0.0 };
     // clang-format off
     std::vector<float> verticies{
         -0.5f, -0.5f, 0.8f, 0.1f, 0.1f, 
@@ -135,7 +134,6 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     };
     auto simple_color_vertex = Meiosis::Renderer::createVertexBuffer(simple_color_vertices);
     simple_color_vertex->setLayout(simple_layout);
-    m_simple_obj = Meiosis::Renderer::createVertexArray();
     m_simple_obj->addVertexBuffer(simple_color_vertex);
     m_simple_obj->setIndexBuffer(inde);
     m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
