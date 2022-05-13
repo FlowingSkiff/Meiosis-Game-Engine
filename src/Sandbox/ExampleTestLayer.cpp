@@ -45,8 +45,6 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     Meiosis::Renderer::beginScene(m_camera);
     // m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
     Meiosis::Renderer::submit(m_shader, m_obj);
-
-    m_texture->bind(0U);
     Meiosis::Renderer::submit(m_texture_shader, m_texture_obj);
 
     m_simple_shader->bind();
@@ -138,4 +136,6 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_simple_obj->addVertexBuffer(simple_color_vertex);
     m_simple_obj->setIndexBuffer(inde);
     m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
+
+    m_texture->bind(0U);
 }
