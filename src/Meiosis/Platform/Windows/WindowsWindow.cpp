@@ -115,7 +115,7 @@ WindowsWindow::WindowsWindow(const std::string& name, uint32_t width, uint32_t h
     m_context = GraphicsContext::create(m_window);
     m_context->init();
     glfwSetWindowUserPointer(m_window, &m_data);
-    setVSync(true);
+    setVSync(false);
     glfwSetWindowSizeCallback(m_window, GLFWWindowSizeCallback);
     glfwSetWindowCloseCallback(m_window, GLFWWindowShouldCloseCallback);
     glfwSetKeyCallback(m_window, GLFWKeyCallback);
