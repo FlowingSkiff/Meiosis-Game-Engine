@@ -26,11 +26,14 @@ void ExampleLayer::onImguiRender()
 {
     ImGui::Text("dear imgui says hello. (%s)", IMGUI_VERSION);
     ImGui::InputFloat("Float value: ", &m_float_val);
+    ImGui::InputFloat3("Float3", glm::value_ptr(m_simple_color));
+    ImGui::Text(fmt::format("FPS: {:.2f}", 1 / m_last_frame_time).c_str());
 }
 
 void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
 {
     const float dx = dt.getSeconds();
+    m_last_frame_time = dt.getSeconds();
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::W))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(0.0, -dx, 0.0));
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::S))
@@ -46,11 +49,15 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     m_texture->bind();
     Meiosis::Renderer::submit(m_texture_shader, m_texture_obj);
 
+    m_simple_shader->bind();
+    m_simple_shader->setFloat3("u_color", m_simple_color);
+    Meiosis::Renderer::submit(m_simple_shader, m_simple_obj);
     Meiosis::Renderer::endScene();
 }
 
 ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_texture_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f)
 {
+    m_simple_color = { 0.0, 0.0, 0.0 };
     // clang-format off
     std::vector<float> verticies{
         -0.5f, -0.5f, 0.8f, 0.1f, 0.1f, 
@@ -120,4 +127,16 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_texture = Meiosis::Renderer::createTexture2D("resources/textures/ChernoLogo.png");
     m_texture_shader->bind();
     m_texture_shader->setInt("u_texture", 0);
+
+
+    const std::vector<float> simple_color_vertices{ -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0 };
+    Meiosis::BufferLayout simple_layout{
+        { "a_position", Meiosis::ShaderUniformType::Float2 }
+    };
+    auto simple_color_vertex = Meiosis::Renderer::createVertexBuffer(simple_color_vertices);
+    simple_color_vertex->setLayout(simple_layout);
+    m_simple_obj = Meiosis::Renderer::createVertexArray();
+    m_simple_obj->addVertexBuffer(simple_color_vertex);
+    m_simple_obj->setIndexBuffer(inde);
+    m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
 }

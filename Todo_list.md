@@ -76,7 +76,6 @@ The conan package manager is used to integrate third party libraries. Depending 
       2. Rectangle
       3. Cube
    3. Frame Buffer
-   4. Shader optimization
 4. ECS
 5. Scene
 6. Physics

@@ -20,4 +20,8 @@ class ExampleLayer : public Meiosis::Layer
     Meiosis::Camera2D m_camera;
     std::shared_ptr<Meiosis::Shader> m_texture_shader;
     std::shared_ptr<Meiosis::Texture> m_texture;
+    std::shared_ptr<Meiosis::VertexArray> m_simple_obj;
+    std::shared_ptr<Meiosis::Shader> m_simple_shader;
+    glm::vec3 m_simple_color;
+    float m_last_frame_time = 1.f;
 };
