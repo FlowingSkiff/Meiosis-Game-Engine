@@ -1,7 +1,7 @@
 #shader-type VERTEX
 #version 450 core
 layout(location=0)in vec2 a_position;
-layout(location=0)in vec2 a_texture_coord;
+layout(location=1)in vec2 a_texture_coord;
 
 uniform mat4 u_transform;
 uniform mat4 u_view_projection;
