@@ -33,13 +33,7 @@ target_include_directories(Test
     SYSTEM PRIVATE
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
-        ${glm_INCLUDE_DIR}
-        ${glfw_INCLUDE_DIRS_RELEASE}
-        ${magic_enum_INCLUDE_DIRS_RELEASE}
-        ${fmt_INCLUDE_DIRS_RELEASE}
-        ${spdlog_INCLUDE_DIRS_RELEASE}
-        ${gtest_INCLUDE_DIRS_RELEASE}
-        ${stb_INCLUDE_DIR}
+        ${spdlog_INCLUDE_DIR}
 )
 
 target_compile_definitions(Test

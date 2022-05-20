@@ -34,7 +34,9 @@ target_link_libraries(meiosis
         glad
         fmt::fmt
         stb::stb
+        glm::glm
 )
+
 
 target_include_directories(meiosis
     PUBLIC
@@ -46,12 +48,7 @@ target_include_directories(meiosis
     SYSTEM PUBLIC
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
-        ${glm_INCLUDE_DIR}
-        ${glfw_INCLUDE_DIRS_RELEASE}
-        ${magic_enum_INCLUDE_DIRS_RELEASE}
-        ${fmt_INCLUDE_DIRS_RELEASE}
-        ${spdlog_INCLUDE_DIRS_RELEASE}
-        ${stb_INCLUDE_DIRS}
+        ${spdlog_INCLUDE_DIR}
 )
 
 target_compile_definitions(meiosis

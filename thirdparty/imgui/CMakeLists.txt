@@ -15,8 +15,6 @@ target_compile_options(imgui PRIVATE -w)
 target_include_directories(imgui PUBLIC BEFORE 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/backends
-    PRIVATE
-        ${glfw_INCLUDE_DIRS_RELEASE}
 )
 
 target_link_libraries(imgui
