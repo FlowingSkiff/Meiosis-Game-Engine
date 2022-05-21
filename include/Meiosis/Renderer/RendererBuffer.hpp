@@ -18,7 +18,8 @@ enum class ShaderUniformType : uint8_t {
     Int2,
     Int3,
     Int4,
-    Bool
+    Bool,
+    UnsignedInt
 };
 
 static constexpr size_t shaderUniformTypeSize(ShaderUniformType type)
@@ -60,6 +61,9 @@ static constexpr size_t shaderUniformTypeSize(ShaderUniformType type)
             break;
         case ShaderUniformType::Bool:
             return sizeof(bool);
+            break;
+        case ShaderUniformType::UnsignedInt:
+            return sizeof(unsigned int);
             break;
     }
     ME_ENGINE_ERROR("Unknown uniform type: {}", static_cast<int>(type));
@@ -117,6 +121,9 @@ struct BufferObject
                 return 4;
                 break;
             case ShaderUniformType::Bool:
+                return 1;
+                break;
+            case ShaderUniformType::UnsignedInt:
                 return 1;
                 break;
         }

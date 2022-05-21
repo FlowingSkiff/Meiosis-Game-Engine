@@ -25,7 +25,9 @@ class ME_API Renderer
     static auto getTime() -> float;
 
     static auto createIndexBuffer(const std::vector<uint32_t>& indicies) -> std::shared_ptr<IndexBuffer>;
-    static auto createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer>;
+    // static auto createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer>;
+    template<typename Type>
+    static auto createVertexBuffer(const std::vector<Type>& vertices) -> std::shared_ptr<VertexBuffer>;
     static auto createVertexBuffer(size_t size) -> std::shared_ptr<VertexBuffer>;
     static auto createVertexArray() -> std::shared_ptr<VertexArray>;
     static auto createShader(const std::string& filename) -> std::shared_ptr<Shader>;
@@ -39,4 +41,10 @@ class ME_API Renderer
   private:
     static std::shared_ptr<RendererAPI> s_api_instance;
 };// namespace Renderer
+
+template<typename Type>
+auto Renderer::createVertexBuffer(const std::vector<Type>& vertices) -> std::shared_ptr<VertexBuffer>
+{
+    return s_api_instance->createVertexBuffer(vertices.data(), sizeof(Type) * vertices.size());
+}
 }// namespace Meiosis

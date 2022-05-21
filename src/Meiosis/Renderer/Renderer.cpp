@@ -61,10 +61,6 @@ auto Renderer::createIndexBuffer(const std::vector<uint32_t>& indicies) -> std::
 {
     return s_api_instance->createIndexBuffer(indicies);
 }
-auto Renderer::createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer>
-{
-    return s_api_instance->createVertexBuffer(vertices);
-}
 auto Renderer::createVertexBuffer(size_t size) -> std::shared_ptr<VertexBuffer>
 {
     return s_api_instance->createVertexBuffer(size);

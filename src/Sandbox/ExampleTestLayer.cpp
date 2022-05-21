@@ -32,7 +32,7 @@ void ExampleLayer::onImguiRender()
 
 void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
 {
-    
+
     const float dx = dt.getSeconds();
     m_last_frame_time = dt.getSeconds();
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::W))
@@ -54,6 +54,13 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     Meiosis::Renderer::endScene();
 }
 
+struct PosAndTexture
+{
+    float position[2];
+    unsigned int texture_id;
+    float texture_coord[2];
+};
+
 ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_texture_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f), m_simple_obj(Meiosis::Renderer::createVertexArray()), m_simple_color{ 0.0, 0.0, 0.0 }
 {
     // clang-format off
@@ -74,16 +81,23 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     auto inde = Meiosis::Renderer::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
     m_obj->setIndexBuffer(inde);
     // clang-format off
-    std::vector<float> text_verticies{
-         0.0f,  0.0f, 0.0f, 0.0f, 
-         1.0f,  0.0f, 1.0f, 0.0f, 
-         1.0f,  1.0f, 1.0f, 1.0f, 
-         0.0f,  1.0f, 0.0f, 1.0f
+    //std::vector<float> text_verticies{
+    //     0.0f,  0.0f, 0.0f, 0.0f, 
+    //     1.0f,  0.0f, 1.0f, 0.0f, 
+    //     1.0f,  1.0f, 1.0f, 1.0f, 
+    //     0.0f,  1.0f, 0.0f, 1.0f
+    //};
+    const std::vector<PosAndTexture> text_verticies{
+        {0.0f,  0.0f, 0U, 0.0f, 0.0f},
+        {1.0f,  0.0f, 0U, 1.0f, 0.0f},
+        {1.0f,  1.0f, 0U, 1.0f, 1.0f},
+        {0.0f,  1.0f, 0U, 0.0f, 1.0f}
     };
     // clang-format on
     auto tex_vertex = Meiosis::Renderer::createVertexBuffer(text_verticies);
     Meiosis::BufferLayout texture_layout = {
         { "a_position", Meiosis::ShaderUniformType::Float2 },
+        { "a_texture_id", Meiosis::ShaderUniformType::UnsignedInt },
         { "a_texture_coord", Meiosis::ShaderUniformType::Float2 }
     };
     tex_vertex->setLayout(texture_layout);

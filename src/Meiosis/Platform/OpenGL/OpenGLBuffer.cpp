@@ -1,5 +1,5 @@
 #include "Meiosis/Platform/OpenGL/OpenGLBuffer.hpp"
-#include <glad/glad.h>
+
 namespace Meiosis
 {
 
@@ -43,6 +43,9 @@ static auto toOpenGLBaseType(ShaderUniformType type) -> GLenum
         case ShaderUniformType::Bool:
             return GL_BOOL;
             break;
+        case ShaderUniformType::UnsignedInt:
+            return GL_UNSIGNED_INT;
+            break;
     }
     ME_ENGINE_ERROR("Unrecognized uniform type {}", static_cast<int>(type));
     return 0;
@@ -58,6 +61,12 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size)
     glCreateBuffers(1, &m_renderer_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), nullptr, GL_DYNAMIC_DRAW);
+}
+OpenGLVertexBuffer::OpenGLVertexBuffer(const void const* data, std::size_t size)
+{
+    glCreateBuffers(1, &m_renderer_id);
+    glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, GL_STATIC_DRAW);
 }
 OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
@@ -141,7 +150,7 @@ void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& buf
                     element.is_normalized ? GL_TRUE : GL_FALSE,
                     static_cast<GLsizei>(layout.getStride()),
                     reinterpret_cast<const void*>(element.offset));
-                    //(const void*)element.offset);
+                //(const void*)element.offset);
                 // reinterpret_cast<const void*>(element.offset));
                 m_vertex_buffer_index++;
                 break;
@@ -155,6 +164,17 @@ void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& buf
                 glEnableVertexAttribArray(m_vertex_buffer_index);
                 glVertexAttribIPointer(m_vertex_buffer_index,
                     static_cast<GLint>(element.getComponentCount()),
+                    toOpenGLBaseType(element.type),
+                    static_cast<GLsizei>(layout.getStride()),
+                    reinterpret_cast<const void*>(element.offset));
+                m_vertex_buffer_index++;
+                break;
+            }
+            case ShaderUniformType::UnsignedInt:
+            {
+                glEnableVertexAttribArray(m_vertex_buffer_index);
+                glVertexAttribIPointer(m_vertex_buffer_index,
+                    static_cast<GLuint>(element.getComponentCount()),
                     toOpenGLBaseType(element.type),
                     static_cast<GLsizei>(layout.getStride()),
                     reinterpret_cast<const void*>(element.offset));
