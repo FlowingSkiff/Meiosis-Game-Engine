@@ -2,6 +2,7 @@
 set(meiosis_sources empty.cpp)
 add_library(meiosis STATIC ${meiosis_sources})
 
+find_package(EnTT REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
@@ -35,6 +36,7 @@ target_link_libraries(meiosis
         fmt::fmt
         stb::stb
         glm::glm
+        EnTT::EnTT
 )
 
 
