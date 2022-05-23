@@ -137,7 +137,7 @@ void WindowsWindow::onUpdate()
 }
 void WindowsWindow::setVSync(bool enabled)
 {
-    if (m_data.is_vsync == enabled)
+    if (m_data.is_vsync = enabled)
         glfwSwapInterval(1);
     else
         glfwSwapInterval(0);
