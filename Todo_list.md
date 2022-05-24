@@ -33,7 +33,7 @@
 
 Meiosis is built as a static library and linked against the game application. The executable, example is Sandbox, needs to include a function CreateApplication() which returns a pointer to a derived Application class where the game operation is defined.
 
-The conan package manager is used to integrate third party libraries. Depending on your system, use:
+The conan package manager is used to integrate third party libraries. Depending on your system, use: (see [scripts](scripts\conan_install.py) as an example for automation)
 
 `conan install .. -if ${OUTPUT_FOLDER} --profile ${CONAN_PROFILE} -pr:b ${CONAN_PROFILE} --build missing`
 
@@ -77,5 +77,7 @@ The conan package manager is used to integrate third party libraries. Depending 
       3. Cube
    3. Frame Buffer
 4. ECS
+   1. IP
 5. Scene
+   1. IP
 6. Physics

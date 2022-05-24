@@ -1,3 +1,5 @@
+# License
+
 MIT License
 
 Copyright (c) 2021 FlowingSkiff
@@ -19,3 +21,38 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-- NOTE: Third party dependency used by this software --
+
+This software depends on the fmt lib (MIT License),
+and users must comply to its license: [link](https://github.com/fmtlib/fmt/blob/master/LICENSE.rst)
+
+This software depends on the spdlog lib (MIT License),
+and users must comply to its license: [link](https://github.com/gabime/spdlog/blob/v1.x/LICENSE)
+
+This software depends on the stb image lib (MIT License),
+and users must comply to its license: [link](https://github.com/nothings/stb/blob/master/LICENSE)
+
+This software depends on the EnTT lib (MIT License),
+and users must comply to its license: [link](https://github.com/skypjack/entt/blob/master/LICENSE)
+
+This software depends on the yaml-cpp lib (MIT License),
+and users must comply to its license: [link](https://github.com/jbeder/yaml-cpp/blob/master/LICENSE)
+
+This software depends on the magic_enum lib (MIT License),
+and users must comply to its license: [link](https://github.com/Neargye/magic_enum/blob/master/LICENSE)
+
+This software depends on the glfw lib (Zlib License),
+and users must comply to its license: [link](https://github.com/glfw/glfw/blob/master/LICENSE.md)
+
+This software depends on the Google Test lib (BSD 3-Clause License),
+and users must comply to its license: [link](https://github.com/google/googletest/blob/main/LICENSE)
+
+This software depends on the GLM Mathmatics lib (MIT License),
+and users must comply to its license: [link](https://github.com/g-truc/glm/blob/master/copying.txt)
+
+This software depends on the Dear ImGUI lib (MIT License),
+and users must comply to its license: [link](https://github.com/ocornut/imgui/blob/master/LICENSE.txt)
+
+This software depends on the GLAD lib (MIT License),
+and users must comply to its license: [link](https://github.com/Dav1dde/glad/blob/master/LICENSE)
