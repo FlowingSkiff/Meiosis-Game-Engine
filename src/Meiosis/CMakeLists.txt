@@ -9,6 +9,7 @@ find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(magic_enum REQUIRED)
 find_package(stb REQUIRED)
+find_package(yaml-cpp REQUIRED)
 
 add_subdirectory(Core)
 add_subdirectory(Events)
@@ -37,6 +38,7 @@ target_link_libraries(meiosis
         stb::stb
         glm::glm
         EnTT::EnTT
+        yaml-cpp
 )
 
 
@@ -51,6 +53,7 @@ target_include_directories(meiosis
         ${third_party_include}
         ${CMAKE_SOURCE_DIR}/thirdparty/imgui
         ${spdlog_INCLUDE_DIR}
+        ${yaml-cpp_INCLUDE_DIR}
 )
 
 target_compile_definitions(meiosis
