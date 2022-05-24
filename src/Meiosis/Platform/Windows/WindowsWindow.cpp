@@ -135,9 +135,10 @@ void WindowsWindow::onUpdate()
     glfwPollEvents();
     m_context->swapBuffers();
 }
-void WindowsWindow::setVSync(bool enabled)
+void WindowsWindow::setVSync(bool should_enable)
 {
-    if (m_data.is_vsync = enabled)
+    m_data.is_vsync = should_enable;
+    if (m_data.is_vsync)
         glfwSwapInterval(1);
     else
         glfwSwapInterval(0);

@@ -24,7 +24,7 @@ class ME_API WindowsWindow : public Window
     auto getWidth() const -> uint32_t override;
     auto getHeight() const -> uint32_t override;
     void setEventCallback(const WindowCallbackFunction& callback) override;
-    void setVSync(bool enabled) override;
+    void setVSync(bool should_enabled) override;
     bool isVSync() const override;
     auto getNativeWindow() const -> void* override;
 
