@@ -46,7 +46,7 @@ auto OpenGLRendererAPI::createVertexBuffer(size_t size) -> std::shared_ptr<Verte
 {
     return std::make_shared<OpenGLVertexBuffer>(size);
 }
-auto OpenGLRendererAPI::createVertexBuffer(const void const* data, std::size_t size) -> std::shared_ptr<VertexBuffer>
+auto OpenGLRendererAPI::createVertexBuffer(const void* const data, std::size_t size) -> std::shared_ptr<VertexBuffer>
 {
     return std::make_shared<OpenGLVertexBuffer>(data, size);
 }

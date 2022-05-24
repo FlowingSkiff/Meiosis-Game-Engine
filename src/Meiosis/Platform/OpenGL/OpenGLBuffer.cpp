@@ -62,7 +62,7 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size)
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), nullptr, GL_DYNAMIC_DRAW);
 }
-OpenGLVertexBuffer::OpenGLVertexBuffer(const void const* data, std::size_t size)
+OpenGLVertexBuffer::OpenGLVertexBuffer(const void* const data, std::size_t size)
 {
     glCreateBuffers(1, &m_renderer_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id);

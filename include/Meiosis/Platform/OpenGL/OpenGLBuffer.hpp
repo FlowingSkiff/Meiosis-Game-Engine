@@ -10,7 +10,7 @@ class ME_API OpenGLVertexBuffer : public VertexBuffer
   public:
     explicit OpenGLVertexBuffer(const std::vector<float>& vertices);
     explicit OpenGLVertexBuffer(size_t size);
-    explicit OpenGLVertexBuffer(const void const* data, std::size_t size);
+    explicit OpenGLVertexBuffer(const void* const data, std::size_t size);
     virtual ~OpenGLVertexBuffer();
     virtual void bind() const override;
     virtual void unbind() const override;

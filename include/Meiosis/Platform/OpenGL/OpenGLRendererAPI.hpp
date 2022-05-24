@@ -14,7 +14,7 @@ class ME_API OpenGLRendererAPI : public RendererAPI
 
     virtual auto createIndexBuffer(const std::vector<uint32_t>& indicies) -> std::shared_ptr<IndexBuffer> override;
     virtual auto createVertexBuffer(const std::vector<float>& vertices) -> std::shared_ptr<VertexBuffer> override;
-    virtual auto createVertexBuffer(const void const* data, std::size_t size) -> std::shared_ptr<VertexBuffer> override;
+    virtual auto createVertexBuffer(const void* const data, std::size_t size) -> std::shared_ptr<VertexBuffer> override;
     virtual auto createVertexBuffer(size_t size) -> std::shared_ptr<VertexBuffer> override;
     virtual auto createVertexArray() -> std::shared_ptr<VertexArray> override;
     virtual auto createShader(const std::string& filename) -> std::shared_ptr<Shader> override;
