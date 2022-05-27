@@ -17,6 +17,7 @@ add_subdirectory(imgui)
 add_subdirectory(Layer)
 add_subdirectory(Platform)
 add_subdirectory(Renderer)
+add_subdirectory(Scene)
 add_subdirectory(Util)
 
 add_library(Meiosis::Meiosis ALIAS meiosis)

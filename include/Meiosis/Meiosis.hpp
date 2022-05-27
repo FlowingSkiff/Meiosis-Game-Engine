@@ -38,6 +38,12 @@
 #include "Renderer/Shader.hpp"
 #include "Renderer/Texture.hpp"
 
+// ---- Scene ----
+#include "Scene/Components.hpp"
+#include "Scene/Entity.hpp"
+#include "Scene/Scene.hpp"
+#include "Scene/SceneCamera.hpp"
+
 // ---- Util
 #include "Util/FileUtils.hpp"
 #include "Util/Random.hpp"
