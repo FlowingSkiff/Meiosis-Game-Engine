@@ -34,7 +34,6 @@ class ME_API Entity
     operator bool() const;
     operator entt::entity() const;
     operator entt::id_type() const;
-    operator uint32_t() const;
 
     bool operator==(const Entity& other) const;
     bool operator!=(const Entity& other) const;
@@ -47,7 +46,7 @@ class ME_API Entity
 template<typename Component, typename... ARGS>
 auto Entity::addComponent(ARGS... args) -> Component&
 {
-    auto& component = m_Scene->addComponentTo<Component>(*this, std::forward<ARGS>(args)...);
+    auto& component = m_scene->addComponentTo<Component>(*this, std::forward<ARGS>(args)...);
     m_scene->onComponentAdded<Component>(*this, component);
     return component;
 }
@@ -65,6 +64,6 @@ bool Entity::hasComponent() const
 template<typename Component>
 void Entity::removeComponent()
 {
-    m_scene->removeComponent<Component>(*this);
+    m_scene->removeComponentFrom<Component>(*this);
 }
 }// namespace Meiosis
