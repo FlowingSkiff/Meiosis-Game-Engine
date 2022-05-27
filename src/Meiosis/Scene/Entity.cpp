@@ -22,10 +22,6 @@ Entity::operator entt::id_type() const
 {
     return static_cast<entt::id_type>(m_id);
 }
-Entity::operator uint32_t() const
-{
-    return static_cast<uint32_t>(m_id);
-}
 
 bool Entity::operator==(const Entity& other) const
 {
