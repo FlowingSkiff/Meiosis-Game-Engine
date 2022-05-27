@@ -2,6 +2,7 @@
 #include "Meiosis/Core/Core.hpp"
 #include "Meiosis/Core/Timestep.hpp"
 #include <entt/entt.hpp>
+#include <utility>
 namespace Meiosis
 {
 class Entity;
@@ -21,13 +22,13 @@ class ME_API Scene
     template<typename Component>
     void onComponentAdded(uint32_t entity_id, Component component);
     template<typename Component, typename... ARGS>
-    auto addComponentTo(uint32_t entity_id, ARGS... args) -> Component&;
+    auto addComponentTo(Entity entity_id, ARGS... args) -> Component&;
     template<typename Component>
-    auto getComponentFrom(uint32_t entity_id) -> Component&;
+    auto getComponentFrom(Entity entity_id) -> Component&;
     template<typename Component>
-    bool entityHas(uint32_t entity_id) const;
+    bool entityHas(Entity entity_id) const;
     template<typename Component>
-    void removeComponentFrom(uint32_t entity_id);
+    void removeComponentFrom(Entity entity_id);
 
   private:
     entt::registry m_registry;
@@ -36,22 +37,22 @@ class ME_API Scene
 };
 
 template<typename Component, typename... ARGS>
-auto Scene::addComponentTo(uint32_t entity_id, ARGS... args) -> Component&
+auto Scene::addComponentTo(Entity entity_id, ARGS... args) -> Component&
 {
-    return m_registry.emplace<Component>(entity_id, std::foward<ARGS>(args)...);
+    return m_registry.emplace<Component>(entity_id, std::forward<ARGS>(args)...);
 }
 template<typename Component>
-auto Scene::getComponentFrom(uint32_t entity_id) -> Component&
+auto Scene::getComponentFrom(Entity entity_id) -> Component&
 {
     return m_registry.get<Component>(entity_id);
 }
 template<typename Component>
-bool Scene::entityHas(uint32_t entity_id) const
+bool Scene::entityHas(Entity entity_id) const
 {
     return m_registry.any_of<Component>(entity_id);
 }
 template<typename Component>
-void Scene::removeComponentFrom(uint32_t entity_id)
+void Scene::removeComponentFrom(Entity entity_id)
 {
     m_registry.remove<Component>(entity_id);
 }
