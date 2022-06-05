@@ -85,6 +85,10 @@ void Scene::onComponentAdded<TagComponent>([[maybe_unused]] uint32_t entity_id, 
 {
 }
 template<>
+void Scene::onComponentAdded<MeshComponent>([[maybe_unused]] uint32_t entity_id, [[maybe_unused]] MeshComponent component)
+{
+}
+template<>
 void Scene::onComponentAdded<CameraComponent>([[maybe_unused]] uint32_t entity_id, [[maybe_unused]] CameraComponent component)
 {
     if (m_view_width > 0U && m_view_height > 0U)

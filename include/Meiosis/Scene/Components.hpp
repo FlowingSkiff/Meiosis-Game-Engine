@@ -1,8 +1,9 @@
 #pragma once
-#include "../Core/Core.hpp"
+#include "Meiosis/Core/Core.hpp"
 #include <string>
 #include "Meiosis/Scene/SceneCamera.hpp"
 #include <glm/glm.hpp>
+#include "Meiosis/Renderer/RendererBuffer.hpp"
 namespace Meiosis
 {
 struct TransformComponent
@@ -21,5 +22,10 @@ struct CameraComponent
     bool is_primary = false;
     bool has_fixed_aspect_ratio = false;
     SceneCamera camera;
+};
+
+struct MeshComponent
+{
+    std::shared_ptr<VertexArray> vertex_data_ptr;
 };
 }// namespace Meiosis
