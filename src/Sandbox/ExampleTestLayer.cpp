@@ -48,9 +48,11 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     Meiosis::Renderer::submit(m_shader, m_obj);
     Meiosis::Renderer::submit(m_texture_shader, m_texture_obj);
 
-    m_simple_shader->bind();
-    m_simple_shader->setFloat3("u_color", m_simple_color);
-    Meiosis::Renderer::submit(m_simple_shader, m_simple_obj);
+    // m_simple_shader->bind();
+    // m_simple_shader->setFloat3("u_color", m_simple_color);
+
+    Meiosis::Renderer::submit(m_simple_material, m_simple_obj);
+    // Meiosis::Renderer::submit(m_simple_shader, m_simple_obj);
     Meiosis::Renderer::endScene();
 }
 
@@ -150,7 +152,12 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     simple_color_vertex->setLayout(simple_layout);
     m_simple_obj->addVertexBuffer(simple_color_vertex);
     m_simple_obj->setIndexBuffer(inde);
-    m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
+    // m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
+
+    m_simple_material = Meiosis::Renderer::createMaterial("resources/shaders/simple_color.glsl");
+    m_simple_material.setOnBind([this](auto& shader) -> void {
+        shader->setFloat3("u_color", m_simple_color);
+    });
 
     m_texture->bind(0U);
 }

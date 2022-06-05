@@ -78,9 +78,30 @@ auto Renderer::createShader(const std::string& name, const std::string& vertexSr
     return s_api_instance->createShader(name, vertexSrc, fragmentSrc);
 }
 
+auto Renderer::createMaterial(const std::string& filename) -> Material
+{
+    return Material(s_api_instance->createShader(filename));
+}
+auto Renderer::createMaterial(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> Material
+{
+    return Material(s_api_instance->createShader(name, vertexSrc, fragmentSrc));
+}
+auto Renderer::createMaterial(std::shared_ptr<Shader>& shader) -> Material
+{
+    return Material(shader);
+}
+auto Renderer::createMaterial(std::shared_ptr<Shader>& shader, Material::UniformFunction function) -> Material
+{
+    return Material(shader, function);
+}
+
 void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 {
     s_api_instance->submit(shader, vertexArray, transform);
+}
+void Renderer::submit(Material& material, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
+{
+    s_api_instance->submit(material.getShader(), vertexArray, transform);
 }
 void Renderer::drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count)
 {

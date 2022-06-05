@@ -3,6 +3,7 @@ set(open_gl_test_sources
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Platform/OpenGL/OpenGLShader.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Util/FileUtils.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Core/Log.cpp
+    ${CMAKE_SOURCE_DIR}/src/Meiosis/Renderer/Material.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Renderer/Shader.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Renderer/Renderer.cpp
     ${CMAKE_SOURCE_DIR}/src/Meiosis/Platform/OpenGL/OpenGLRendererAPI.cpp

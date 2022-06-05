@@ -5,6 +5,7 @@
 #include <memory>
 #include "Meiosis/Renderer/Camera.hpp"
 #include "Meiosis/Renderer/Texture.hpp"
+#include "Meiosis/Renderer/Material.hpp"
 namespace Meiosis
 {
 class ME_API Renderer
@@ -30,12 +31,20 @@ class ME_API Renderer
     static auto createVertexBuffer(const std::vector<Type>& vertices) -> std::shared_ptr<VertexBuffer>;
     static auto createVertexBuffer(size_t size) -> std::shared_ptr<VertexBuffer>;
     static auto createVertexArray() -> std::shared_ptr<VertexArray>;
+
     static auto createShader(const std::string& filename) -> std::shared_ptr<Shader>;
     static auto createShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) -> std::shared_ptr<Shader>;
+
+    static auto createMaterial(const std::string& shader_filename) -> Material;
+    static auto createMaterial(const std::string& shader_name, const std::string& vertexSrc, const std::string& fragmentSrc) -> Material;
+    static auto createMaterial(std::shared_ptr<Shader>& shader) -> Material;
+    static auto createMaterial(std::shared_ptr<Shader>& shader, Material::UniformFunction function) -> Material;
+
     static auto createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture>;
     static auto createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture>;
 
     static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
+    static void submit(Material& material, const std::shared_ptr<VertexArray>& vertex_array, const glm::mat4& transform = glm::mat4(1.0f));
     static void drawIndexed(const std::shared_ptr<VertexArray>& array, uint32_t count = 0);
 
   private:
