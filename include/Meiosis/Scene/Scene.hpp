@@ -26,7 +26,7 @@ class ME_API Scene
     template<typename Component>
     auto getComponentFrom(Entity entity_id) -> Component&;
     template<typename Component>
-    bool entityHas(Entity entity_id) const;
+    [[nodiscard]] bool entityHas(Entity entity_id) const;
     template<typename Component>
     void removeComponentFrom(Entity entity_id);
 
