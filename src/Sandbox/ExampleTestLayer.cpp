@@ -83,12 +83,6 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     auto inde = Meiosis::Renderer::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
     m_obj->setIndexBuffer(inde);
     // clang-format off
-    //std::vector<float> text_verticies{
-    //     0.0f,  0.0f, 0.0f, 0.0f, 
-    //     1.0f,  0.0f, 1.0f, 0.0f, 
-    //     1.0f,  1.0f, 1.0f, 1.0f, 
-    //     0.0f,  1.0f, 0.0f, 1.0f
-    //};
     const std::vector<PosAndTexture> text_verticies{
         {0.0f,  0.0f, 0U, 0.0f, 0.0f},
         {1.0f,  0.0f, 0U, 1.0f, 0.0f},
