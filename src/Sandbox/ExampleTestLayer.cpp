@@ -74,7 +74,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     };
     // clang-format on
     auto vertex = Meiosis::Renderer::createVertexBuffer(verticies);
-    Meiosis::BufferLayout layout = {
+    Meiosis::BufferLayout layout{
         { "a_position", Meiosis::ShaderUniformType::Float2 },
         { "a_color", Meiosis::ShaderUniformType::Float3 }
     };
@@ -91,7 +91,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     };
     // clang-format on
     auto tex_vertex = Meiosis::Renderer::createVertexBuffer(text_verticies);
-    Meiosis::BufferLayout texture_layout = {
+    Meiosis::BufferLayout texture_layout{
         { "a_position", Meiosis::ShaderUniformType::Float2 },
         { "a_texture_id", Meiosis::ShaderUniformType::UnsignedInt },
         { "a_texture_coord", Meiosis::ShaderUniformType::Float2 }

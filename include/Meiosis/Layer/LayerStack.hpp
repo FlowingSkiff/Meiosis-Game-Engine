@@ -14,8 +14,8 @@ class ME_API LayerStack
     LayerStack(const LayerStack&) = delete;
     LayerStack& operator=(const LayerStack&) = delete;
     // move into new, does not delete
-    LayerStack(LayerStack&&);
-    LayerStack& operator=(LayerStack&&);
+    LayerStack(LayerStack&&) noexcept;
+    LayerStack& operator=(LayerStack&&) noexcept;
 
   private:
     // Removes layers but does not delete them
@@ -43,6 +43,6 @@ class ME_API LayerStack
 
   private:
     std::vector<Layer*> m_layers;
-    uint16_t m_overlay_count = 0u;
+    uint16_t m_overlay_count = 0U;
 };
 }// namespace Meiosis

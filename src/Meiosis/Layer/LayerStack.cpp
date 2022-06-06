@@ -9,7 +9,7 @@ LayerStack::~LayerStack()
     clear();
 }
 
-LayerStack::LayerStack(LayerStack&& stack)
+LayerStack::LayerStack(LayerStack&& stack) noexcept
 {
     m_layers = stack.m_layers;
     m_overlay_count = stack.m_overlay_count;
@@ -17,7 +17,7 @@ LayerStack::LayerStack(LayerStack&& stack)
     stack.detach();
 }
 
-LayerStack& LayerStack::operator=(LayerStack&& stack)
+LayerStack& LayerStack::operator=(LayerStack&& stack) noexcept
 {
     this->clear();
     m_layers = stack.m_layers;

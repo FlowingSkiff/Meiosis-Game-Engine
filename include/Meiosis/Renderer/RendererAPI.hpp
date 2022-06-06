@@ -42,6 +42,6 @@ class ME_API RendererAPI
     virtual void beginScene(Camera& cam) = 0;
     virtual void endScene() = 0;
 
-    virtual auto getTime() const -> float = 0;
+    [[nodiscard]] virtual auto getTime() const -> float = 0;
 };// namespace RendererAPI
 }// namespace Meiosis

@@ -16,15 +16,15 @@ class ME_API Window
   public:
     virtual ~Window() = default;
     virtual void onUpdate() = 0;
-    virtual auto getWidth() const -> uint32_t = 0;
-    virtual auto getHeight() const -> uint32_t = 0;
+    [[nodiscard]] virtual auto getWidth() const -> uint32_t = 0;
+    [[nodiscard]] virtual auto getHeight() const -> uint32_t = 0;
     virtual void setEventCallback(const WindowCallbackFunction& callback) = 0;
     virtual void setVSync(bool should_enabled) = 0;
-    virtual auto isVSync() const -> bool = 0;
-    virtual auto getNativeWindow() const -> void* = 0;
+    [[nodiscard]] virtual auto isVSync() const -> bool = 0;
+    [[nodiscard]] virtual auto getNativeWindow() const -> void* = 0;
     static std::unique_ptr<Window> create(const std::string& rhs = "Meiosis Engine", uint32_t width = 1600, uint32_t height = 900);
 
   protected:
-    Window() {}
+    Window() = default;
 };
 }// namespace Meiosis

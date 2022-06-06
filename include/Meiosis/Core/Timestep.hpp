@@ -6,18 +6,18 @@ namespace Meiosis
 class ME_API Timestep
 {
   public:
-    Timestep(float time = 0.0f) : m_time(time) {}
+    Timestep(float time = 0.0F) : m_time(time) {}
     operator float() const
     {
         return m_time;
     }
-    auto getSeconds() const
+    [[nodiscard]] auto getSeconds() const
     {
         return m_time;
     }
-    auto getMilliseconds() const
+    [[nodiscard]] auto getMilliseconds() const
     {
-        return m_time * 1000.0f;
+        return m_time * 1000.0F;
     }
 
   private:

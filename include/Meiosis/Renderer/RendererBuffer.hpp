@@ -7,7 +7,7 @@
 namespace Meiosis
 {
 enum class ShaderUniformType : uint8_t {
-    None = 0u,
+    None = 0U,
     Float,
     Float2,
     Float3,
@@ -42,10 +42,10 @@ static constexpr size_t shaderUniformTypeSize(ShaderUniformType type)
             return 4 * sizeof(float);
             break;
         case ShaderUniformType::Mat3:
-            return 3 * 3 * sizeof(float);
+            return 3ULL * 3ULL * sizeof(float);
             break;
         case ShaderUniformType::Mat4:
-            return 4 * 4 * sizeof(float);
+            return 4ULL * 4ULL * sizeof(float);
             break;
         case ShaderUniformType::Int:
             return sizeof(int);
@@ -135,7 +135,7 @@ class ME_API BufferLayout
 {
   public:
     BufferLayout() = default;
-    BufferLayout(std::initializer_list<BufferObject> elements);
+    explicit BufferLayout(std::initializer_list<BufferObject> elements);
     [[nodiscard]] auto getStride() const { return m_stride; }
     [[nodiscard]] auto getElements() const { return m_elements; }
     [[nodiscard]] auto begin() { return m_elements.begin(); }

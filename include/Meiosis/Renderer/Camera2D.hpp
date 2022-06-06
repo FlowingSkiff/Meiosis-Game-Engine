@@ -10,11 +10,11 @@ class ME_API Camera2D : public Camera
     virtual ~Camera2D() = default;
 
   public:
-    auto getProjectionMatrix() const -> const glm::mat4&;
-    auto getViewMatrix() const -> const glm::mat4&;
-    virtual auto getViewProjectionMatrix() const -> const glm::mat4& override;
-    auto getPosition() const -> const glm::vec3&;
-    auto getRotation() const -> float;
+    [[nodiscard]] auto getProjectionMatrix() const -> const glm::mat4&;
+    [[nodiscard]] auto getViewMatrix() const -> const glm::mat4&;
+    [[nodiscard]] virtual auto getViewProjectionMatrix() const -> const glm::mat4& override;
+    [[nodiscard]] auto getPosition() const -> const glm::vec3&;
+    [[nodiscard]] auto getRotation() const -> float;
 
   public:
     void setProjectionMatrix(const glm::mat4& proj);
