@@ -25,7 +25,12 @@ void Scene::deleteEntity(Entity entity)
 void Scene::onUpdate([[maybe_unused]] Timestep ts)
 {
     {
-        // Scripts
+        /*
+        for (auto script : m_registry<ScripComponent>())
+        {
+            script(ts);
+        }
+        */
     }
 
     Camera* main_camera = nullptr;
@@ -44,9 +49,6 @@ void Scene::onUpdate([[maybe_unused]] Timestep ts)
     if (main_camera != nullptr)
     {
     }
-}
-void Scene::onEditorUpdate([[maybe_unused]] Timestep ts /*, Camera& camera */)
-{
     /*
     for (auto mesh : m_registry.view<MeshComponent>())
     {
@@ -57,6 +59,9 @@ void Scene::onEditorUpdate([[maybe_unused]] Timestep ts /*, Camera& camera */)
         Meiosis::renderer::submit(m_shader_library.get(mesh.shader_id), mesh.vertices);
     }
     */
+}
+void Scene::onEditorUpdate([[maybe_unused]] Timestep ts /*, Camera& camera */)
+{
 }
 Entity Scene::getCameraEntity()
 {
