@@ -19,7 +19,9 @@ class ExampleLayer : public Meiosis::Layer
     Meiosis::ShaderLibrary m_shader_library;
     Meiosis::Camera2D m_camera;
     std::shared_ptr<Meiosis::Shader> m_texture_shader;
-    std::shared_ptr<Meiosis::Texture> m_texture;
+    Meiosis::TextureLibrary m_texture_library;
+    Meiosis::TextureLibrary::TextureID m_texture;
+    // std::shared_ptr<Meiosis::Texture> m_texture;
     std::shared_ptr<Meiosis::VertexArray> m_simple_obj;
     std::shared_ptr<Meiosis::Shader> m_simple_shader;
     Meiosis::Material m_simple_material;

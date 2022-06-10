@@ -132,10 +132,12 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
 
     m_shader = Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc);
     m_texture_shader = Meiosis::Renderer::createShader("resources/shaders/texture.glsl");
-    m_texture = Meiosis::Renderer::createTexture2D("resources/textures/grass.jpg");
+    m_texture = m_texture_library.add("resources/textures/grass.jpg");
+    // m_texture = Meiosis::Renderer::createTexture2D("resources/textures/grass.jpg");
     m_texture_shader->bind();
     m_texture_shader->setInt("u_texture", 0);
-    m_texture->bind(0U);
+    // m_texture->bind(0U);
+    m_texture_library.get(m_texture)->bind(0U);
 
 
     const std::vector<float> simple_color_vertices{ -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0 };
@@ -153,5 +155,5 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
         shader->setFloat3("u_color", m_simple_color);
     });
 
-    m_texture->bind(0U);
+    m_texture_library.get(m_texture)->bind(0U);
 }
