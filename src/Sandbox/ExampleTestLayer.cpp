@@ -1,6 +1,7 @@
 #include "ExampleTestLayer.hpp"
 #include <imgui/imgui.h>
 #include <vector>
+#include <array>
 
 bool ExampleLayer::onKeyPressEvent(Meiosis::KeyPressedEvent& e)
 {
@@ -44,23 +45,18 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::D))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(-dx, 0.0, 0.0));
     Meiosis::Renderer::beginScene(m_camera);
-    // m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
     Meiosis::Renderer::submit(m_shader_library.get(m_shader), m_obj);
     Meiosis::Renderer::submit(m_shader_library.get(m_texture_shader), m_texture_obj);
 
-    // m_simple_shader->bind();
-    // m_simple_shader->setFloat3("u_color", m_simple_color);
-
     Meiosis::Renderer::submit(m_simple_material, m_simple_obj);
-    // Meiosis::Renderer::submit(m_simple_shader, m_simple_obj);
     Meiosis::Renderer::endScene();
 }
 
 struct PosAndTexture
 {
-    float position[2];
+    std::array<float, 2> position;
     unsigned int texture_id;
-    float texture_coord[2];
+    std::array<float, 2> texture_coord;
 };
 
 ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::createVertexArray()), m_texture_obj(Meiosis::Renderer::createVertexArray()), m_shader(), m_shader_library(), m_camera(-1.6f, 1.6f, -0.9f, 0.9f), m_simple_obj(Meiosis::Renderer::createVertexArray()), m_simple_color{ 0.0, 0.0, 0.0 }
@@ -100,7 +96,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_texture_obj->addVertexBuffer(tex_vertex);
     m_texture_obj->setIndexBuffer(inde);
 
-    std::string vertexSrc = R"....(
+    const std::string vertexSrc = R"....(
         #version 330 core
         layout(location = 0) in vec2 a_position;
         layout(location = 1) in vec3 a_color;
@@ -118,7 +114,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
         }
     )....";
 
-    std::string fragmentSrc = R"....(
+    const std::string fragmentSrc = R"....(
         #version 330 core
         layout (location = 0) out vec4 color;
         in vec3 v_position;
@@ -133,10 +129,8 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_shader = m_shader_library.add(Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc));
     m_texture_shader = m_shader_library.load("resources/shaders/texture.glsl");
     m_texture = m_texture_library.add("resources/textures/grass.jpg");
-    // m_texture = Meiosis::Renderer::createTexture2D("resources/textures/grass.jpg");
     m_shader_library.get(m_texture_shader)->bind();
     m_shader_library.get(m_texture_shader)->setInt("u_texture", 0);
-    // m_texture->bind(0U);
     m_texture_library.get(m_texture)->bind(0U);
 
 
@@ -148,12 +142,10 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     simple_color_vertex->setLayout(simple_layout);
     m_simple_obj->addVertexBuffer(simple_color_vertex);
     m_simple_obj->setIndexBuffer(inde);
-    // m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
     m_simple_shader = m_shader_library.load("resources/shaders/simple_color.glsl");
-    m_simple_material = Meiosis::Renderer::createMaterial(m_shader_library.get(m_simple_shader));
-    m_simple_material.setOnBind([this](auto& shader) -> void {
-        shader->setFloat3("u_color", m_simple_color);
-    });
-
+    m_simple_material = Meiosis::Renderer::createMaterial(m_shader_library.get(m_simple_shader),
+        [this](auto& shader) -> void {
+            shader->setFloat3("u_color", m_simple_color);
+        });
     m_texture_library.get(m_texture)->bind(0U);
 }

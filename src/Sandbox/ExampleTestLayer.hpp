@@ -21,7 +21,6 @@ class ExampleLayer : public Meiosis::Layer
     Meiosis::ShaderLibrary::ShaderID m_texture_shader;
     Meiosis::TextureLibrary m_texture_library;
     Meiosis::TextureLibrary::TextureID m_texture;
-    // std::shared_ptr<Meiosis::Texture> m_texture;
     std::shared_ptr<Meiosis::VertexArray> m_simple_obj;
     Meiosis::ShaderLibrary::ShaderID m_simple_shader;
     Meiosis::Material m_simple_material;
