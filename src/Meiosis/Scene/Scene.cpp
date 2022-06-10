@@ -47,6 +47,16 @@ void Scene::onUpdate([[maybe_unused]] Timestep ts)
 }
 void Scene::onEditorUpdate([[maybe_unused]] Timestep ts /*, Camera& camera */)
 {
+    /*
+    for (auto mesh : m_registry.view<MeshComponent>())
+    {
+        for (uint32_t bind_index = 0U; auto texture : mesh.textures)
+        {
+            texture->bind(bind_index++);
+        }
+        Meiosis::renderer::submit(m_shader_library.get(mesh.shader_id), mesh.vertices);
+    }
+    */
 }
 Entity Scene::getCameraEntity()
 {

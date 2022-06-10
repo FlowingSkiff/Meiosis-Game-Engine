@@ -3,6 +3,8 @@
 #include "Meiosis/Core/Timestep.hpp"
 #include <entt/entt.hpp>
 #include <utility>
+#include "Meiosis/Renderer/Shader.hpp"
+#include "Meiosis/Renderer/Texture.hpp"
 namespace Meiosis
 {
 class Entity;
@@ -34,6 +36,8 @@ class ME_API Scene
     entt::registry m_registry;
     uint32_t m_view_width = 0U;
     uint32_t m_view_height = 0U;
+    ShaderLibrary m_shader_library;
+    TextureLibrary m_texture_library;
 };
 
 template<typename Component, typename... ARGS>

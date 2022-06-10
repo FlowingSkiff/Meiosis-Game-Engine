@@ -45,6 +45,7 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::D))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(-dx, 0.0, 0.0));
     Meiosis::Renderer::beginScene(m_camera);
+    
     Meiosis::Renderer::submit(m_shader_library.get(m_shader), m_obj);
     Meiosis::Renderer::submit(m_shader_library.get(m_texture_shader), m_texture_obj);
 

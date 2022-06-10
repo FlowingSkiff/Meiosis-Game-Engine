@@ -4,6 +4,9 @@
 #include "Meiosis/Scene/SceneCamera.hpp"
 #include <glm/glm.hpp>
 #include "Meiosis/Renderer/RendererBuffer.hpp"
+#include "Meiosis/Renderer/Shader.hpp"
+#include "Meiosis/Renderer/Texture.hpp"
+#include <vector>
 namespace Meiosis
 {
 struct TransformComponent
@@ -26,6 +29,8 @@ struct CameraComponent
 
 struct MeshComponent
 {
-    std::shared_ptr<VertexArray> vertex_data_ptr;
+    std::vector<TextureLibrary::TextureID> textures;
+    std::shared_ptr<VertexArray> vertices;
+    ShaderLibrary::ShaderID shader;
 };
 }// namespace Meiosis
