@@ -1,10 +1,10 @@
 #pragma once
 #include "Meiosis/Core/Core.hpp"
 #include <string>
-#include <unordered_map>
 #include <string_view>
 #include <glm/glm.hpp>
 #include <memory>
+#include <vector>
 namespace Meiosis
 {
 class ME_API Shader
@@ -32,14 +32,13 @@ class ME_API Shader
 class ME_API ShaderLibrary
 {
   public:
-    void add(const std::string& name, const std::shared_ptr<Shader>& shader);
-    void add(const std::shared_ptr<Shader>& shader);
-    auto load(const std::string& file_name) -> std::shared_ptr<Shader>;
-    auto load(const std::string& name, const std::string& file_name) -> std::shared_ptr<Shader>;
-    auto get(const std::string& name) -> std::shared_ptr<Shader>;
-    [[nodiscard]] bool exists(const std::string& name) const;
+    using ShaderID = size_t;
+    [[nodiscard]] auto add(const std::shared_ptr<Shader>& shader) -> ShaderID;
+    [[nodiscard]] auto load(const std::string& file_name) -> ShaderID;
+    [[nodiscard]] auto get(ShaderID shader) -> std::shared_ptr<Shader>;
+    [[nodiscard]] bool exists(ShaderID id) const;
 
   private:
-    std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
+    std::vector<std::shared_ptr<Shader>> m_shaders;
 };
 }// namespace Meiosis

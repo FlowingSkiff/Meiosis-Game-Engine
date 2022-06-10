@@ -6,38 +6,21 @@
 namespace Meiosis
 {
 
-void ShaderLibrary::add(const std::string& name, const std::shared_ptr<Shader>& shader)
+auto ShaderLibrary::add(const std::shared_ptr<Shader>& shader) -> ShaderID
 {
-    m_shaders[name] = shader;
+    m_shaders.push_back(shader);
+    return m_shaders.size() - 1;
 }
-void ShaderLibrary::add(const std::shared_ptr<Shader>& shader)
+auto ShaderLibrary::load(const std::string& file_name) -> ShaderID
 {
-    add(shader->getName(), shader);
+    return add(Renderer::createShader(file_name));
 }
-auto ShaderLibrary::load(const std::string& file_name) -> std::shared_ptr<Shader>
+auto ShaderLibrary::get(ShaderID id) -> std::shared_ptr<Shader>
 {
-    auto shader = Renderer::createShader(file_name);
-    add(shader);
-    return shader;
+    return m_shaders.at(id);
 }
-auto ShaderLibrary::load(const std::string& name, const std::string& file_name) -> std::shared_ptr<Shader>
+bool ShaderLibrary::exists(ShaderID id) const
 {
-    auto shader = Renderer::createShader(file_name);
-    add(name, shader);
-    return shader;
-}
-auto ShaderLibrary::get(const std::string& name) -> std::shared_ptr<Shader>
-{
-#ifdef ME_DEBUG
-    if (!exists(name))
-    {
-        ME_ENGINE_ERROR("Shader ({}) does not exist", name);
-    }
-#endif
-    return m_shaders[name];
-}
-bool ShaderLibrary::exists(const std::string& name) const
-{
-    return m_shaders.find(name) != m_shaders.end();
+    return m_shaders.size() > id;
 }
 }// namespace Meiosis

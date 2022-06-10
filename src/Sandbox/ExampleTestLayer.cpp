@@ -45,8 +45,8 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(-dx, 0.0, 0.0));
     Meiosis::Renderer::beginScene(m_camera);
     // m_shader->setMat4("u_view_projection", m_camera.getViewProjectionMatrix());
-    Meiosis::Renderer::submit(m_shader, m_obj);
-    Meiosis::Renderer::submit(m_texture_shader, m_texture_obj);
+    Meiosis::Renderer::submit(m_shader_library.get(m_shader), m_obj);
+    Meiosis::Renderer::submit(m_shader_library.get(m_texture_shader), m_texture_obj);
 
     // m_simple_shader->bind();
     // m_simple_shader->setFloat3("u_color", m_simple_color);
@@ -130,12 +130,12 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
         }
     )....";
 
-    m_shader = Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc);
-    m_texture_shader = Meiosis::Renderer::createShader("resources/shaders/texture.glsl");
+    m_shader = m_shader_library.add(Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc));
+    m_texture_shader = m_shader_library.load("resources/shaders/texture.glsl");
     m_texture = m_texture_library.add("resources/textures/grass.jpg");
     // m_texture = Meiosis::Renderer::createTexture2D("resources/textures/grass.jpg");
-    m_texture_shader->bind();
-    m_texture_shader->setInt("u_texture", 0);
+    m_shader_library.get(m_texture_shader)->bind();
+    m_shader_library.get(m_texture_shader)->setInt("u_texture", 0);
     // m_texture->bind(0U);
     m_texture_library.get(m_texture)->bind(0U);
 
@@ -149,8 +149,8 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_simple_obj->addVertexBuffer(simple_color_vertex);
     m_simple_obj->setIndexBuffer(inde);
     // m_simple_shader = Meiosis::Renderer::createShader("resources/shaders/simple_color.glsl");
-
-    m_simple_material = Meiosis::Renderer::createMaterial("resources/shaders/simple_color.glsl");
+    m_simple_shader = m_shader_library.load("resources/shaders/simple_color.glsl");
+    m_simple_material = Meiosis::Renderer::createMaterial(m_shader_library.get(m_simple_shader));
     m_simple_material.setOnBind([this](auto& shader) -> void {
         shader->setFloat3("u_color", m_simple_color);
     });

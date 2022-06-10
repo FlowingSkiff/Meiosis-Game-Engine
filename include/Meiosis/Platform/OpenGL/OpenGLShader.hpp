@@ -3,6 +3,7 @@
 #include "Meiosis/Core/Core.hpp"
 #include "Meiosis/Renderer/Shader.hpp"
 #include <glad/glad.h>
+#include <unordered_map>
 namespace Meiosis
 {
 class ME_API OpenGLShader : public Shader

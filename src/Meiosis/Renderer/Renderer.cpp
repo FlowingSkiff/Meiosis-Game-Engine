@@ -95,6 +95,15 @@ auto Renderer::createMaterial(std::shared_ptr<Shader>& shader, Material::Uniform
     return Material(shader, function);
 }
 
+auto Renderer::createMaterial(std::shared_ptr<Shader>&& shader) -> Material
+{
+    return Material(shader);
+}
+auto Renderer::createMaterial(std::shared_ptr<Shader>&& shader, Material::UniformFunction function) -> Material
+{
+    return Material(shader, function);
+}
+
 void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 {
     s_api_instance->submit(shader, vertexArray, transform);

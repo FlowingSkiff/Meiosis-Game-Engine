@@ -38,7 +38,9 @@ class ME_API Renderer
     static auto createMaterial(const std::string& shader_filename) -> Material;
     static auto createMaterial(const std::string& shader_name, const std::string& vertexSrc, const std::string& fragmentSrc) -> Material;
     static auto createMaterial(std::shared_ptr<Shader>& shader) -> Material;
+    static auto createMaterial(std::shared_ptr<Shader>&& shader) -> Material;
     static auto createMaterial(std::shared_ptr<Shader>& shader, Material::UniformFunction function) -> Material;
+    static auto createMaterial(std::shared_ptr<Shader>&& shader, Material::UniformFunction function) -> Material;
 
     static auto createTexture2D(const std::string& file_name) -> std::shared_ptr<Texture>;
     static auto createTexture2D(uint32_t width, uint32_t height) -> std::shared_ptr<Texture>;
