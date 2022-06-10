@@ -7,13 +7,13 @@ auto TextureLibrary::exists(TextureID id) const -> bool
 {
     return (m_textures.size() > id);
 }
-auto TextureLibrary::add(uint32_t width, uint32_t height) -> TextureID
+auto TextureLibrary::load(uint32_t width, uint32_t height) -> TextureID
 {
     auto texture = Renderer::createTexture2D(width, height);
     m_textures.push_back(texture);
     return m_textures.size() - 1UL;
 }
-auto TextureLibrary::add(const std::string& file_name) -> TextureID
+auto TextureLibrary::load(const std::string& file_name) -> TextureID
 {
     m_textures.push_back(Renderer::createTexture2D(file_name));
     return m_textures.size() - 1UL;

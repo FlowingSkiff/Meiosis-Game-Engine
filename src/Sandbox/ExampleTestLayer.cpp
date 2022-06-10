@@ -128,7 +128,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
 
     m_shader = m_shader_library.add(Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc));
     m_texture_shader = m_shader_library.load("resources/shaders/texture.glsl");
-    m_texture = m_texture_library.add("resources/textures/grass.jpg");
+    m_texture = m_texture_library.load("resources/textures/grass.jpg");
     m_shader_library.get(m_texture_shader)->bind();
     m_shader_library.get(m_texture_shader)->setInt("u_texture", 0);
     m_texture_library.get(m_texture)->bind(0U);

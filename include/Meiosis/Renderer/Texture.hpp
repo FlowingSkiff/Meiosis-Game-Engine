@@ -31,8 +31,8 @@ class ME_API TextureLibrary
     using TextureID = size_t;
     TextureLibrary() = default;
     [[nodiscard]] bool exists(TextureID id) const;
-    [[nodiscard]] auto add(uint32_t width, uint32_t height) -> TextureID;
-    [[nodiscard]] auto add(const std::string& file_name) -> TextureID;
+    [[nodiscard]] auto load(uint32_t width, uint32_t height) -> TextureID;
+    [[nodiscard]] auto load(const std::string& file_name) -> TextureID;
     [[nodiscard]] auto add(std::shared_ptr<Texture>& texture) -> TextureID;
     [[nodiscard]] auto get(TextureID id) -> std::shared_ptr<Texture>;
 
