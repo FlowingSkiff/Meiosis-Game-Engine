@@ -18,7 +18,7 @@ Entity Scene::createEntity(const std::string& name)
     tag.tag = (name.empty()) ? "Unnamed" : name;
     return entity;
 }
-void Scene::deleteEntity(Entity entity)
+void Scene::deleteEntity(entity_type entity)
 {
     m_registry.destroy(entity);
 }
@@ -91,20 +91,20 @@ void Scene::onViewportResize(uint32_t width, uint32_t height)
 
 
 template<>
-void Scene::onComponentAdded<TransformComponent>([[maybe_unused]] uint32_t entity_id, [[maybe_unused]] TransformComponent component)
+void Scene::onComponentAdded<TransformComponent>([[maybe_unused]] entity_type entity_id, [[maybe_unused]] TransformComponent component)
 {
 }
 
 template<>
-void Scene::onComponentAdded<TagComponent>([[maybe_unused]] uint32_t entity_id, [[maybe_unused]] TagComponent component)
+void Scene::onComponentAdded<TagComponent>([[maybe_unused]] entity_type entity_id, [[maybe_unused]] TagComponent component)
 {
 }
 template<>
-void Scene::onComponentAdded<MeshComponent>([[maybe_unused]] uint32_t entity_id, [[maybe_unused]] MeshComponent component)
+void Scene::onComponentAdded<MeshComponent>([[maybe_unused]] entity_type entity_id, [[maybe_unused]] MeshComponent component)
 {
 }
 template<>
-void Scene::onComponentAdded<CameraComponent>([[maybe_unused]] uint32_t entity_id, [[maybe_unused]] CameraComponent component)
+void Scene::onComponentAdded<CameraComponent>([[maybe_unused]] entity_type entity_id, [[maybe_unused]] CameraComponent component)
 {
     if (m_view_width > 0U && m_view_height > 0U)
         component.camera.setViewportSize(m_view_width, m_view_height);
@@ -112,8 +112,9 @@ void Scene::onComponentAdded<CameraComponent>([[maybe_unused]] uint32_t entity_i
 
 
 template<typename Component>
-void Scene::onComponentAdded(uint32_t entity_id, Component component)
+void Scene::onComponentAdded(entity_type entity_id, Component component)
 {
     assert(false);
 }
+
 }// namespace Meiosis
