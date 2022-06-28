@@ -30,7 +30,7 @@ struct CameraComponent
 struct MeshComponent
 {
     MeshComponent(std::vector<TextureLibrary::TextureID>&& texts, ShaderLibrary::ShaderID&& shader_id, std::shared_ptr<VertexArray>&& vao):
-        textures(texts), shader(shader_id), vertices(vao) { }
+        textures{texts}, shader{shader_id}, vertices{vao} { }
     std::vector<TextureLibrary::TextureID> textures;
     ShaderLibrary::ShaderID shader;
     std::shared_ptr<VertexArray> vertices;

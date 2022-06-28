@@ -1,6 +1,7 @@
 #include <Meiosis/Scene/Scene.hpp>
 #include <Meiosis/Scene/Components.hpp>
 #include <Meiosis/Scene/Entity.hpp>
+#include <Meiosis/Renderer/Renderer.hpp>
 
 namespace Meiosis
 {
@@ -48,17 +49,19 @@ void Scene::onUpdate([[maybe_unused]] Timestep ts)
     }
     if (main_camera != nullptr)
     {
+        // setup main camera
     }
-    /*
-    for (auto mesh : m_registry.view<MeshComponent>())
+    auto mesh_view = m_registry.view<MeshComponent>();
+    for (auto entity : mesh_view)
     {
-        for (uint32_t bind_index = 0U; auto texture : mesh.textures)
+        auto mesh = mesh_view.get<MeshComponent>(entity);
+        uint32_t bind_index = 0U;
+        for (auto texture : mesh.textures)
         {
-            texture->bind(bind_index++);
+            m_texture_library.get(texture)->bind(bind_index++);
         }
-        Meiosis::renderer::submit(m_shader_library.get(mesh.shader_id), mesh.vertices);
+        Renderer::submit(m_shader_library.get(mesh.shader), mesh.vertices);
     }
-    */
 }
 void Scene::onEditorUpdate([[maybe_unused]] Timestep ts /*, Camera& camera */)
 {
