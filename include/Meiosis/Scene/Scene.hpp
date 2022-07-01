@@ -17,11 +17,11 @@ class ME_API Scene
   public:
     Scene();
     ~Scene();
-    Entity createEntity(const std::string& name = std::string());
+    [[nodiscard]] Entity createEntity(const std::string& name = std::string());
     void deleteEntity(entity_type entity);
-    void onUpdate(Timestep ts);
+    void onUpdate(Timestep ts, Camera& temp_camera);
     void onEditorUpdate(Timestep ts /*, Camera& camera */);
-    Entity getCameraEntity();
+    [[nodiscard]] Entity getCameraEntity();
 
     void onViewportResize(uint32_t width, uint32_t height);
 
@@ -44,20 +44,20 @@ class ME_API Scene
     TextureLibrary m_texture_library;
 };
 
-template<typename Component, typename... ARGS>
-inline auto Scene::addComponentTo(entity_type entity_id, ARGS... args) -> Component&
-{
-    static_assert(!std::is_same<Component, MeshComponent>::value);
-    return m_registry.emplace<Component>(entity_id, std::forward<ARGS>(args)...);
-}
 template<>
-inline auto Scene::addComponentTo<MeshComponent, const std::string&, const std::vector<std::string>&, std::shared_ptr<VertexArray>>(entity_type entity_id, const std::string& shader_filename, const std::vector<std::string>& texture_filenames, std::shared_ptr<VertexArray> vao) -> MeshComponent&
+inline auto Scene::addComponentTo<MeshComponent, std::string, std::vector<std::string>, std::shared_ptr<VertexArray>>(entity_type entity_id, std::string shader_filename, std::vector<std::string> texture_filenames, std::shared_ptr<VertexArray> vao) -> MeshComponent&
 {
     auto shader = m_shader_library.load(shader_filename);
     std::vector<TextureLibrary::TextureID> textures;
     for (const auto& filename : texture_filenames)
         textures.push_back(m_texture_library.load(filename));
     return m_registry.emplace<MeshComponent>(entity_id, std::forward<std::vector<TextureLibrary::TextureID>>(textures), std::forward<ShaderLibrary::ShaderID>(shader), std::forward<std::shared_ptr<VertexArray>>(vao));
+}
+template<typename Component, typename... ARGS>
+inline auto Scene::addComponentTo(entity_type entity_id, ARGS... args) -> Component&
+{
+    static_assert(!std::is_same<Component, MeshComponent>::value);
+    return m_registry.emplace<Component>(entity_id, std::forward<ARGS>(args)...);
 }
 template<typename Component>
 auto Scene::getComponentFrom(entity_type entity_id) -> Component&

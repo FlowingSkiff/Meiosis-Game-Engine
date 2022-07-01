@@ -13,6 +13,7 @@ class ExampleLayer : public Meiosis::Layer
 
   private:
     float m_float_val;
+    Meiosis::Scene m_scene;
     std::shared_ptr<Meiosis::VertexArray> m_obj;
     std::shared_ptr<Meiosis::VertexArray> m_texture_obj;
     Meiosis::ShaderLibrary::ShaderID m_shader;
@@ -26,5 +27,4 @@ class ExampleLayer : public Meiosis::Layer
     Meiosis::Material m_simple_material;
     glm::vec3 m_simple_color;
     float m_last_frame_time = 1.f;
-    Meiosis::Scene m_scene;
 };

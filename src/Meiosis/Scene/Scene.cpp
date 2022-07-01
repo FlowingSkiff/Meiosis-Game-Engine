@@ -23,7 +23,7 @@ void Scene::deleteEntity(entity_type entity)
 {
     m_registry.destroy(entity);
 }
-void Scene::onUpdate([[maybe_unused]] Timestep ts)
+void Scene::onUpdate([[maybe_unused]] Timestep ts, Camera& temp_camera)
 {
     {
         /*
@@ -47,14 +47,11 @@ void Scene::onUpdate([[maybe_unused]] Timestep ts)
             break;
         }
     }
-    if (main_camera != nullptr)
-    {
-        // setup main camera
-    }
-    auto mesh_view = m_registry.view<MeshComponent>();
+    auto mesh_view = m_registry.view<TagComponent, MeshComponent>();
+    Renderer::beginScene(temp_camera);
     for (auto entity : mesh_view)
     {
-        auto mesh = mesh_view.get<MeshComponent>(entity);
+        auto [tag, mesh] = mesh_view.get<TagComponent, MeshComponent>(entity);
         uint32_t bind_index = 0U;
         for (auto texture : mesh.textures)
         {
@@ -62,6 +59,7 @@ void Scene::onUpdate([[maybe_unused]] Timestep ts)
         }
         Renderer::submit(m_shader_library.get(mesh.shader), mesh.vertices);
     }
+    Renderer::endScene();
 }
 void Scene::onEditorUpdate([[maybe_unused]] Timestep ts /*, Camera& camera */)
 {

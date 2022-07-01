@@ -44,13 +44,14 @@ void ExampleLayer::onUpdate([[maybe_unused]] Meiosis::Timestep dt)
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(dx, 0.0, 0.0));
     if (Meiosis::Input::isKeyPressed(Meiosis::KeyCode::D))
         m_camera.setPosition(m_camera.getPosition() + glm::vec3(-dx, 0.0, 0.0));
-    Meiosis::Renderer::beginScene(m_camera);
-    
-    Meiosis::Renderer::submit(m_shader_library.get(m_shader), m_obj);
-    Meiosis::Renderer::submit(m_shader_library.get(m_texture_shader), m_texture_obj);
-
-    Meiosis::Renderer::submit(m_simple_material, m_simple_obj);
-    Meiosis::Renderer::endScene();
+    // Meiosis::Renderer::beginScene(m_camera);
+    //
+    // Meiosis::Renderer::submit(m_shader_library.get(m_shader), m_obj);
+    // Meiosis::Renderer::submit(m_shader_library.get(m_texture_shader), m_texture_obj);
+    //
+    // Meiosis::Renderer::submit(m_simple_material, m_simple_obj);
+    // Meiosis::Renderer::endScene();
+    m_scene.onUpdate(dt, m_camera);
 }
 
 struct PosAndTexture
@@ -79,6 +80,10 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     m_obj->addVertexBuffer(vertex);
     auto inde = Meiosis::Renderer::createIndexBuffer({ 0, 1, 2, 2, 3, 0 });
     m_obj->setIndexBuffer(inde);
+    const std::string obj_shader_filename = "resources/shaders/basic_obj_shader.glsl";
+    const std::vector<std::string> obj_textures{};
+    auto object_entt = m_scene.createEntity("basic entity");
+    object_entt.addComponent<Meiosis::MeshComponent>(obj_shader_filename, obj_textures, m_obj);
     // clang-format off
     const std::vector<PosAndTexture> text_verticies{
         {0.0f,  0.0f, 0U, 0.0f, 0.0f},
@@ -96,57 +101,62 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     tex_vertex->setLayout(texture_layout);
     m_texture_obj->addVertexBuffer(tex_vertex);
     m_texture_obj->setIndexBuffer(inde);
-
-    const std::string vertexSrc = R"....(
-        #version 330 core
-        layout(location = 0) in vec2 a_position;
-        layout(location = 1) in vec3 a_color;
-        uniform mat4 u_transform;
-        uniform mat4 u_view_projection;
-
-        out vec3 v_position;
-        out vec4 v_color;
-        void main()
-        {
-            v_position =  vec3(a_position, 1.0);
-            v_color = vec4(a_color, 1.0);
-            gl_Position = u_view_projection * u_transform * vec4(a_position, 0.0, 1.0);
-            // gl_Position = vec4(a_position, 0.0, 1.0);
-        }
-    )....";
-
-    const std::string fragmentSrc = R"....(
-        #version 330 core
-        layout (location = 0) out vec4 color;
-        in vec3 v_position;
-        in vec4 v_color;
-
-        void main()
-        {
-            color = v_color;
-        }
-    )....";
-
-    m_shader = m_shader_library.add(Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc));
-    m_texture_shader = m_shader_library.load("resources/shaders/texture.glsl");
-    m_texture = m_texture_library.load("resources/textures/grass.jpg");
-    m_shader_library.get(m_texture_shader)->bind();
-    m_shader_library.get(m_texture_shader)->setInt("u_texture", 0);
-    m_texture_library.get(m_texture)->bind(0U);
+    auto texture_entt = m_scene.createEntity("texture_entt");
+    const std::string texture_shader_filename = "resources/shaders/texture.glsl";
+    const std::vector<std::string> texture_texture_filenames{ "resources/textures/grass.jpg" };
+    auto texture_mesh = texture_entt.addComponent<Meiosis::MeshComponent>(texture_shader_filename, texture_texture_filenames, m_texture_obj);
 
 
-    const std::vector<float> simple_color_vertices{ -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0 };
-    Meiosis::BufferLayout simple_layout{
-        { "a_position", Meiosis::ShaderUniformType::Float2 }
-    };
-    auto simple_color_vertex = Meiosis::Renderer::createVertexBuffer(simple_color_vertices);
-    simple_color_vertex->setLayout(simple_layout);
-    m_simple_obj->addVertexBuffer(simple_color_vertex);
-    m_simple_obj->setIndexBuffer(inde);
-    m_simple_shader = m_shader_library.load("resources/shaders/simple_color.glsl");
-    m_simple_material = Meiosis::Renderer::createMaterial(m_shader_library.get(m_simple_shader),
-        [this](auto& shader) -> void {
-            shader->setFloat3("u_color", m_simple_color);
-        });
-    m_texture_library.get(m_texture)->bind(0U);
+    // const std::string vertexSrc = R"....(
+    //     #version 330 core
+    //     layout(location = 0) in vec2 a_position;
+    //     layout(location = 1) in vec3 a_color;
+    //     uniform mat4 u_transform;
+    //     uniform mat4 u_view_projection;
+    //
+    //     out vec3 v_position;
+    //     out vec4 v_color;
+    //     void main()
+    //     {
+    //         v_position =  vec3(a_position, 1.0);
+    //         v_color = vec4(a_color, 1.0);
+    //         gl_Position = u_view_projection * u_transform * vec4(a_position, 0.0, 1.0);
+    //         // gl_Position = vec4(a_position, 0.0, 1.0);
+    //     }
+    // )....";
+    //
+    // const std::string fragmentSrc = R"....(
+    //     #version 330 core
+    //     layout (location = 0) out vec4 color;
+    //     in vec3 v_position;
+    //     in vec4 v_color;
+    //
+    //     void main()
+    //     {
+    //         color = v_color;
+    //     }
+    // )....";
+
+    // m_shader = m_shader_library.add(Meiosis::Renderer::createShader("Basic", vertexSrc, fragmentSrc));
+    // m_texture_shader = m_shader_library.load("resources/shaders/texture.glsl");
+    // m_texture = m_texture_library.load("resources/textures/grass.jpg");
+    // m_shader_library.get(m_texture_shader)->bind();
+    // m_shader_library.get(m_texture_shader)->setInt("u_texture", 0);
+    // m_texture_library.get(m_texture)->bind(0U);
+
+
+    // const std::vector<float> simple_color_vertices{ -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0 };
+    // Meiosis::BufferLayout simple_layout{
+    //     { "a_position", Meiosis::ShaderUniformType::Float2 }
+    // };
+    // auto simple_color_vertex = Meiosis::Renderer::createVertexBuffer(simple_color_vertices);
+    // simple_color_vertex->setLayout(simple_layout);
+    // m_simple_obj->addVertexBuffer(simple_color_vertex);
+    // m_simple_obj->setIndexBuffer(inde);
+    // m_simple_shader = m_shader_library.load("resources/shaders/simple_color.glsl");
+    // m_simple_material = Meiosis::Renderer::createMaterial(m_shader_library.get(m_simple_shader),
+    //     [this](auto& shader) -> void {
+    //         shader->setFloat3("u_color", m_simple_color);
+    //     });
+    // m_texture_library.get(m_texture)->bind(0U);
 }
