@@ -83,7 +83,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     const std::string obj_shader_filename = "resources/shaders/basic_obj_shader.glsl";
     const std::vector<std::string> obj_textures{};
     auto object_entt = m_scene.createEntity("basic entity");
-    object_entt.addComponent<Meiosis::MeshComponent>(obj_shader_filename, obj_textures, m_obj);
+    object_entt.addComponent<Meiosis::MeshComponent>(obj_shader_filename, obj_textures, m_obj, object_entt.getScene());
     // clang-format off
     const std::vector<PosAndTexture> text_verticies{
         {0.0f,  0.0f, 0U, 0.0f, 0.0f},
@@ -104,7 +104,7 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     auto texture_entt = m_scene.createEntity("texture_entt");
     const std::string texture_shader_filename = "resources/shaders/texture.glsl";
     const std::vector<std::string> texture_texture_filenames{ "resources/textures/grass.jpg" };
-    auto texture_mesh = texture_entt.addComponent<Meiosis::MeshComponent>(texture_shader_filename, texture_texture_filenames, m_texture_obj);
+    auto texture_mesh = texture_entt.addComponent<Meiosis::MeshComponent>(texture_shader_filename, texture_texture_filenames, m_texture_obj, texture_entt.getScene());
 
 
     // const std::string vertexSrc = R"....(

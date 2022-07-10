@@ -118,4 +118,13 @@ void Scene::onComponentAdded(entity_type entity_id, Component component)
     assert(false);
 }
 
+auto Scene::loadTexture(const std::string& filename) -> TextureLibrary::TextureID
+{
+    return m_texture_library.load(filename);
+}
+auto Scene::loadShader(const std::string& filename) -> ShaderLibrary::ShaderID
+{
+    return m_shader_library.load(filename);
+}
+
 }// namespace Meiosis

@@ -24,6 +24,7 @@ class ME_API Entity
 
     template<typename Component>
     [[nodiscard]] auto getComponent() -> Component&;
+    auto getScene() const { return m_scene; }
 
     template<typename Component>
     bool hasComponent() const;

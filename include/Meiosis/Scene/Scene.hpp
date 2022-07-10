@@ -36,6 +36,11 @@ class ME_API Scene
     template<typename Component>
     void removeComponentFrom(entity_type entity_id);
 
+    auto loadTexture(const std::string& filename) -> TextureLibrary::TextureID;
+    auto loadShader(const std::string& filename) -> ShaderLibrary::ShaderID;
+    auto getTexture(TextureLibrary::TextureID id) { return m_texture_library.get(id); }
+    auto getShader(ShaderLibrary::ShaderID id) { return m_shader_library.get(id); }
+
   private:
     entt::registry m_registry;
     uint32_t m_view_width = 0U;
@@ -44,19 +49,9 @@ class ME_API Scene
     TextureLibrary m_texture_library;
 };
 
-template<>
-inline auto Scene::addComponentTo<MeshComponent, std::string, std::vector<std::string>, std::shared_ptr<VertexArray>>(entity_type entity_id, std::string shader_filename, std::vector<std::string> texture_filenames, std::shared_ptr<VertexArray> vao) -> MeshComponent&
-{
-    auto shader = m_shader_library.load(shader_filename);
-    std::vector<TextureLibrary::TextureID> textures;
-    for (const auto& filename : texture_filenames)
-        textures.push_back(m_texture_library.load(filename));
-    return m_registry.emplace<MeshComponent>(entity_id, std::forward<std::vector<TextureLibrary::TextureID>>(textures), std::forward<ShaderLibrary::ShaderID>(shader), std::forward<std::shared_ptr<VertexArray>>(vao));
-}
 template<typename Component, typename... ARGS>
-inline auto Scene::addComponentTo(entity_type entity_id, ARGS... args) -> Component&
+auto Scene::addComponentTo(entity_type entity_id, ARGS... args) -> Component&
 {
-    static_assert(!std::is_same<Component, MeshComponent>::value);
     return m_registry.emplace<Component>(entity_id, std::forward<ARGS>(args)...);
 }
 template<typename Component>
