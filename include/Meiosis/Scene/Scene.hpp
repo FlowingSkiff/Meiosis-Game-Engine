@@ -38,8 +38,10 @@ class ME_API Scene
 
     auto loadTexture(const std::string& filename) -> TextureLibrary::TextureID;
     auto loadShader(const std::string& filename) -> ShaderLibrary::ShaderID;
+    auto loadMaterial(const std::string& filename, Material::UniformFunction op) -> ShaderLibrary::MaterialID;
     auto getTexture(TextureLibrary::TextureID id) { return m_texture_library.get(id); }
-    auto getShader(ShaderLibrary::ShaderID id) { return m_shader_library.get(id); }
+    auto getShader(ShaderLibrary::ShaderID id) { return m_shader_library.getShader(id); }
+    auto getMaterial(ShaderLibrary::MaterialID id) { return m_shader_library.getMaterial(id); }
 
   private:
     entt::registry m_registry;

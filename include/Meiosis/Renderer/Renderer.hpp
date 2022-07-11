@@ -4,8 +4,8 @@
 #include "Meiosis/Renderer/RendererAPI.hpp"
 #include <memory>
 #include "Meiosis/Renderer/Camera.hpp"
+#include "Meiosis/Renderer/Shader.hpp"
 #include "Meiosis/Renderer/Texture.hpp"
-#include "Meiosis/Renderer/Material.hpp"
 namespace Meiosis
 {
 class ME_API Renderer

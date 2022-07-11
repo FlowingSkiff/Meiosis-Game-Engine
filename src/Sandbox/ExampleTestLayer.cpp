@@ -145,15 +145,22 @@ ExampleLayer::ExampleLayer() : m_float_val(1.0), m_obj(Meiosis::Renderer::create
     // m_texture_library.get(m_texture)->bind(0U);
 
 
-    // const std::vector<float> simple_color_vertices{ -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0 };
-    // Meiosis::BufferLayout simple_layout{
-    //     { "a_position", Meiosis::ShaderUniformType::Float2 }
-    // };
-    // auto simple_color_vertex = Meiosis::Renderer::createVertexBuffer(simple_color_vertices);
-    // simple_color_vertex->setLayout(simple_layout);
-    // m_simple_obj->addVertexBuffer(simple_color_vertex);
-    // m_simple_obj->setIndexBuffer(inde);
+    const std::vector<float> simple_color_vertices{ -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0 };
+    Meiosis::BufferLayout simple_layout{
+        { "a_position", Meiosis::ShaderUniformType::Float2 }
+    };
+    auto simple_color_vertex = Meiosis::Renderer::createVertexBuffer(simple_color_vertices);
+    simple_color_vertex->setLayout(simple_layout);
+    m_simple_obj->addVertexBuffer(simple_color_vertex);
+    m_simple_obj->setIndexBuffer(inde);
+    auto simple_entt = m_scene.createEntity("simple");
+    const std::string simple_shader = "resources/shaders/simple_color.glsl";
+    const std::vector<std::string> simple_textures = {};
     // m_simple_shader = m_shader_library.load("resources/shaders/simple_color.glsl");
+    const auto simple_callable = [this](auto& shader) -> void {
+        shader->setFloat3("u_color", m_simple_color);
+    };
+    auto simple_mesh = simple_entt.addComponent<Meiosis::MeshComponent>(simple_shader, simple_callable, simple_textures, m_simple_obj, simple_entt.getScene());
     // m_simple_material = Meiosis::Renderer::createMaterial(m_shader_library.get(m_simple_shader),
     //     [this](auto& shader) -> void {
     //         shader->setFloat3("u_color", m_simple_color);

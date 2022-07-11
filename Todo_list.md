@@ -78,8 +78,6 @@ The conan package manager is used to integrate third party libraries. Depending 
    3. Frame Buffer
 4. ECS
    1. IP
-   2. Allow MeshComponent to take in Materials
-   3. Allow MeshComponent to take in Shader source strings rather than filenames
 5. Scene
    1. IP
    2. Set up camera system

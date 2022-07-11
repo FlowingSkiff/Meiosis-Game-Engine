@@ -31,12 +31,15 @@ struct CameraComponent
 struct MeshComponent
 {
     MeshComponent(std::string shader_filename, std::vector<std::string> textures_filenames, std::shared_ptr<VertexArray> vao, Scene* scene);
+    MeshComponent(std::string shader_filename, Material::UniformFunction op, std::vector<std::string> textures_filenames, std::shared_ptr<VertexArray> vao, Scene* scene);
     std::vector<TextureLibrary::TextureID> textures;
     ShaderLibrary::ShaderID shader;
     std::shared_ptr<VertexArray> vertices;
+    ShaderLibrary::MaterialID material;
+    bool is_material = false;
 
-    auto getShader() { return m_scene->getShader(shader); }
-    auto getTexture(TextureLibrary::TextureID id) { return m_scene->getTexture(id); }// TODO: check if it owns the texture
+    auto getShader() -> std::shared_ptr<Shader>;
+    auto getTexture(TextureLibrary::TextureID id) -> std::shared_ptr<Texture>;// TODO: check if it owns the texture
 
   private:
     Scene* m_scene = nullptr;

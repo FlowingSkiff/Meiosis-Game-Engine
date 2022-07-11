@@ -32,7 +32,6 @@
 // ---- Renderer ----
 #include "Renderer/Camera.hpp"
 #include "Renderer/Camera2D.hpp"
-#include "Renderer/Material.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Renderer/RendererAPI.hpp"
 #include "Renderer/RendererBuffer.hpp"

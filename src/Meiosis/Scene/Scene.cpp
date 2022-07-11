@@ -57,7 +57,14 @@ void Scene::onUpdate([[maybe_unused]] Timestep ts, Camera& temp_camera)
         {
             m_texture_library.get(texture)->bind(bind_index++);
         }
-        Renderer::submit(m_shader_library.get(mesh.shader), mesh.vertices);
+        if (mesh.is_material)
+        {
+            Renderer::submit(m_shader_library.getMaterial(mesh.material), mesh.vertices);
+        }
+        else
+        {
+            Renderer::submit(m_shader_library.getShader(mesh.shader), mesh.vertices);
+        }
     }
     Renderer::endScene();
 }
@@ -124,7 +131,12 @@ auto Scene::loadTexture(const std::string& filename) -> TextureLibrary::TextureI
 }
 auto Scene::loadShader(const std::string& filename) -> ShaderLibrary::ShaderID
 {
-    return m_shader_library.load(filename);
+    return m_shader_library.loadShader(filename);
+}
+
+auto Scene::loadMaterial(const std::string& filename, Material::UniformFunction op) -> ShaderLibrary::MaterialID
+{
+    return m_shader_library.loadMaterial(filename, op);
 }
 
 }// namespace Meiosis
